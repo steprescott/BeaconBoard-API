@@ -11,7 +11,7 @@ namespace BB.DataLayer
         public bool CreateOrUpdate(Domain.Session dominObject)
         {
             //Query the database to see if we already have an object with the same ID
-            var obj = GetById(dominObject.RoomID);
+            var obj = GetById(dominObject.SessionID);
 
             try
             {
