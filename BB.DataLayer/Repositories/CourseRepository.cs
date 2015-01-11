@@ -55,7 +55,7 @@ namespace BB.DataLayer
             return AutoMapper.Mapper.Map<List<Domain.Course>>(GetAll());
         }
 
-        public Domain.Lesson GetLessonByID(Guid id)
+        public Domain.Lesson GetCourseByID(Guid id)
         {
             AutoMapper.Mapper.CreateMap<Course, Domain.Course>().ForMember(dest => dest.LessonIDs, opt => opt.MapFrom(c => c.Lessons.Select(i => i.LessonID).ToList()))
                                                                 .ForMember(dest => dest.StudentIDs, opt => opt.MapFrom(c => c.Students.Select(i => i.UserID).ToList()))
@@ -104,6 +104,5 @@ namespace BB.DataLayer
                 return false;
             }
         }
-    }
     }
 }
