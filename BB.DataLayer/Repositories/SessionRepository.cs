@@ -53,7 +53,7 @@ namespace BB.DataLayer
             return AutoMapper.Mapper.Map<List<Domain.Session>>(GetAll());
         }
 
-        public Domain.Session GetRoomByID(Guid id)
+        public Domain.Session GetSessionByID(Guid id)
         {
             AutoMapper.Mapper.CreateMap<Session, Domain.Session>().ForMember(dest => dest.LecturerIDs, opt => opt.MapFrom(c => c.Lecturers.Select(i => i.UserID).ToList()));
             return AutoMapper.Mapper.Map<Domain.Session>(GetById(id));
