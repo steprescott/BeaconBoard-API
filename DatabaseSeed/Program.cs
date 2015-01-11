@@ -7,6 +7,7 @@ using Room = BB.Domain.Room;
 using Lesson = BB.Domain.Lesson;
 using Course = BB.Domain.Course;
 using Session = BB.Domain.Session;
+using ResourceType = BB.Domain.ResourceType;
 
 namespace DatabaseSeed
 {
@@ -23,6 +24,10 @@ namespace DatabaseSeed
             var beacon1 = InsertBeacon("8add217a-faa6-4fc4-9e8f-48e0c2c5702a", 1, 1, room1);
             var beacon2 = InsertBeacon("e9f09f7d-0622-4c1d-91dd-adef628b43f5", 1, 2, room1);
             var beacon3 = InsertBeacon("e8b738b4-5d9d-4e1e-8046-1350f16c48d9", 2, 1, room2);
+
+            Console.WriteLine("--- Seeding resource types");
+            var resourceTypePDF = InsertResourceType("8add217a-faa6-4fc4-9e8f-48e0c2c5702a", "PDF", "This is an open format that can be normally opened via a web browser.");
+            var resourceTypeDoc = InsertResourceType("8add217a-faa6-4fc4-9e8f-48e0c2c5702a", "Word document", "Standard word format for MS Word documents.");
 
             Console.WriteLine("--- Seeding lessons");
             var lesson1 = InsertLesson("75feec01-6cff-4f86-93fe-2d74f4e4995a");
@@ -133,6 +138,28 @@ namespace DatabaseSeed
                 ScheduledDate = scheduledDate,
                 LessonID = lesson.LessonID,
                 RoomID = room.RoomID
+            };
+
+            var result = repo.CreateOrUpdate(obj);
+
+            if (result)
+            {
+                return obj;
+            }
+
+            Console.WriteLine("    Error occurred");
+            return null;
+        }
+
+        static ResourceType InsertResourceType(String id, String name, String description)
+        {
+            var repo = new UnitOfWork().ResourceTypeRepository;
+
+            var obj = new ResourceType
+            {
+                ResourceTypeID = Guid.Parse(id),
+                Name = name,
+                Description = description
             };
 
             var result = repo.CreateOrUpdate(obj);

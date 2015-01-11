@@ -1,0 +1,106 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BB.DataLayer
+{
+    public partial class ResourceTypeRepository
+    {
+        public bool CreateOrUpdate(Domain.ResourceType dominObject)
+        {
+            //Query the database to see if we already have an object with the same ID
+            var obj = GetById(dominObject.ResourceTypeID);
+
+            try
+            {
+                //If we don't have an object with the passed ID
+                if (obj == null)
+                {
+                    //Create a new one
+                    obj = new ResourceType
+                    {
+                        ResourceTypeID = dominObject.ResourceTypeID != Guid.Empty ? dominObject.ResourceTypeID : Guid.NewGuid(),
+                        Name = dominObject.Name,
+                        Description = dominObject.Description
+                    };
+
+                    //Insert it into the database
+                    Insert(obj);
+                }
+                else
+                {
+                    //Update the mutable values
+                    obj.Name = dominObject.Name;
+                    obj.Description = dominObject.Description;
+
+                    //Update the database
+                    Update(obj);
+                }
+
+                //Save the changes to the database
+                SaveChanges();
+                return true;
+            }
+            catch (Exception exception)
+            {
+                return false;
+            }
+        }
+
+        public List<Domain.ResourceType> GetAllResourceTypes()
+        {
+            AutoMapper.Mapper.CreateMap<ResourceType, Domain.ResourceType>().ForMember(dest => dest.ResourceIDs, opt => opt.MapFrom(c => c.Resources.Select(i => i.ResourceID).ToList()));
+            return AutoMapper.Mapper.Map<List<Domain.ResourceType>>(GetAll());
+        }
+
+        public Domain.ResourceType GetResourceTypeByID(Guid id)
+        {
+            AutoMapper.Mapper.CreateMap<ResourceType, Domain.ResourceType>().ForMember(dest => dest.ResourceIDs, opt => opt.MapFrom(c => c.Resources.Select(i => i.ResourceID).ToList()));
+            return AutoMapper.Mapper.Map<Domain.ResourceType>(GetById(id));
+        }
+
+        public bool Delete(Domain.ResourceType domainObject)
+        {
+            //Get the object from the database
+            var obj = GetById(domainObject.ResourceTypeID);
+
+            //If we have a valid object
+            if (obj != null)
+            {
+                try
+                {
+                    //Delete it
+                    Delete(obj);
+
+                    //Save the changes to the database
+                    SaveChanges();
+                    return true;
+                }
+                catch (Exception exception)
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
+
+        public bool DeleteByID(Guid id)
+        {
+            try
+            {
+                //Delete the object with the given ID
+                Delete(id);
+
+                //Save the changes to the database
+                SaveChanges();
+                return true;
+            }
+            catch (Exception exception)
+            {
+                return false;
+            }
+        }
+    }
+}

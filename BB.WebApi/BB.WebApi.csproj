@@ -122,6 +122,7 @@
     <Folder Include="Models\" />
     <Folder Include="Views\Course\" />
     <Folder Include="Views\Lesson\" />
+    <Folder Include="Views\ResourceType\" />
     <Folder Include="Views\Room\" />
     <Folder Include="Views\Session\" />
   </ItemGroup>
@@ -163,6 +164,7 @@
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LessonController.cs" />
+    <Compile Include="Controllers\ResourceTypeController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Global.asax.cs">
