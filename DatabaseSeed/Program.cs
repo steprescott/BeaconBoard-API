@@ -8,6 +8,7 @@ using Lesson = BB.Domain.Lesson;
 using Course = BB.Domain.Course;
 using Session = BB.Domain.Session;
 using ResourceType = BB.Domain.ResourceType;
+using Resource = BB.Domain.Resource;
 
 namespace DatabaseSeed
 {
@@ -28,6 +29,10 @@ namespace DatabaseSeed
             Console.WriteLine("--- Seeding resource types");
             var resourceTypePDF = InsertResourceType("6211158c-8c5a-4862-a1b6-bd2a0b686fa5", "PDF", "This is an open format that can be normally opened via a web browser.");
             var resourceTypeDoc = InsertResourceType("5f518272-99bc-46fc-a1ba-7fe78c8658ba", "Word document", "Standard word format for MS Word documents.");
+
+            Console.WriteLine("--- Seeding resources");
+            var resorce1 = InsertResource("accd09fc-083d-4897-b4ed-04a6ea3f4217", "Test PDF", "This is to test if we can see resources.", "http://www.energy.umich.edu/sites/default/files/pdf-sample.pdf", resourceTypePDF);
+            var resorce2 = InsertResource("b9c222e0-7f47-4e22-9ed6-2e92daca7eca", "Test doc", "Another test to see if resources are returned correctly.", "http://homepages.inf.ed.ac.uk/neilb/TestWordDoc.doc", resourceTypePDF);
 
             Console.WriteLine("--- Seeding lessons");
             var lesson1 = InsertLesson("75feec01-6cff-4f86-93fe-2d74f4e4995a");
@@ -160,6 +165,30 @@ namespace DatabaseSeed
                 ResourceTypeID = Guid.Parse(id),
                 Name = name,
                 Description = description
+            };
+
+            var result = repo.CreateOrUpdate(obj);
+
+            if (result)
+            {
+                return obj;
+            }
+
+            Console.WriteLine("    Error occurred");
+            return null;
+        }
+
+        static Resource InsertResource(String id, String name, String description, String URLString, ResourceType resourceType)
+        {
+            var repo = new UnitOfWork().ResourceRepository;
+
+            var obj = new Resource
+            {
+                ResourceID = Guid.Parse(id),
+                Name = name,
+                Description = description,
+                URLString = URLString,
+                ResourceTypeID = resourceType.ResourceTypeID
             };
 
             var result = repo.CreateOrUpdate(obj);
