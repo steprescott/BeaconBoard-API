@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace BB.DataLayer
 {
-    public partial class RoomRepository
+    public partial class CourseRepository
     {
-        public bool CreateOrUpdate(Domain.Room dominObject)
+        public bool CreateOrUpdate(Domain.Course dominObject)
         {
             //Query the database to see if we already have an object with the same ID
-            var obj = GetById(dominObject.RoomID);
+            var obj = GetById(dominObject.CourseID);
 
             try
             {
@@ -19,10 +19,10 @@ namespace BB.DataLayer
                 if (obj == null)
                 {
                     //Create a new one
-                    obj = new Room
+                    obj = new Course
                     {
-                        RoomID = dominObject.RoomID != Guid.Empty ? dominObject.RoomID : Guid.NewGuid(),
-                        Number = dominObject.Number
+                        CourseID = dominObject.CourseID != Guid.Empty ? dominObject.CourseID : Guid.NewGuid(),
+                        Name = dominObject.Name
                     };
 
                     //Insert it into the database
@@ -31,7 +31,7 @@ namespace BB.DataLayer
                 else
                 {
                     //Update the mutable values
-                    obj.Number = dominObject.Number;
+                    obj.Name = dominObject.Name;
 
                     //Update the database
                     Update(obj);
@@ -47,22 +47,26 @@ namespace BB.DataLayer
             }
         }
 
-        public List<Domain.Room> GetAllRooms()
+        public List<Domain.Course> GetAllCourses()
         {
-            AutoMapper.Mapper.CreateMap<Room, Domain.Room>().ForMember(dest => dest.BeaconIDs, opt => opt.MapFrom(c => c.Beacons.Select(i => i.BeaconID).ToList()));
-            return AutoMapper.Mapper.Map<List<Domain.Room>>(GetAll());
+            AutoMapper.Mapper.CreateMap<Course, Domain.Course>().ForMember(dest => dest.LessonIDs, opt => opt.MapFrom(c => c.Lessons.Select(i => i.LessonID).ToList()))
+                                                                .ForMember(dest => dest.StudentIDs, opt => opt.MapFrom(c => c.Students.Select(i => i.UserID).ToList()))
+                                                                .ForMember(dest => dest.LecturerIDs, opt => opt.MapFrom(c => c.Lecturers.Select(i => i.UserID).ToList()));
+            return AutoMapper.Mapper.Map<List<Domain.Course>>(GetAll());
         }
 
-        public Domain.Room GetRoomByID(Guid id)
+        public Domain.Lesson GetCourseByID(Guid id)
         {
-            AutoMapper.Mapper.CreateMap<Room, Domain.Room>().ForMember(dest => dest.BeaconIDs, opt => opt.MapFrom(c => c.Beacons.Select(i => i.BeaconID).ToList()));
-            return AutoMapper.Mapper.Map<Domain.Room>(GetById(id));
+            AutoMapper.Mapper.CreateMap<Course, Domain.Course>().ForMember(dest => dest.LessonIDs, opt => opt.MapFrom(c => c.Lessons.Select(i => i.LessonID).ToList()))
+                                                                .ForMember(dest => dest.StudentIDs, opt => opt.MapFrom(c => c.Students.Select(i => i.UserID).ToList()))
+                                                                .ForMember(dest => dest.LecturerIDs, opt => opt.MapFrom(c => c.Lecturers.Select(i => i.UserID).ToList()));
+            return AutoMapper.Mapper.Map<Domain.Lesson>(GetById(id));
         }
 
-        public bool Delete(Domain.Room domainObject)
+        public bool Delete(Domain.Lesson domainObject)
         {
             //Get the object from the database
-            var obj = GetById(domainObject.RoomID);
+            var obj = GetById(domainObject.LessonID);
 
             //If we have a valid object
             if(obj != null)
