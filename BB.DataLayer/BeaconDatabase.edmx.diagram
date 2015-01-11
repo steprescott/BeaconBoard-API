@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="dd6bc111807a4702b0a1cab6bbf59657" Name="Diagram1" >
+        <EntityTypeShape EntityType="BeaconDatabase.Beacon" Width="1.5" PointX="22.875" PointY="7" />
+        <EntityTypeShape EntityType="BeaconDatabase.Room" Width="1.5" PointX="20.25" PointY="7" />
+        <AssociationConnector Association="BeaconDatabase.RoomBeacon" />
+        <EntityTypeShape EntityType="BeaconDatabase.Course" Width="1.5" PointX="15.25" PointY="4.125" />
+        <EntityTypeShape EntityType="BeaconDatabase.Lesson" Width="1.5" PointX="17.75" PointY="4.125" />
+        <EntityTypeShape EntityType="BeaconDatabase.Session" Width="1.5" PointX="17.75" PointY="7" />
+        <AssociationConnector Association="BeaconDatabase.LessonSession" />
+        <EntityTypeShape EntityType="BeaconDatabase.Resource" Width="1.5" PointX="20.25" PointY="4.125" />
+        <EntityTypeShape EntityType="BeaconDatabase.ResourceType" Width="1.5" PointX="22.75" PointY="4.375" />
+        <AssociationConnector Association="BeaconDatabase.ResourceResourceType" />
+        <AssociationConnector Association="BeaconDatabase.LessonResource" />
+        <AssociationConnector Association="BeaconDatabase.CourseLesson" />
+        <EntityTypeShape EntityType="BeaconDatabase.User" Width="1.5" PointX="12" PointY="1.375" />
+        <EntityTypeShape EntityType="BeaconDatabase.Student" Width="1.5" PointX="13" PointY="4.125" />
+        <InheritanceConnector EntityType="BeaconDatabase.Student" />
+        <EntityTypeShape EntityType="BeaconDatabase.Lecturer" Width="1.5" PointX="11" PointY="4.125" />
+        <InheritanceConnector EntityType="BeaconDatabase.Lecturer" />
+        <AssociationConnector Association="BeaconDatabase.StudentCourse" />
+        <AssociationConnector Association="BeaconDatabase.LecturerCourse" />
+        <AssociationConnector Association="BeaconDatabase.LecturerSession" />
+        <AssociationConnector Association="BeaconDatabase.SessionRoom" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
