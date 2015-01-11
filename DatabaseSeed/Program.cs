@@ -5,6 +5,7 @@ using BB.DataLayer;
 using Beacon = BB.Domain.Beacon;
 using Room = BB.Domain.Room;
 using Lesson = BB.Domain.Lesson;
+using Course = BB.Domain.Course;
 
 namespace DatabaseSeed
 {
@@ -12,6 +13,7 @@ namespace DatabaseSeed
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Database seeding started\n");
             Console.WriteLine("--- Seeding rooms");
             var room1 = InsertRoom("2eae5485-512d-43e3-9050-7c7b85445e81", "9101");
             var room2 = InsertRoom("67daf5e0-326e-4ef9-8e6e-a93a3f5bd764", "9130");
@@ -24,7 +26,10 @@ namespace DatabaseSeed
             Console.WriteLine("--- Seeding lessons");
             var lesson1 = InsertLesson("75feec01-6cff-4f86-93fe-2d74f4e4995a");
 
-            Console.WriteLine("--- Done");
+            Console.WriteLine("--- Seeding courses");
+            var course1 = InsertCourse("cd3b9e14-c648-4501-a0f6-6ff7d878cc04", "MComp Software Engineering", new List<Lesson>{ lesson1 });
+
+            Console.WriteLine("\nDone");
             Console.ReadKey();
         }
 
@@ -40,7 +45,13 @@ namespace DatabaseSeed
 
             var result = repo.CreateOrUpdate(obj);
 
-            return result ? obj : null;
+            if (result)
+            {
+                return obj;
+            }
+
+            Console.WriteLine("    Error occurred");
+            return null;
         }
 
         static Beacon InsertBeacon(String id, Int32 major, Int32 minor, Room room)
@@ -57,7 +68,13 @@ namespace DatabaseSeed
 
             var result = repo.CreateOrUpdate(obj);
 
-            return result ? obj : null;
+            if(result)
+            {
+                return obj;
+            }
+
+            Console.WriteLine("    Error occurred");
+            return null;
         }
 
         static Lesson InsertLesson(String id)
@@ -71,7 +88,35 @@ namespace DatabaseSeed
 
             var result = repo.CreateOrUpdate(obj);
 
-            return result ? obj : null;
+            if (result)
+            {
+                return obj;
+            }
+
+            Console.WriteLine("    Error occurred");
+            return null;
+        }
+
+        static Course InsertCourse(String id, String name, List<Lesson>lessons)
+        {
+            var repo = new UnitOfWork().CourseRepository;
+
+            var obj = new Course
+            {
+                CourseID = Guid.Parse(id),
+                Name = name,
+                LessonIDs = lessons.Select(i => i.LessonID).ToList()
+            };
+
+            var result = repo.CreateOrUpdate(obj);
+
+            if (result)
+            {
+                return obj;
+            }
+
+            Console.WriteLine("    Error occurred");
+            return null;
         }
     }
 }
