@@ -22,7 +22,9 @@ namespace BB.DataLayer
                     obj = new Session
                     {
                         SessionID = dominObject.SessionID != Guid.Empty ? dominObject.SessionID : Guid.NewGuid(),
-                        ScheduledDate = dominObject.ScheduledDate
+                        ScheduledDate = dominObject.ScheduledDate,
+                        LessonID = dominObject.LessonID,
+                        RoomID = dominObject.RoomID
                     };
 
                     //Insert it into the database
@@ -32,6 +34,8 @@ namespace BB.DataLayer
                 {
                     //Update the mutable values
                     obj.ScheduledDate = dominObject.ScheduledDate;
+                    obj.LessonID = dominObject.LessonID;
+                    obj.RoomID = dominObject.RoomID;
 
                     //Update the database
                     Update(obj);
