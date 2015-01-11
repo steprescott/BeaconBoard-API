@@ -22,7 +22,6 @@ namespace BB.DataLayer
         }
     
         public System.Guid LessonID { get; set; }
-        public System.Guid RoomID { get; set; }
     
         public virtual ICollection<Session> Sessions { get; set; }
         public virtual ICollection<Resource> Resources { get; set; }
