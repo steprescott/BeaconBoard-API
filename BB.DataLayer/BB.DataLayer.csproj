@@ -86,6 +86,7 @@
     <Compile Include="Repositories\CourseRepository.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Repositories\LessonRepository.cs" />
+    <Compile Include="Repositories\ResourceRepository.cs" />
     <Compile Include="Repositories\ResourceTypeRepository.cs" />
     <Compile Include="Repositories\RoomRepository.cs" />
     <Compile Include="Repositories\SessionRepository.cs" />
