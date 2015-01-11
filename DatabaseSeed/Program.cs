@@ -4,6 +4,7 @@ using System.Linq;
 using BB.DataLayer;
 using Beacon = BB.Domain.Beacon;
 using Room = BB.Domain.Room;
+using Lesson = BB.Domain.Lesson;
 
 namespace DatabaseSeed
 {
