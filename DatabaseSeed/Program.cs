@@ -32,7 +32,7 @@ namespace DatabaseSeed
 
             Console.WriteLine("--- Seeding resources");
             var resorce1 = InsertResource("accd09fc-083d-4897-b4ed-04a6ea3f4217", "Test PDF", "This is to test if we can see resources.", "http://www.energy.umich.edu/sites/default/files/pdf-sample.pdf", resourceTypePDF);
-            var resorce2 = InsertResource("b9c222e0-7f47-4e22-9ed6-2e92daca7eca", "Test doc", "Another test to see if resources are returned correctly.", "http://homepages.inf.ed.ac.uk/neilb/TestWordDoc.doc", resourceTypePDF);
+            var resorce2 = InsertResource("b9c222e0-7f47-4e22-9ed6-2e92daca7eca", "Test doc", "Another test to see if resources are returned correctly.", "http://homepages.inf.ed.ac.uk/neilb/TestWordDoc.doc", resourceTypeDoc);
 
             Console.WriteLine("--- Seeding lessons");
             var lesson1 = InsertLesson("75feec01-6cff-4f86-93fe-2d74f4e4995a");
