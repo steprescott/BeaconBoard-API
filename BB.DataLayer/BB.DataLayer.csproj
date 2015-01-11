@@ -87,6 +87,7 @@
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Repositories\LessonRepository.cs" />
     <Compile Include="Repositories\RoomRepository.cs" />
+    <Compile Include="Repositories\SessionRepository.cs" />
     <Compile Include="Resource.cs">
       <DependentUpon>BeaconDatabase.tt</DependentUpon>
     </Compile>

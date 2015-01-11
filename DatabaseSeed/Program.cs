@@ -6,6 +6,7 @@ using Beacon = BB.Domain.Beacon;
 using Room = BB.Domain.Room;
 using Lesson = BB.Domain.Lesson;
 using Course = BB.Domain.Course;
+using Session = BB.Domain.Session;
 
 namespace DatabaseSeed
 {
@@ -28,6 +29,9 @@ namespace DatabaseSeed
 
             Console.WriteLine("--- Seeding courses");
             var course1 = InsertCourse("cd3b9e14-c648-4501-a0f6-6ff7d878cc04", "MComp Software Engineering", new List<Lesson>{ lesson1 });
+
+            Console.WriteLine("--- Seeding sessions");
+            var session1 = InsertSession("00fbf224-159b-4921-8d87-c2f3d3832afb", DateTime.Parse("10/01/2015"), lesson1, room1);
 
             Console.WriteLine("\nDone");
             Console.ReadKey();
@@ -106,6 +110,29 @@ namespace DatabaseSeed
                 CourseID = Guid.Parse(id),
                 Name = name,
                 LessonIDs = lessons.Select(i => i.LessonID).ToList()
+            };
+
+            var result = repo.CreateOrUpdate(obj);
+
+            if (result)
+            {
+                return obj;
+            }
+
+            Console.WriteLine("    Error occurred");
+            return null;
+        }
+
+        static Session InsertSession(String id, DateTime scheduledDate, Lesson lesson, Room room)
+        {
+            var repo = new UnitOfWork().SessionRepository;
+
+            var obj = new Session
+            {
+                SessionID = Guid.Parse(id),
+                ScheduledDate = scheduledDate,
+                LessonID = lesson.LessonID,
+                RoomID = room.RoomID
             };
 
             var result = repo.CreateOrUpdate(obj);
