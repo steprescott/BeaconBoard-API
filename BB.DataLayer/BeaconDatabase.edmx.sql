@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/11/2015 15:05:17
--- Generated from EDMX file: C:\Users\Jonathan\Desktop\BeaconBoard\BB.DataLayer\BeaconDatabase.edmx
+-- Date Created: 01/11/2015 19:48:41
+-- Generated from EDMX file: C:\Users\steprescott\Documents\Visual Studio 2013\Projects\BeaconBoard\BB.DataLayer\BeaconDatabase.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,11 +17,104 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_RoomBeacon]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Beacons] DROP CONSTRAINT [FK_RoomBeacon];
+GO
+IF OBJECT_ID(N'[dbo].[FK_LessonSession]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Sessions] DROP CONSTRAINT [FK_LessonSession];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ResourceResourceType]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Resources] DROP CONSTRAINT [FK_ResourceResourceType];
+GO
+IF OBJECT_ID(N'[dbo].[FK_LessonResource_Lesson]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[LessonResource] DROP CONSTRAINT [FK_LessonResource_Lesson];
+GO
+IF OBJECT_ID(N'[dbo].[FK_LessonResource_Resource]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[LessonResource] DROP CONSTRAINT [FK_LessonResource_Resource];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CourseLesson_Course]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CourseLesson] DROP CONSTRAINT [FK_CourseLesson_Course];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CourseLesson_Lesson]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CourseLesson] DROP CONSTRAINT [FK_CourseLesson_Lesson];
+GO
+IF OBJECT_ID(N'[dbo].[FK_StudentCourse_Student]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[StudentCourse] DROP CONSTRAINT [FK_StudentCourse_Student];
+GO
+IF OBJECT_ID(N'[dbo].[FK_StudentCourse_Course]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[StudentCourse] DROP CONSTRAINT [FK_StudentCourse_Course];
+GO
+IF OBJECT_ID(N'[dbo].[FK_LecturerCourse_Lecturer]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[LecturerCourse] DROP CONSTRAINT [FK_LecturerCourse_Lecturer];
+GO
+IF OBJECT_ID(N'[dbo].[FK_LecturerCourse_Course]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[LecturerCourse] DROP CONSTRAINT [FK_LecturerCourse_Course];
+GO
+IF OBJECT_ID(N'[dbo].[FK_LecturerSession_Lecturer]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[LecturerSession] DROP CONSTRAINT [FK_LecturerSession_Lecturer];
+GO
+IF OBJECT_ID(N'[dbo].[FK_LecturerSession_Session]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[LecturerSession] DROP CONSTRAINT [FK_LecturerSession_Session];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SessionRoom]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Sessions] DROP CONSTRAINT [FK_SessionRoom];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Student_inherits_User]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Users_Student] DROP CONSTRAINT [FK_Student_inherits_User];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Lecturer_inherits_User]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Users_Lecturer] DROP CONSTRAINT [FK_Lecturer_inherits_User];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[Beacons]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Beacons];
+GO
+IF OBJECT_ID(N'[dbo].[Rooms]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Rooms];
+GO
+IF OBJECT_ID(N'[dbo].[Courses]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Courses];
+GO
+IF OBJECT_ID(N'[dbo].[Lessons]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Lessons];
+GO
+IF OBJECT_ID(N'[dbo].[Sessions]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Sessions];
+GO
+IF OBJECT_ID(N'[dbo].[Resources]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Resources];
+GO
+IF OBJECT_ID(N'[dbo].[ResourceTypes]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ResourceTypes];
+GO
+IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Users];
+GO
+IF OBJECT_ID(N'[dbo].[Users_Student]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Users_Student];
+GO
+IF OBJECT_ID(N'[dbo].[Users_Lecturer]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Users_Lecturer];
+GO
+IF OBJECT_ID(N'[dbo].[LessonResource]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[LessonResource];
+GO
+IF OBJECT_ID(N'[dbo].[CourseLesson]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CourseLesson];
+GO
+IF OBJECT_ID(N'[dbo].[StudentCourse]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[StudentCourse];
+GO
+IF OBJECT_ID(N'[dbo].[LecturerCourse]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[LecturerCourse];
+GO
+IF OBJECT_ID(N'[dbo].[LecturerSession]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[LecturerSession];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -52,8 +145,7 @@ GO
 
 -- Creating table 'Lessons'
 CREATE TABLE [dbo].[Lessons] (
-    [LessonID] uniqueidentifier  NOT NULL,
-    [RoomID] uniqueidentifier  NOT NULL
+    [LessonID] uniqueidentifier  NOT NULL
 );
 GO
 

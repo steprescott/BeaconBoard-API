@@ -114,7 +114,6 @@
       <PropertyRef Name="LessonID" />
     </Key>
     <Property Name="LessonID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="RoomID" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
   <EntityType Name="Sessions">
     <Key>
@@ -500,7 +499,6 @@
           <NavigationProperty Name="Sessions" Relationship="BeaconDatabase.LessonSession" FromRole="Lesson" ToRole="Session" />
           <NavigationProperty Name="Resources" Relationship="BeaconDatabase.LessonResource" FromRole="Lesson" ToRole="Resource" />
           <NavigationProperty Name="Courses" Relationship="BeaconDatabase.CourseLesson" FromRole="Lesson" ToRole="Course" />
-          <Property Name="RoomID" Type="Guid" Nullable="false" />
         </EntityType>
         <EntityType Name="Session">
           <Key>
@@ -644,7 +642,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(BeaconDatabase.Lesson)">
         <MappingFragment StoreEntitySet="Lessons">
           <ScalarProperty Name="LessonID" ColumnName="LessonID" />
-          <ScalarProperty Name="RoomID" ColumnName="RoomID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
