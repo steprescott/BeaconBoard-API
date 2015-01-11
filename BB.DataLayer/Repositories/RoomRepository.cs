@@ -49,13 +49,13 @@ namespace BB.DataLayer
 
         public List<Domain.Room> GetAllRooms()
         {
-            AutoMapper.Mapper.CreateMap<Room, Domain.Room>().ForMember(dest => dest.BeaconIDs, opt => opt.MapFrom(so => so.Beacons.Select(b => b.BeaconID).ToList()));
+            AutoMapper.Mapper.CreateMap<Room, Domain.Room>().ForMember(dest => dest.BeaconIDs, opt => opt.MapFrom(c => c.Beacons.Select(i => i.BeaconID).ToList()));
             return AutoMapper.Mapper.Map<List<Domain.Room>>(GetAll());
         }
 
         public Domain.Room GetRoomByID(Guid id)
         {
-            AutoMapper.Mapper.CreateMap<Room, Domain.Room>().ForMember(dest => dest.BeaconIDs, opt => opt.MapFrom(so => so.Beacons.Select(b => b.BeaconID).ToList()));
+            AutoMapper.Mapper.CreateMap<Room, Domain.Room>().ForMember(dest => dest.BeaconIDs, opt => opt.MapFrom(c => c.Beacons.Select(i => i.BeaconID).ToList()));
             return AutoMapper.Mapper.Map<Domain.Room>(GetById(id));
         }
 
