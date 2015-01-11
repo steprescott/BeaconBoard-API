@@ -26,8 +26,8 @@ namespace DatabaseSeed
             var beacon3 = InsertBeacon("e8b738b4-5d9d-4e1e-8046-1350f16c48d9", 2, 1, room2);
 
             Console.WriteLine("--- Seeding resource types");
-            var resourceTypePDF = InsertResourceType("8add217a-faa6-4fc4-9e8f-48e0c2c5702a", "PDF", "This is an open format that can be normally opened via a web browser.");
-            var resourceTypeDoc = InsertResourceType("8add217a-faa6-4fc4-9e8f-48e0c2c5702a", "Word document", "Standard word format for MS Word documents.");
+            var resourceTypePDF = InsertResourceType("6211158c-8c5a-4862-a1b6-bd2a0b686fa5", "PDF", "This is an open format that can be normally opened via a web browser.");
+            var resourceTypeDoc = InsertResourceType("5f518272-99bc-46fc-a1ba-7fe78c8658ba", "Word document", "Standard word format for MS Word documents.");
 
             Console.WriteLine("--- Seeding lessons");
             var lesson1 = InsertLesson("75feec01-6cff-4f86-93fe-2d74f4e4995a");
