@@ -20,6 +20,9 @@ namespace DatabaseSeed
             var beacon2 = InsertBeacon("e9f09f7d-0622-4c1d-91dd-adef628b43f5", 1, 2, room1);
             var beacon3 = InsertBeacon("e8b738b4-5d9d-4e1e-8046-1350f16c48d9", 2, 1, room2);
 
+            Console.WriteLine("--- Seeding lessons");
+            var lesson1 = InsertLesson("75feec01-6cff-4f86-93fe-2d74f4e4995a");
+
             Console.WriteLine("--- Done");
             Console.ReadKey();
         }
@@ -49,6 +52,20 @@ namespace DatabaseSeed
                 Major = major,
                 Minor = minor,
                 RoomID = room.RoomID
+            };
+
+            var result = repo.CreateOrUpdate(obj);
+
+            return result ? obj : null;
+        }
+
+        static Lesson InsertLesson(String id)
+        {
+            var repo = new UnitOfWork().LessonRepository;
+
+            var obj = new Lesson
+            {
+                LessonID= Guid.Parse(id)
             };
 
             var result = repo.CreateOrUpdate(obj);
