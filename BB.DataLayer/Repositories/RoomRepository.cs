@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AutoMapper;
 
 namespace BB.DataLayer
 {
@@ -49,14 +48,14 @@ namespace BB.DataLayer
 
         public List<Domain.Room> GetAllRooms()
         {
-            AutoMapper.Mapper.CreateMap<Room, Domain.Room>().ForMember(dest => dest.BeaconIDs, opt => opt.MapFrom(c => c.Beacons.Select(i => i.BeaconID).ToList()));
-            return AutoMapper.Mapper.Map<List<Domain.Room>>(GetAll());
+            Mapper.CreateMap<Room, Domain.Room>().ForMember(dest => dest.BeaconIDs, opt => opt.MapFrom(c => c.Beacons.Select(i => i.BeaconID).ToList()));
+            return Mapper.Map<List<Domain.Room>>(GetAll());
         }
 
         public Domain.Room GetRoomByID(Guid id)
         {
-            AutoMapper.Mapper.CreateMap<Room, Domain.Room>().ForMember(dest => dest.BeaconIDs, opt => opt.MapFrom(c => c.Beacons.Select(i => i.BeaconID).ToList()));
-            return AutoMapper.Mapper.Map<Domain.Room>(GetById(id));
+            Mapper.CreateMap<Room, Domain.Room>().ForMember(dest => dest.BeaconIDs, opt => opt.MapFrom(c => c.Beacons.Select(i => i.BeaconID).ToList()));
+            return Mapper.Map<Domain.Room>(GetById(id));
         }
 
         public bool Delete(Domain.Room domainObject)

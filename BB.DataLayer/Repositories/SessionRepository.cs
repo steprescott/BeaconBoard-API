@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AutoMapper;
 
 namespace BB.DataLayer
 {
@@ -53,14 +52,14 @@ namespace BB.DataLayer
 
         public List<Domain.Session> GetAllSessions()
         {
-            AutoMapper.Mapper.CreateMap<Session, Domain.Session>().ForMember(dest => dest.LecturerIDs, opt => opt.MapFrom(c => c.Lecturers.Select(i => i.UserID).ToList()));
-            return AutoMapper.Mapper.Map<List<Domain.Session>>(GetAll());
+            Mapper.CreateMap<Session, Domain.Session>().ForMember(dest => dest.LecturerIDs, opt => opt.MapFrom(c => c.Lecturers.Select(i => i.UserID).ToList()));
+            return Mapper.Map<List<Domain.Session>>(GetAll());
         }
 
         public Domain.Session GetSessionByID(Guid id)
         {
-            AutoMapper.Mapper.CreateMap<Session, Domain.Session>().ForMember(dest => dest.LecturerIDs, opt => opt.MapFrom(c => c.Lecturers.Select(i => i.UserID).ToList()));
-            return AutoMapper.Mapper.Map<Domain.Session>(GetById(id));
+            Mapper.CreateMap<Session, Domain.Session>().ForMember(dest => dest.LecturerIDs, opt => opt.MapFrom(c => c.Lecturers.Select(i => i.UserID).ToList()));
+            return Mapper.Map<Domain.Session>(GetById(id));
         }
 
         public bool Delete(Domain.Session domainObject)

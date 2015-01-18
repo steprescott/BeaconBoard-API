@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 
 namespace BB.DataLayer
 {
@@ -56,14 +57,14 @@ namespace BB.DataLayer
 
         public List<Domain.Beacon> GetAllBeacons()
         {
-            AutoMapper.Mapper.CreateMap<Beacon, Domain.Beacon>();
-            return AutoMapper.Mapper.Map<List<Domain.Beacon>>(GetAll());
+            Mapper.CreateMap<Beacon, Domain.Beacon>();
+            return Mapper.Map<List<Domain.Beacon>>(GetAll());
         }
 
         public Domain.Beacon GetBeaconByID(Guid id)
         {
-            AutoMapper.Mapper.CreateMap<Beacon, Domain.Beacon>();
-            return AutoMapper.Mapper.Map<Domain.Beacon>(GetById(id));
+            Mapper.CreateMap<Beacon, Domain.Beacon>();
+            return Mapper.Map<Domain.Beacon>(GetById(id));
         }
 
         public bool Delete(Domain.Beacon domainObject)

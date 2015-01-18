@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AutoMapper;
 
 namespace BB.DataLayer
 {
@@ -56,14 +54,14 @@ namespace BB.DataLayer
 
         public List<Domain.Resource> GetAllResources()
         {
-            AutoMapper.Mapper.CreateMap<Resource, Domain.Resource>().ForMember(dest => dest.LessonIDs, opt => opt.MapFrom(c => c.Lessons.Select(i => i.LessonID).ToList()));
-            return AutoMapper.Mapper.Map<List<Domain.Resource>>(GetAll());
+            Mapper.CreateMap<Resource, Domain.Resource>().ForMember(dest => dest.LessonIDs, opt => opt.MapFrom(c => c.Lessons.Select(i => i.LessonID).ToList()));
+            return Mapper.Map<List<Domain.Resource>>(GetAll());
         }
 
         public Domain.Resource GetRecourceByID(Guid id)
         {
-            AutoMapper.Mapper.CreateMap<Resource, Domain.Resource>().ForMember(dest => dest.LessonIDs, opt => opt.MapFrom(c => c.Lessons.Select(i => i.LessonID).ToList()));
-            return AutoMapper.Mapper.Map<Domain.Resource>(GetById(id));
+            Mapper.CreateMap<Resource, Domain.Resource>().ForMember(dest => dest.LessonIDs, opt => opt.MapFrom(c => c.Lessons.Select(i => i.LessonID).ToList()));
+            return Mapper.Map<Domain.Resource>(GetById(id));
         }
 
         public bool Delete(Domain.Resource domainObject)

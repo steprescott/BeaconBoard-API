@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AutoMapper;
 
 namespace BB.DataLayer
 {
@@ -48,18 +47,12 @@ namespace BB.DataLayer
 
         public List<Domain.Lesson> GetAllLessons()
         {
-            AutoMapper.Mapper.CreateMap<Lesson, Domain.Lesson>().ForMember(dest => dest.SessionIDs, opt => opt.MapFrom(so => so.Sessions.Select(i => i.SessionID).ToList()))
-                                                                .ForMember(dest => dest.ResourceIDs, opt => opt.MapFrom(so => so.Resources.Select(i => i.ResourceID).ToList()))
-                                                                .ForMember(dest => dest.CourseIDs, opt => opt.MapFrom(so => so.Courses.Select(i => i.CourseID).ToList()));
-            return AutoMapper.Mapper.Map<List<Domain.Lesson>>(GetAll());
+            return Mapper.Map<List<Domain.Lesson>>(GetAll());
         }
 
         public Domain.Lesson GetLessonByID(Guid id)
         {
-            AutoMapper.Mapper.CreateMap<Lesson, Domain.Lesson>().ForMember(dest => dest.SessionIDs, opt => opt.MapFrom(so => so.Sessions.Select(i => i.SessionID).ToList()))
-                                                                .ForMember(dest => dest.ResourceIDs, opt => opt.MapFrom(so => so.Resources.Select(i => i.ResourceID).ToList()))
-                                                                .ForMember(dest => dest.CourseIDs, opt => opt.MapFrom(so => so.Courses.Select(i => i.CourseID).ToList()));
-            return AutoMapper.Mapper.Map<Domain.Lesson>(GetById(id));
+            return Mapper.Map<Domain.Lesson>(GetById(id));
         }
 
         public bool Delete(Domain.Lesson domainObject)

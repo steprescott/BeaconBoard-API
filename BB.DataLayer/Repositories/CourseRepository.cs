@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AutoMapper;
 
 namespace BB.DataLayer
 {
@@ -49,18 +48,18 @@ namespace BB.DataLayer
 
         public List<Domain.Course> GetAllCourses()
         {
-            AutoMapper.Mapper.CreateMap<Course, Domain.Course>().ForMember(dest => dest.LessonIDs, opt => opt.MapFrom(c => c.Lessons.Select(i => i.LessonID).ToList()))
+            Mapper.CreateMap<Course, Domain.Course>().ForMember(dest => dest.LessonIDs, opt => opt.MapFrom(c => c.Lessons.Select(i => i.LessonID).ToList()))
                                                                 .ForMember(dest => dest.StudentIDs, opt => opt.MapFrom(c => c.Students.Select(i => i.UserID).ToList()))
                                                                 .ForMember(dest => dest.LecturerIDs, opt => opt.MapFrom(c => c.Lecturers.Select(i => i.UserID).ToList()));
-            return AutoMapper.Mapper.Map<List<Domain.Course>>(GetAll());
+            return Mapper.Map<List<Domain.Course>>(GetAll());
         }
 
         public Domain.Lesson GetCourseByID(Guid id)
         {
-            AutoMapper.Mapper.CreateMap<Course, Domain.Course>().ForMember(dest => dest.LessonIDs, opt => opt.MapFrom(c => c.Lessons.Select(i => i.LessonID).ToList()))
+            Mapper.CreateMap<Course, Domain.Course>().ForMember(dest => dest.LessonIDs, opt => opt.MapFrom(c => c.Lessons.Select(i => i.LessonID).ToList()))
                                                                 .ForMember(dest => dest.StudentIDs, opt => opt.MapFrom(c => c.Students.Select(i => i.UserID).ToList()))
                                                                 .ForMember(dest => dest.LecturerIDs, opt => opt.MapFrom(c => c.Lecturers.Select(i => i.UserID).ToList()));
-            return AutoMapper.Mapper.Map<Domain.Lesson>(GetById(id));
+            return Mapper.Map<Domain.Lesson>(GetById(id));
         }
 
         public bool Delete(Domain.Lesson domainObject)

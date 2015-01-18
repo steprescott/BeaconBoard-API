@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AutoMapper;
 
 namespace BB.DataLayer
 {
@@ -51,14 +50,14 @@ namespace BB.DataLayer
 
         public List<Domain.ResourceType> GetAllResourceTypes()
         {
-            AutoMapper.Mapper.CreateMap<ResourceType, Domain.ResourceType>().ForMember(dest => dest.ResourceIDs, opt => opt.MapFrom(c => c.Resources.Select(i => i.ResourceID).ToList()));
-            return AutoMapper.Mapper.Map<List<Domain.ResourceType>>(GetAll());
+            Mapper.CreateMap<ResourceType, Domain.ResourceType>().ForMember(dest => dest.ResourceIDs, opt => opt.MapFrom(c => c.Resources.Select(i => i.ResourceID).ToList()));
+            return Mapper.Map<List<Domain.ResourceType>>(GetAll());
         }
 
         public Domain.ResourceType GetResourceTypeByID(Guid id)
         {
-            AutoMapper.Mapper.CreateMap<ResourceType, Domain.ResourceType>().ForMember(dest => dest.ResourceIDs, opt => opt.MapFrom(c => c.Resources.Select(i => i.ResourceID).ToList()));
-            return AutoMapper.Mapper.Map<Domain.ResourceType>(GetById(id));
+            Mapper.CreateMap<ResourceType, Domain.ResourceType>().ForMember(dest => dest.ResourceIDs, opt => opt.MapFrom(c => c.Resources.Select(i => i.ResourceID).ToList()));
+            return Mapper.Map<Domain.ResourceType>(GetById(id));
         }
 
         public bool Delete(Domain.ResourceType domainObject)
