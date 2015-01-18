@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using BB.WebApi.Utilities;
 
 namespace BB.WebApi
 {
@@ -19,6 +20,9 @@ namespace BB.WebApi
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            //Handle checking of the API key
+            GlobalConfiguration.Configuration.MessageHandlers.Add(new ApiKeyHeaderValueHandler());
         }
     }
 }
