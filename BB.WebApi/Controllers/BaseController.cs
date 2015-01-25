@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
-using BB.DataLayer;
+using BB.WebApi.Services;
 
 namespace BB.WebApi.Controllers
 {
     public class BaseController : ApiController
     {
-        private UnitOfWork _unitOfWork;
-        public UnitOfWork UnitOfWork
+        private BeaconBoardService _beaconBoardService;
+
+        public BeaconBoardService BeaconBoardService
         {
-            get { return _unitOfWork ?? (_unitOfWork = new UnitOfWork()); }
+            get { return _beaconBoardService ?? (_beaconBoardService = new BeaconBoardService()); }
         }
     }
 }

@@ -4,18 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3DE0B579-8D33-4A50-8111-D468EE2C03F5}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{44AF2D14-7FFD-43A6-A9B6-84F0C2CFC135}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DatabaseSeed</RootNamespace>
-    <AssemblyName>DatabaseSeed</AssemblyName>
+    <RootNamespace>BB.UnitOfWorkEntityFramework</RootNamespace>
+    <AssemblyName>BB.UnitOfWorkEntityFramework</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -25,7 +24,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -34,16 +32,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,26 +50,82 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Beacon.cs">
+      <DependentUpon>BeaconBoardDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BeaconBoardDatabase.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BeaconBoardDatabase.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BeaconBoardDatabase.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BeaconBoardDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BeaconBoardDatabase.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BeaconBoardDatabase.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Course.cs">
+      <DependentUpon>BeaconBoardDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Lecturer.cs">
+      <DependentUpon>BeaconBoardDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Lesson.cs">
+      <DependentUpon>BeaconBoardDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource.cs">
+      <DependentUpon>BeaconBoardDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceType.cs">
+      <DependentUpon>BeaconBoardDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Room.cs">
+      <DependentUpon>BeaconBoardDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Session.cs">
+      <DependentUpon>BeaconBoardDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Student.cs">
+      <DependentUpon>BeaconBoardDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UnitOfWorkEntityFrameworkImplementation.cs" />
+    <Compile Include="User.cs">
+      <DependentUpon>BeaconBoardDatabase.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.Config" />
+    <EntityDeploy Include="BeaconBoardDatabase.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BeaconBoardDatabase.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="BeaconBoardDatabase.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BeaconBoardDatabase.Context.cs</LastGenOutput>
+      <DependentUpon>BeaconBoardDatabase.edmx</DependentUpon>
+    </None>
+    <None Include="BeaconBoardDatabase.edmx.diagram">
+      <DependentUpon>BeaconBoardDatabase.edmx</DependentUpon>
+    </None>
+    <None Include="BeaconBoardDatabase.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BeaconBoardDatabase.cs</LastGenOutput>
+      <DependentUpon>BeaconBoardDatabase.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BB.BusinessLogicEntityFramework\BB.BusinessLogicEntityFramework.csproj">
-      <Project>{6f1a1411-0bdf-47ae-ad50-7e307d9f148c}</Project>
-      <Name>BB.BusinessLogicEntityFramework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BB.Container\BB.Container.csproj">
-      <Project>{89b259a3-0e7a-4e98-916e-a471342a9721}</Project>
-      <Name>BB.Container</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BB.Domain\BB.Domain.csproj">
-      <Project>{b5f18ade-8779-44bd-9ccf-ed3872c5eb21}</Project>
-      <Name>BB.Domain</Name>
-    </ProjectReference>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BeaconBoardDatabase.edmx.sql" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\BB.Interfaces\BB.Interfaces.csproj">
       <Project>{748eb161-0237-4669-ba07-69c59a90e03d}</Project>
       <Name>BB.Interfaces</Name>

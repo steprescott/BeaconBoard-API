@@ -4,18 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3DE0B579-8D33-4A50-8111-D468EE2C03F5}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{6F1A1411-0BDF-47AE-AD50-7E307D9F148C}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DatabaseSeed</RootNamespace>
-    <AssemblyName>DatabaseSeed</AssemblyName>
+    <RootNamespace>BB.BusinessLogicEntityFramework</RootNamespace>
+    <AssemblyName>BB.BusinessLogicEntityFramework</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -25,7 +24,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -34,15 +32,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.3.0\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.3.0\lib\net40\AutoMapper.Net4.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -51,22 +47,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Logic\BeaconBusinessLogic.cs" />
+    <Compile Include="Logic\ResourceBusinessLogic.cs" />
+    <Compile Include="Logic\ResourceTypeBusinessLogic.cs" />
+    <Compile Include="Logic\LessonBusinessLogic.cs" />
+    <Compile Include="Logic\CourseBusinessLogic.cs" />
+    <Compile Include="Logic\SessionBusinessLogic.cs" />
+    <Compile Include="Logic\RoomBusinessLogic.cs" />
+    <Compile Include="Utilities\AutoMapperUtilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BB.BusinessLogicEntityFramework\BB.BusinessLogicEntityFramework.csproj">
-      <Project>{6f1a1411-0bdf-47ae-ad50-7e307d9f148c}</Project>
-      <Name>BB.BusinessLogicEntityFramework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BB.Container\BB.Container.csproj">
-      <Project>{89b259a3-0e7a-4e98-916e-a471342a9721}</Project>
-      <Name>BB.Container</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BB.Domain\BB.Domain.csproj">
       <Project>{b5f18ade-8779-44bd-9ccf-ed3872c5eb21}</Project>
       <Name>BB.Domain</Name>
@@ -74,6 +68,10 @@
     <ProjectReference Include="..\BB.Interfaces\BB.Interfaces.csproj">
       <Project>{748eb161-0237-4669-ba07-69c59a90e03d}</Project>
       <Name>BB.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BB.UnitOfWorkEntityFramework\BB.UnitOfWorkEntityFramework.csproj">
+      <Project>{44af2d14-7ffd-43a6-a9b6-84f0c2cfc135}</Project>
+      <Name>BB.UnitOfWorkEntityFramework</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -84,6 +82,7 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <Import Project="..\packages\AutoMapper.3.3.0\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.0\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
