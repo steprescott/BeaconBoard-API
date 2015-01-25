@@ -12,14 +12,14 @@ namespace BB.Interfaces
     {
         bool BeaconExists(Guid id);
 
-        BeaconResult Create(Beacon dominObject);
+        CRUDResult Create(Beacon dominObject);
 
-        BeaconResult Update(Beacon dominObject);
+        CRUDResult Update(Beacon dominObject);
 
         List<Beacon> GetAll();
         Beacon GetByID(Guid id);
 
-        BeaconResult Delete(Beacon domainObject);
-        BeaconResult DeleteByID(Guid id);
+        CRUDResult Delete(Beacon domainObject);
+        CRUDResult DeleteByID(Guid id);
     }
 }

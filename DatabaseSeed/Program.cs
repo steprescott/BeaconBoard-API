@@ -22,6 +22,10 @@ namespace DatabaseSeed
             AutoMapperUtilities.RegisterMappings();
 
             Console.WriteLine("Database seeding started\n");
+
+            //Console.WriteLine("--- Seeding lecturers");
+            //var lecturer1 = 
+
             Console.WriteLine("--- Seeding rooms");
             var room1 = CreateOrUpdateRoom("2eae5485-512d-43e3-9050-7c7b85445e81", "9101");
             var room2 = CreateOrUpdateRoom("67daf5e0-326e-4ef9-8e6e-a93a3f5bd764", "9130");
@@ -52,6 +56,40 @@ namespace DatabaseSeed
             Console.ReadKey();
         }
 
+        //static Room CreateOrUpdateStudent(String id, String firstName, String otherNames, String lastName, String emailAddress, String token)
+        //{
+        //    var businessLogic = BeaconBoardContainer.GetInstance<IUserBusinessLogic>();
+        //    var obj = businessLogic.GetByID(Guid.Parse(id));
+
+        //    if (obj == null)
+        //    {
+        //        obj = new Room
+        //        {
+        //            RoomID = Guid.Parse(id),
+        //            Number = number
+        //        };
+
+        //        var result = businessLogic.Create(obj);
+
+        //        if (result == CRUDResult.Created)
+        //        {
+        //            return obj;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        var result = businessLogic.Update(obj);
+
+        //        if (result == CRUDResult.Updated)
+        //        {
+        //            return obj;
+        //        }
+        //    }
+
+        //    Console.WriteLine("    Error occurred");
+        //    return null;
+        //}
+
         static Room CreateOrUpdateRoom(String id, String number)
         {
             var businessLogic = BeaconBoardContainer.GetInstance<IRoomBusinessLogic>();
@@ -67,7 +105,7 @@ namespace DatabaseSeed
 
                 var result = businessLogic.Create(obj);
 
-                if (result == RoomResult.Created)
+                if (result == CRUDResult.Created)
                 {
                     return obj;
                 }
@@ -76,12 +114,11 @@ namespace DatabaseSeed
             {
                 var result = businessLogic.Update(obj);
 
-                if (result == RoomResult.Updated)
+                if (result == CRUDResult.Updated)
                 {
                     return obj;
                 }
             }
-            
 
             Console.WriteLine("    Error occurred");
             return null;
@@ -104,7 +141,7 @@ namespace DatabaseSeed
 
                 var result = businessLogic.Create(obj);
 
-                if (result == BeaconResult.Created)
+                if (result == CRUDResult.Created)
                 {
                     return obj;
                 }
@@ -113,7 +150,7 @@ namespace DatabaseSeed
             {
                 var result = businessLogic.Update(obj);
 
-                if (result == BeaconResult.Updated)
+                if (result == CRUDResult.Updated)
                 {
                     return obj;
                 }
@@ -139,7 +176,7 @@ namespace DatabaseSeed
 
                 var result = businessLogic.Create(obj);
 
-                if (result == ResourceTypeResult.Created)
+                if (result == CRUDResult.Created)
                 {
                     return obj;
                 }
@@ -148,7 +185,7 @@ namespace DatabaseSeed
             {
                 var result = businessLogic.Update(obj);
 
-                if (result == ResourceTypeResult.Updated)
+                if (result == CRUDResult.Updated)
                 {
                     return obj;
                 }
@@ -176,7 +213,7 @@ namespace DatabaseSeed
 
                 var result = businessLogic.Create(obj);
 
-                if (result == ResourceResult.Created)
+                if (result == CRUDResult.Created)
                 {
                     return obj;
                 }
@@ -185,7 +222,7 @@ namespace DatabaseSeed
             {
                 var result = businessLogic.Update(obj);
 
-                if (result == ResourceResult.Updated)
+                if (result == CRUDResult.Updated)
                 {
                     return obj;
                 }
@@ -210,16 +247,17 @@ namespace DatabaseSeed
 
                 var result = businessLogic.Create(obj);
 
-                if (result == LessonResult.Created)
+                if (result == CRUDResult.Created)
                 {
                     return obj;
                 }
             }
             else
             {
+                obj.ResourceIDs = resources.Select(i => i.ResourceID).ToList();
                 var result = businessLogic.Update(obj);
 
-                if (result == LessonResult.Updated)
+                if (result == CRUDResult.Updated)
                 {
                     return obj;
                 }
@@ -245,7 +283,7 @@ namespace DatabaseSeed
 
                 var result = businessLogic.Create(obj);
 
-                if (result == CourseResult.Created)
+                if (result == CRUDResult.Created)
                 {
                     return obj;
                 }
@@ -254,7 +292,7 @@ namespace DatabaseSeed
             {
                 var result = businessLogic.Update(obj);
 
-                if (result == CourseResult.Updated)
+                if (result == CRUDResult.Updated)
                 {
                     return obj;
                 }
@@ -281,7 +319,7 @@ namespace DatabaseSeed
 
                 var result = businessLogic.Create(obj);
 
-                if (result == SessionResult.Created)
+                if (result == CRUDResult.Created)
                 {
                     return obj;
                 }
@@ -290,7 +328,7 @@ namespace DatabaseSeed
             {
                 var result = businessLogic.Update(obj);
 
-                if (result == SessionResult.Updated)
+                if (result == CRUDResult.Updated)
                 {
                     return obj;
                 }

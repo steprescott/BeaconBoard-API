@@ -4,7 +4,6 @@ using System.Linq;
 using AutoMapper;
 using BB.UnitOfWorkEntityFramework;
 using BB.BusinessLogicEntityFramework.Logic;
-using BB.Container;
 using BB.Interfaces;
 
 namespace BB.BusinessLogicEntityFramework.Utilities
@@ -24,13 +23,7 @@ namespace BB.BusinessLogicEntityFramework.Utilities
             Mapper.CreateMap<Lesson, Domain.Lesson>().ForMember(dest => dest.SessionIDs, opt => opt.MapFrom(so => so.Sessions.Select(i => i.SessionID).ToList()))
                 .ForMember(dest => dest.ResourceIDs, opt => opt.MapFrom(so => so.Resources.Select(i => i.ResourceID).ToList()))
                 .ForMember(dest => dest.CourseIDs, opt => opt.MapFrom(so => so.Courses.Select(i => i.CourseID).ToList()));
-            Mapper.CreateMap<Domain.Lesson, Lesson>().AfterMap((src, dest) => {
-                var businessLogic = BeaconBoardContainer.GetInstance<IResourceBusinessLogic>();
-                foreach(Guid id in src.ResourceIDs)
-                {
-                    var obj = businessLogic.GetByID(id);
-                }
-            });
+            Mapper.CreateMap<Domain.Lesson, Lesson>();
 
             Mapper.CreateMap<Resource, Domain.Resource>().ForMember(dest => dest.LessonIDs, opt => opt.MapFrom(c => c.Lessons.Select(i => i.LessonID).ToList()));
             Mapper.CreateMap<Domain.Resource, Resource>();
@@ -38,11 +31,15 @@ namespace BB.BusinessLogicEntityFramework.Utilities
             Mapper.CreateMap<ResourceType, Domain.ResourceType>().ForMember(dest => dest.ResourceIDs, opt => opt.MapFrom(c => c.Resources.Select(i => i.ResourceID).ToList()));
             Mapper.CreateMap<Domain.ResourceType, ResourceType>();
 
-            Mapper.CreateMap<Room, Domain.Room>().ForMember(dest => dest.BeaconIDs, opt => opt.MapFrom(c => c.Beacons.Select(i => i.BeaconID).ToList()));
+            Mapper.CreateMap<Room, Domain.Room>().ForMember(dest => dest.BeaconIDs, opt => opt.MapFrom(c => c.Beacons.Select(i => i.BeaconID).ToList()))
+                .ForMember(dest => dest.SessionIDs, opt => opt.MapFrom(c => c.Sessions.Select(i => i.SessionID).ToList()));
             Mapper.CreateMap<Domain.Room, Room>();
 
             Mapper.CreateMap<Session, Domain.Session>().ForMember(dest => dest.LecturerIDs, opt => opt.MapFrom(c => c.Lecturers.Select(i => i.UserID).ToList()));
             Mapper.CreateMap<Domain.Session, Session>();
+
+            Mapper.CreateMap<Domain.User, User>();
+            Mapper.CreateMap<User, Domain.Session>();
         }
     }
 }

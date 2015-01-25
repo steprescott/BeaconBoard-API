@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace BB.Interfaces
 {
-    public interface ISessionBusinessLogic
+    public interface IRoomBusinessLogic
     {
-        bool SessionExists(Guid id);
+        bool RoomExists(Guid id);
 
-        SessionResult Create(Session dominObject);
+        CRUDResult Create(Room dominObject);
 
-        SessionResult Update(Session dominObject);
+        CRUDResult Update(Room dominObject);
 
-        List<Session> GetAll();
-        Session GetByID(Guid id);
+        List<Room> GetAll();
+        Room GetByID(Guid id);
 
-        SessionResult Delete(Session domainObject);
-        SessionResult DeleteByID(Guid id);
+        CRUDResult Delete(Room domainObject);
+        CRUDResult DeleteByID(Guid id);
     }
 }

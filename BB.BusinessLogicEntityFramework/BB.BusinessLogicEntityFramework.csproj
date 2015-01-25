@@ -52,6 +52,7 @@
     <Compile Include="Logic\ResourceTypeBusinessLogic.cs" />
     <Compile Include="Logic\LessonBusinessLogic.cs" />
     <Compile Include="Logic\CourseBusinessLogic.cs" />
+    <Compile Include="Logic\UserBusinessLogic.cs" />
     <Compile Include="Logic\SessionBusinessLogic.cs" />
     <Compile Include="Logic\RoomBusinessLogic.cs" />
     <Compile Include="Utilities\AutoMapperUtilities.cs" />

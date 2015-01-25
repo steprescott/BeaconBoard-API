@@ -24,7 +24,7 @@ namespace BB.BusinessLogicEntityFramework.Logic
             return _unitOfWork.GetAll<Lesson>().Any(i => i.LessonID == id);
         }
 
-        public LessonResult Create(Domain.Lesson domainObject)
+        public CRUDResult Create(Domain.Lesson domainObject)
         {
             try
             {
@@ -38,21 +38,24 @@ namespace BB.BusinessLogicEntityFramework.Logic
                 //Map the domain object to an Entity Framework object
                 var obj = Mapper.Map<Lesson>(domainObject);
 
+                var resources = _unitOfWork.GetAll<Resource>().Where(i => domainObject.ResourceIDs.Contains(i.ResourceID));
+                obj.Resources = resources.ToList();
+
                 //Insert it in the database
                 _unitOfWork.Insert(obj);
                 _unitOfWork.SaveChanges();
-                return LessonResult.Created;
+                return CRUDResult.Created;
             }
             catch (Exception exception)
             {
                 //An error has occurred.
                 //We don't want to return the exception over the API as it could
                 //expose sensitive information, code snippets and / or stack trace.
-                return LessonResult.Error;
+                return CRUDResult.Error;
             }
         }
 
-        public LessonResult Update(Domain.Lesson domainObject)
+        public CRUDResult Update(Domain.Lesson domainObject)
         {
             //Check first that an ID has been passed
             if (domainObject.LessonID != Guid.Empty)
@@ -68,15 +71,18 @@ namespace BB.BusinessLogicEntityFramework.Logic
                         //Map the updated values
                         obj = Mapper.Map(domainObject, obj);
 
+                        var resources = _unitOfWork.GetAll<Resource>().Where(i => domainObject.ResourceIDs.Contains(i.ResourceID));
+                        obj.Resources = resources.ToList();
+
                         //Update the database to reflect these changes
                         _unitOfWork.Update(obj);
                         _unitOfWork.SaveChanges();
-                        return LessonResult.Updated;
+                        return CRUDResult.Updated;
                     }
                     else
                     {
                         //An object with that ID has not been found
-                        return LessonResult.NotFound;
+                        return CRUDResult.NotFound;
                     }
                 }
                 catch (Exception exception)
@@ -84,11 +90,11 @@ namespace BB.BusinessLogicEntityFramework.Logic
                     //An error has occurred.
                     //We don't want to return the exception over the API as it could
                     //expose sensitive information, code snippets and / or stack trace.
-                    return LessonResult.Error;
+                    return CRUDResult.Error;
                 }
             }
 
-            return LessonResult.Error;
+            return CRUDResult.Error;
         }
 
         public List<Domain.Lesson> GetAll()
@@ -109,13 +115,13 @@ namespace BB.BusinessLogicEntityFramework.Logic
             return Mapper.Map<Domain.Lesson>(obj);
         }
 
-        public LessonResult Delete(Domain.Lesson domainObject)
+        public CRUDResult Delete(Domain.Lesson domainObject)
         {
             //Use the ID of the domain object to call the DeleteByID function
             return DeleteByID(domainObject.LessonID);
         }
 
-        public LessonResult DeleteByID(Guid id)
+        public CRUDResult DeleteByID(Guid id)
         {
             try
             {
@@ -128,18 +134,18 @@ namespace BB.BusinessLogicEntityFramework.Logic
                     //Delete it from the database
                     _unitOfWork.Delete(obj);
                     _unitOfWork.SaveChanges();
-                    return LessonResult.Deleted;
+                    return CRUDResult.Deleted;
                 }
 
                 //No object found with the given ID
-                return LessonResult.NotFound;
+                return CRUDResult.NotFound;
             }
             catch (Exception)
             {
                 //An error has occurred.
                 //We don't want to return the exception over the API as it could
                 //expose sensitive information, code snippets and / or stack trace.
-                return LessonResult.Error;
+                return CRUDResult.Error;
             }
         }
     }

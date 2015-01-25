@@ -12,14 +12,14 @@ namespace BB.Interfaces
     {
         bool ResourceExists(Guid id);
 
-        ResourceResult Create(Resource dominObject);
+        CRUDResult Create(Resource dominObject);
 
-        ResourceResult Update(Resource dominObject);
+        CRUDResult Update(Resource dominObject);
 
         List<Resource> GetAll();
         Resource GetByID(Guid id);
 
-        ResourceResult Delete(Resource domainObject);
-        ResourceResult DeleteByID(Guid id);
+        CRUDResult Delete(Resource domainObject);
+        CRUDResult DeleteByID(Guid id);
     }
 }

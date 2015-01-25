@@ -24,7 +24,7 @@ namespace BB.BusinessLogicEntityFramework.Logic
             return _unitOfWork.GetAll<Room>().Any(i => i.RoomID == id);
         }
 
-        public RoomResult Create(Domain.Room domainObject)
+        public CRUDResult Create(Domain.Room domainObject)
         {
             try
             {
@@ -47,18 +47,18 @@ namespace BB.BusinessLogicEntityFramework.Logic
                 //Insert it in the database
                 _unitOfWork.Insert(obj);
                 _unitOfWork.SaveChanges();
-                return RoomResult.Created;
+                return CRUDResult.Created;
             }
             catch (Exception exception)
             {
                 //An error has occurred.
                 //We don't want to return the exception over the API as it could
                 //expose sensitive information, code snippets and / or stack trace.
-                return RoomResult.Error;
+                return CRUDResult.Error;
             }
         }
 
-        public RoomResult Update(Domain.Room domainObject)
+        public CRUDResult Update(Domain.Room domainObject)
         {
             //Check first that an ID has been passed
             if (domainObject.RoomID != Guid.Empty)
@@ -77,12 +77,12 @@ namespace BB.BusinessLogicEntityFramework.Logic
                         //Update the database to reflect these changes
                         _unitOfWork.Update(obj);
                         _unitOfWork.SaveChanges();
-                        return RoomResult.Updated;
+                        return CRUDResult.Updated;
                     }
                     else
                     {
                         //An object with that ID has not been found
-                        return RoomResult.NotFound;
+                        return CRUDResult.NotFound;
                     }
                 }
                 catch (Exception exception)
@@ -90,11 +90,11 @@ namespace BB.BusinessLogicEntityFramework.Logic
                     //An error has occurred.
                     //We don't want to return the exception over the API as it could
                     //expose sensitive information, code snippets and / or stack trace.
-                    return RoomResult.Error;
+                    return CRUDResult.Error;
                 }
             }
 
-            return RoomResult.Error;
+            return CRUDResult.Error;
         }
 
         public List<Domain.Room> GetAll()
@@ -115,13 +115,13 @@ namespace BB.BusinessLogicEntityFramework.Logic
             return Mapper.Map<Domain.Room>(obj);
         }
 
-        public RoomResult Delete(Domain.Room domainObject)
+        public CRUDResult Delete(Domain.Room domainObject)
         {
             //Use the ID of the domain object to call the DeleteByID function
             return DeleteByID(domainObject.RoomID);
         }
 
-        public RoomResult DeleteByID(Guid id)
+        public CRUDResult DeleteByID(Guid id)
         {
             try
             {
@@ -134,18 +134,18 @@ namespace BB.BusinessLogicEntityFramework.Logic
                     //Delete it from the database
                     _unitOfWork.Delete(obj);
                     _unitOfWork.SaveChanges();
-                    return RoomResult.Deleted;
+                    return CRUDResult.Deleted;
                 }
 
                 //No object found with the given ID
-                return RoomResult.NotFound;
+                return CRUDResult.NotFound;
             }
             catch (Exception)
             {
                 //An error has occurred.
                 //We don't want to return the exception over the API as it could
                 //expose sensitive information, code snippets and / or stack trace.
-                return RoomResult.Error;
+                return CRUDResult.Error;
             }
         }
     }

@@ -19,5 +19,6 @@ namespace BB.UnitOfWorkEntityFramework
         public string OtherNames { get; set; }
         public string LastName { get; set; }
         public string EmailAddress { get; set; }
+        public Nullable<System.Guid> token { get; set; }
     }
 }

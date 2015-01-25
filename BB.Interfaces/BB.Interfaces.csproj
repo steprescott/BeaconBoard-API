@@ -43,8 +43,9 @@
     <Compile Include="IResourceTypeBusinessLogic.cs" />
     <Compile Include="ILessonBusinessLogic.cs" />
     <Compile Include="ICourseBusinessLogic.cs" />
-    <Compile Include="IRoomBusinessLogic - Copy.cs" />
+    <Compile Include="IUserBusinessLogic.cs" />
     <Compile Include="IRoomBusinessLogic.cs" />
+    <Compile Include="ISessionBusinessLogic.cs" />
     <Compile Include="IBeaconBusinessLogic.cs" />
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -4,10 +4,10 @@
 @model Collection<ApiDescription>
 
 @{
-    ViewBag.Title = "ASP.NET Web API Help Page";
+    ViewBag.Title = "BeaconBoard API Help Page";
 
-    // Group APIs by controller
-    ILookup<HttpControllerDescriptor, ApiDescription> apiGroups = Model.ToLookup(api => api.ActionDescriptor.ControllerDescriptor);
+    // Group APIs by controller and order them alphabetically.
+    ILookup<HttpControllerDescriptor, ApiDescription> apiGroups = Model.OrderBy(d => d.ActionDescriptor.ControllerDescriptor.ControllerName).ToLookup(api => api.ActionDescriptor.ControllerDescriptor);
 }
 
 <link type="text/css" href="~/Areas/HelpPage/HelpPage.css" rel="stylesheet" />
@@ -21,10 +21,8 @@
 <div id="body" class="help-page">
     <section class="featured">
         <div class="content-wrapper">
-            <h2>Introduction</h2>
-            <p>
-                Provide a general description of your APIs here.
-            </p>
+            <p>Here is where you can find the documentation for all API requests and see their parameters alongside their response information.</p>
+            <p>Use the links to navigate through the controllers and their methods to see the method in more detail.</p>
         </div>
     </section>
     <section class="content-wrapper main-content clear-fix">

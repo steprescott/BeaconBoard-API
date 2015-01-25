@@ -24,7 +24,7 @@ namespace BB.BusinessLogicEntityFramework.Logic
             return _unitOfWork.GetAll<Course>().Any(i => i.CourseID == id);
         }
 
-        public CourseResult Create(Domain.Course domainObject)
+        public CRUDResult Create(Domain.Course domainObject)
         {
             try
             {
@@ -41,18 +41,18 @@ namespace BB.BusinessLogicEntityFramework.Logic
                 //Insert it in the database
                 _unitOfWork.Insert(obj);
                 _unitOfWork.SaveChanges();
-                return CourseResult.Created;
+                return CRUDResult.Created;
             }
             catch (Exception exception)
             {
                 //An error has occurred.
                 //We don't want to return the exception over the API as it could
                 //expose sensitive information, code snippets and / or stack trace.
-                return CourseResult.Error;
+                return CRUDResult.Error;
             }
         }
 
-        public CourseResult Update(Domain.Course domainObject)
+        public CRUDResult Update(Domain.Course domainObject)
         {
             //Check first that an ID has been passed
             if (domainObject.CourseID != Guid.Empty)
@@ -71,12 +71,12 @@ namespace BB.BusinessLogicEntityFramework.Logic
                         //Update the database to reflect these changes
                         _unitOfWork.Update(obj);
                         _unitOfWork.SaveChanges();
-                        return CourseResult.Updated;
+                        return CRUDResult.Updated;
                     }
                     else
                     {
                         //An object with that ID has not been found
-                        return CourseResult.NotFound;
+                        return CRUDResult.NotFound;
                     }
                 }
                 catch (Exception exception)
@@ -84,11 +84,11 @@ namespace BB.BusinessLogicEntityFramework.Logic
                     //An error has occurred.
                     //We don't want to return the exception over the API as it could
                     //expose sensitive information, code snippets and / or stack trace.
-                    return CourseResult.Error;
+                    return CRUDResult.Error;
                 }
             }
 
-            return CourseResult.Error;
+            return CRUDResult.Error;
         }
 
         public List<Domain.Course> GetAll()
@@ -109,13 +109,13 @@ namespace BB.BusinessLogicEntityFramework.Logic
             return Mapper.Map<Domain.Course>(obj);
         }
 
-        public CourseResult Delete(Domain.Course domainObject)
+        public CRUDResult Delete(Domain.Course domainObject)
         {
             //Use the ID of the domain object to call the DeleteByID function
             return DeleteByID(domainObject.CourseID);
         }
 
-        public CourseResult DeleteByID(Guid id)
+        public CRUDResult DeleteByID(Guid id)
         {
             try
             {
@@ -128,18 +128,18 @@ namespace BB.BusinessLogicEntityFramework.Logic
                     //Delete it from the database
                     _unitOfWork.Delete(obj);
                     _unitOfWork.SaveChanges();
-                    return CourseResult.Deleted;
+                    return CRUDResult.Deleted;
                 }
 
                 //No object found with the given ID
-                return CourseResult.NotFound;
+                return CRUDResult.NotFound;
             }
             catch (Exception)
             {
                 //An error has occurred.
                 //We don't want to return the exception over the API as it could
                 //expose sensitive information, code snippets and / or stack trace.
-                return CourseResult.Error;
+                return CRUDResult.Error;
             }
         }
     }

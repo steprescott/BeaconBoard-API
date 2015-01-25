@@ -12,14 +12,14 @@ namespace BB.Interfaces
     {
         bool CourseExists(Guid id);
 
-        CourseResult Create(Course dominObject);
+        CRUDResult Create(Course dominObject);
 
-        CourseResult Update(Course dominObject);
+        CRUDResult Update(Course dominObject);
 
         List<Course> GetAll();
         Course GetByID(Guid id);
 
-        CourseResult Delete(Course domainObject);
-        CourseResult DeleteByID(Guid id);
+        CRUDResult Delete(Course domainObject);
+        CRUDResult DeleteByID(Guid id);
     }
 }

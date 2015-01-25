@@ -151,6 +151,7 @@
     <Property Name="OtherNames" Type="nvarchar(max)" Nullable="true" />
     <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="EmailAddress" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="token" Type="uniqueidentifier" Nullable="true" />
   </EntityType>
   <EntityType Name="Users_Student">
     <Key>
@@ -530,6 +531,7 @@
           <Property Name="OtherNames" Type="String" Nullable="true" />
           <Property Name="LastName" Type="String" Nullable="false" />
           <Property Name="EmailAddress" Type="String" Nullable="true" />
+          <Property Name="token" Type="Guid" Nullable="true" />
         </EntityType>
         <EntityType Name="Student" BaseType="BeaconBoardDatabase.User">
           <NavigationProperty Name="Courses" Relationship="BeaconBoardDatabase.StudentCourse" FromRole="Student" ToRole="Course" />
@@ -683,6 +685,7 @@
           <ScalarProperty Name="OtherNames" ColumnName="OtherNames" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="token" ColumnName="token" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(BeaconBoardDatabase.Student)">

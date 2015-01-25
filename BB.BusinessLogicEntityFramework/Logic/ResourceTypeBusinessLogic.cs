@@ -24,7 +24,7 @@ namespace BB.BusinessLogicEntityFramework.Logic
             return _unitOfWork.GetAll<ResourceType>().Any(i => i.ResourceTypeID == id);
         }
 
-        public ResourceTypeResult Create(Domain.ResourceType domainObject)
+        public CRUDResult Create(Domain.ResourceType domainObject)
         {
             try
             {
@@ -41,18 +41,18 @@ namespace BB.BusinessLogicEntityFramework.Logic
                 //Insert it in the database
                 _unitOfWork.Insert(obj);
                 _unitOfWork.SaveChanges();
-                return ResourceTypeResult.Created;
+                return CRUDResult.Created;
             }
             catch (Exception exception)
             {
                 //An error has occurred.
                 //We don't want to return the exception over the API as it could
                 //expose sensitive information, code snippets and / or stack trace.
-                return ResourceTypeResult.Error;
+                return CRUDResult.Error;
             }
         }
 
-        public ResourceTypeResult Update(Domain.ResourceType domainObject)
+        public CRUDResult Update(Domain.ResourceType domainObject)
         {
             //Check first that an ID has been passed
             if (domainObject.ResourceTypeID != Guid.Empty)
@@ -71,12 +71,12 @@ namespace BB.BusinessLogicEntityFramework.Logic
                         //Update the database to reflect these changes
                         _unitOfWork.Update(obj);
                         _unitOfWork.SaveChanges();
-                        return ResourceTypeResult.Updated;
+                        return CRUDResult.Updated;
                     }
                     else
                     {
                         //An object with that ID has not been found
-                        return ResourceTypeResult.NotFound;
+                        return CRUDResult.NotFound;
                     }
                 }
                 catch (Exception exception)
@@ -84,11 +84,11 @@ namespace BB.BusinessLogicEntityFramework.Logic
                     //An error has occurred.
                     //We don't want to return the exception over the API as it could
                     //expose sensitive information, code snippets and / or stack trace.
-                    return ResourceTypeResult.Error;
+                    return CRUDResult.Error;
                 }
             }
 
-            return ResourceTypeResult.Error;
+            return CRUDResult.Error;
         }
 
         public List<Domain.ResourceType> GetAll()
@@ -109,13 +109,13 @@ namespace BB.BusinessLogicEntityFramework.Logic
             return Mapper.Map<Domain.ResourceType>(obj);
         }
 
-        public ResourceTypeResult Delete(Domain.ResourceType domainObject)
+        public CRUDResult Delete(Domain.ResourceType domainObject)
         {
             //Use the ID of the domain object to call the DeleteByID function
             return DeleteByID(domainObject.ResourceTypeID);
         }
 
-        public ResourceTypeResult DeleteByID(Guid id)
+        public CRUDResult DeleteByID(Guid id)
         {
             try
             {
@@ -128,18 +128,18 @@ namespace BB.BusinessLogicEntityFramework.Logic
                     //Delete it from the database
                     _unitOfWork.Delete(obj);
                     _unitOfWork.SaveChanges();
-                    return ResourceTypeResult.Deleted;
+                    return CRUDResult.Deleted;
                 }
 
                 //No object found with the given ID
-                return ResourceTypeResult.NotFound;
+                return CRUDResult.NotFound;
             }
             catch (Exception)
             {
                 //An error has occurred.
                 //We don't want to return the exception over the API as it could
                 //expose sensitive information, code snippets and / or stack trace.
-                return ResourceTypeResult.Error;
+                return CRUDResult.Error;
             }
         }
     }

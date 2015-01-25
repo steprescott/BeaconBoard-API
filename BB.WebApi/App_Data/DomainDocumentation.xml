@@ -1,0 +1,348 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BB.Domain</name>
+    </assembly>
+    <members>
+        <member name="T:BB.Domain.Beacon">
+            <summary>
+            DTO to allow the Entity to be passed over the API.
+            The App will use the beacons Major and Minor values to identify what room the user is in.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Beacon.BeaconID">
+            <summary>
+            Primary key that is unique for the object.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Beacon.Major">
+            <summary>
+            This value is used to find a beacon. Combined with the Minor value it should be unique.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Beacon.Minor">
+            <summary>
+            This value is used to find a beacon. Combined with the Major value it should be unique.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Beacon.RoomID">
+            <summary>
+            The ID of the room that the beacon is placed in.
+            </summary>
+        </member>
+        <member name="T:BB.Domain.Course">
+            <summary>
+            DTO to allow the Entity to be passed over the API.
+            The Course Entity allows the system to see what Students are enrolled on a course and therefore what Students can attend what Sessions.
+            It also keeps track of what lessons are taught on the Course and by what Lecturers. 
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Course.CourseID">
+            <summary>
+            Primary key that is unique for the object.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Course.Name">
+            <summary>
+            The name of the course.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Course.LessonIDs">
+            <summary>
+            An array of Lesson IDs that is in the course. 
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Course.StudentIDs">
+            <summary>
+            An array of Student IDs that are enrolled on the course.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Course.LecturerIDs">
+            <summary>
+            An array of Lecturer IDs that deliver the course.
+            </summary>
+        </member>
+        <member name="T:BB.Domain.Enums.CRUDResult">
+            <summary>
+            A CRUD operation can end with several states.
+            This Enum is used to determine what state the CRUD operation finished with.
+            </summary>
+        </member>
+        <member name="F:BB.Domain.Enums.CRUDResult.Created">
+            <summary>
+            This state is used on a successful creation of an entity.
+            </summary>
+        </member>
+        <member name="F:BB.Domain.Enums.CRUDResult.Updated">
+            <summary>
+            This state is used on a successful update of an entity.
+            </summary>
+        </member>
+        <member name="F:BB.Domain.Enums.CRUDResult.Deleted">
+            <summary>
+            This state is used on a successful deletion of an entity.
+            </summary>
+        </member>
+        <member name="F:BB.Domain.Enums.CRUDResult.NotFound">
+            <summary>
+            This state is used on a if the entity is not found.
+            This should only happen for operations that take an ID.
+            </summary>
+        </member>
+        <member name="F:BB.Domain.Enums.CRUDResult.Error">
+            <summary>
+            This state is used if any error occurs during the CRUD operation.
+            </summary>
+        </member>
+        <member name="T:BB.Domain.Enums.TokenResult">
+            <summary>
+            A user token can be in several states.
+            This Enum is used to determine what state a token is in.
+            </summary>
+        </member>
+        <member name="F:BB.Domain.Enums.TokenResult.Valid">
+            <summary>
+            This is for it the token is in a valid state.
+            </summary>
+        </member>
+        <member name="F:BB.Domain.Enums.TokenResult.Expired">
+            <summary>
+            This is for it the token is in a expired state.
+            This could be due to account inactivity or session timeout
+            </summary>
+        </member>
+        <member name="F:BB.Domain.Enums.TokenResult.Revoked">
+            <summary>
+            This is for it the token is in a revoked state.
+            This is due to the token manually being set to revoked in result of loss of device / account or miss-use of account.
+            </summary>
+        </member>
+        <member name="F:BB.Domain.Enums.TokenResult.NotFound">
+            <summary>
+            This is for it the token is not found.
+            This is due to the user not having an current issued token.
+            </summary>
+        </member>
+        <member name="T:BB.Domain.Lecturer">
+            <summary>
+            DTO to allow the Entity to be passed over the API.
+            Subclass of the User entity, this Entity allows a Lecturer to see what Courses they are related to and what Sessions they are teaching.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Lecturer.CourseIDs">
+            <summary>
+            An array of Course IDs that the lecture teaches.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Lecturer.SessionIDs">
+            <summary>
+            An array of Sessions IDs that the lecture is teaching / involved in.
+            </summary>
+        </member>
+        <member name="T:BB.Domain.Lesson">
+            <summary>
+            DTO to allow the Entity to be passed over the API.
+            A lesson entity is used to reduce the need to input data multiple times. It holds all the data needed for the lesson to be taught but doesn't care by who or when.
+            If a lesson had a scheduled date then all the meta data such as the resources would needed to be added again breaking normalisation principles.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Lesson.LessonID">
+            <summary>
+            Primary key that is unique for the object.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Lesson.SessionIDs">
+            <summary>
+            An array of Session IDs that will teach / use this lesson.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Lesson.ResourceIDs">
+            <summary>
+            An array of resources used in this Lesson.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Lesson.CourseIDs">
+            <summary>
+            An array of Courses that teach this Lesson.
+            </summary>
+        </member>
+        <member name="T:BB.Domain.Resource">
+            <summary>
+            DTO to allow the Entity to be passed over the API.
+            A Resource is a file that is used in a Lesson. These normally might be the lecture slides or lab notes.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Resource.ResourceID">
+            <summary>
+            Primary key that is unique for the object.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Resource.Name">
+            <summary>
+            Name of the Resource that will be shown to the user.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Resource.Description">
+            <summary>
+            Description of the Resource that will be shown to the user.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Resource.URLString">
+            <summary>
+            URL to the Resource where it can be accessed.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Resource.ResourceTypeID">
+            <summary>
+            A Resource can be of a set ResourceType. This is used to identify the type of the Resource so the App knows how to open / handle it.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Resource.LessonIDs">
+            <summary>
+            An array of Lessons IDs that use this Resource.
+            A Resource can be used in several Lessons because their might be a common Resource used across several Lessons.
+            </summary>
+        </member>
+        <member name="T:BB.Domain.ResourceType">
+            <summary>
+            In order for the App to know how to handle a Resource it needs to know it's type.
+            This entity allows a resource to be of a set of types.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.ResourceType.ResourceTypeID">
+            <summary>
+            Primary key that is unique for the object.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.ResourceType.Name">
+            <summary>
+            Name of the ResourceType such as 'Word Document'.
+            This may be shown to the user.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.ResourceType.Description">
+            <summary>
+            Description of the ResourceType.
+            This may be shown to the user.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.ResourceType.ResourceIDs">
+            <summary>
+            An array of Resources that are of this type.
+            </summary>
+        </member>
+        <member name="T:BB.Domain.Student">
+            <summary>
+            DTO to allow the Entity to be passed over the API.
+            Subclass of the User entity, this Entity allows a Student to see what Courses they are enrolled in and therefore what Sessions they can attend.
+            </summary>
+        </member>
+        <member name="T:BB.Domain.User">
+            <summary>
+            DTO to allow the Entity to be passed over the API.
+            This entity is used to hold any data that a Lecturer and a Student shares.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.User.UserID">
+            <summary>
+            Primary key that is unique for the object.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.User.FirstName">
+            <summary>
+            The first name of the user.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.User.OtherNames">
+            <summary>
+            Any other names of the user.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.User.LastName">
+            <summary>
+            The last name of the user.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.User.EmailAddress">
+            <summary>
+            The email address of the user.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.User.token">
+            <summary>
+            To avoid the passing of passwords to the API a user token system is used.
+            This follows the BasicAuth idea and allows for other security advantages such of revoking of the token and not transferring of passwords.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Student.CourseIDs">
+            <summary>
+            An array of Course IDs that the student is enrolled in.
+            </summary>
+        </member>
+        <member name="T:BB.Domain.Room">
+            <summary>
+            DTO to allow the Entity to be passed over the API.
+            A Room can contain several Beacons that can be used by the App to locate what Room the user is in.
+            From that the App can determine what Session is currently running and validate if the user should be there.
+            If they are the Room entity can link the App to the Lesson of for the current Session and give them access to the Resources of the Lesson.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Room.RoomID">
+            <summary>
+            Primary key that is unique for the object.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Room.Number">
+            <summary>
+            This should be unique so the user can validate what room they should be in.
+            If the App can not guarantee what room the user is in, this number will be shown along side the other Rooms the App sees for the user to choose from.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Room.BeaconIDs">
+            <summary>
+            An array of Beacon IDs that are in this room.
+            The App uses the beacons to know what room the user is currently in.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Room.SessionIDs">
+            <summary>
+            An array of Sessions IDs that are ran in this room.
+            </summary>
+        </member>
+        <member name="T:BB.Domain.Session">
+            <summary>
+            DTO to allow the Entity to be passed over the API.
+            A Session is the delivery of a Lesson. This is to avoid redundant / duplicate data.
+            A session has a date and time it is to be ran, where it is being ran and who by. Using this data we can tell if a User should be there or not.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Session.SessionID">
+            <summary>
+            Primary key that is unique for the object.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Session.ScheduledDate">
+            <summary>
+            The Date and Time that the Session is to be ran.
+            This is used by the App to see what Session is currently being taught at the current Date and Time.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Session.LessonID">
+            <summary>
+            The ID of the Lesson that is being taught for this Session.
+            This links the Session to the Resources via the Lesson.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Session.RoomID">
+            <summary>
+            The ID of the Room that the Session will be taught in.
+            This allows the App to know what is the current Session for a given Room.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Session.LecturerIDs">
+            <summary>
+            An array of Lecturer IDs that are involved with this Session.
+            </summary>
+        </member>
+    </members>
+</doc>
