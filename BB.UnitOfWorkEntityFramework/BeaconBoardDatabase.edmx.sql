@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/25/2015 13:25:58
+-- Date Created: 01/25/2015 22:02:25
 -- Generated from EDMX file: C:\Users\steprescott\Documents\Visual Studio 2013\Projects\BeaconBoard\BB.UnitOfWorkEntityFramework\BeaconBoardDatabase.edmx
 -- --------------------------------------------------
 
@@ -153,7 +153,8 @@ GO
 CREATE TABLE [dbo].[Sessions] (
     [SessionID] uniqueidentifier  NOT NULL,
     [LessonID] uniqueidentifier  NOT NULL,
-    [ScheduledDate] datetime  NOT NULL,
+    [ScheduledStartDate] datetime  NOT NULL,
+    [ScheduledEndDate] datetime  NOT NULL,
     [RoomID] uniqueidentifier  NOT NULL
 );
 GO

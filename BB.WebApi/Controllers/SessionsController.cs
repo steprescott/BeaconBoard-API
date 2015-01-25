@@ -104,6 +104,25 @@ namespace BB.WebApi.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, obj);
         }
 
+        [HttpGet]
+        [Route("sessions/GetCurrentSessionByRoomID")]
+        [ResponseType(typeof(Session))]
+        public HttpResponseMessage GetCurrentSessionByRoomID(Guid id)
+        {
+            //Get back the current Session that is happening in the Room with the given ID
+            var obj = BeaconBoardService.SessionBusinessLogic.GetCurrentSessionForRoomWithID(id);
+
+            //If there is no current Session for the Room
+            if (obj == null)
+            {
+                //Return HttpResponseMessage with NotFound status code
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No current Session for the room.");
+            }
+
+            //Otherwise return the object with a status of OK
+            return Request.CreateResponse(HttpStatusCode.OK, obj);
+        }
+
         /// <summary>
         /// Deletes the Session from the database with the given ID.
         /// </summary>

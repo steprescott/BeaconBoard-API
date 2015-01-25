@@ -50,7 +50,7 @@ namespace DatabaseSeed
             var course1 = CreateOrUpdateCourse("cd3b9e14-c648-4501-a0f6-6ff7d878cc04", "MComp Software Engineering", new List<Lesson> { lesson1 });
 
             Console.WriteLine("--- Seeding sessions");
-            var session1 = CreateOrUpdateSession("00fbf224-159b-4921-8d87-c2f3d3832afb", DateTime.Parse("10/01/2015"), lesson1, room1);
+            var session1 = CreateOrUpdateSession("00fbf224-159b-4921-8d87-c2f3d3832afb", DateTime.Parse("25/01/2015 23:00"), DateTime.Parse("26/01/2015 01:00"), lesson1, room1);
 
             Console.WriteLine("\nDone");
             Console.ReadKey();
@@ -302,7 +302,7 @@ namespace DatabaseSeed
             return null;
         }
 
-        static Session CreateOrUpdateSession(String id, DateTime scheduledDate, Lesson lesson, Room room)
+        static Session CreateOrUpdateSession(String id, DateTime scheduledStartDate, DateTime scheduledEndDate, Lesson lesson, Room room)
         {
             var businessLogic = BeaconBoardContainer.GetInstance<ISessionBusinessLogic>();
             var obj = businessLogic.GetByID(Guid.Parse(id));
@@ -312,7 +312,8 @@ namespace DatabaseSeed
                 obj = new Session
                 {
                     SessionID = Guid.Parse(id),
-                    ScheduledDate = scheduledDate,
+                    ScheduledStartDate = scheduledStartDate,
+                    ScheduledEndDate = scheduledEndDate,
                     LessonID = lesson.LessonID,
                     RoomID = room.RoomID
                 };

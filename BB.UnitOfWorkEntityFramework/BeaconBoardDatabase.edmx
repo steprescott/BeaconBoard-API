@@ -121,7 +121,8 @@
     </Key>
     <Property Name="SessionID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="LessonID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="ScheduledDate" Type="datetime" Nullable="false" />
+    <Property Name="ScheduledStartDate" Type="datetime" Nullable="false" />
+    <Property Name="ScheduledEndDate" Type="datetime" Nullable="false" />
     <Property Name="RoomID" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
   <EntityType Name="Resources">
@@ -495,9 +496,10 @@
           </Key>
           <Property Name="SessionID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="LessonID" Type="Guid" Nullable="false" />
-          <Property Name="ScheduledDate" Type="DateTime" Nullable="false" />
+          <Property Name="ScheduledStartDate" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Lesson" Relationship="BeaconBoardDatabase.LessonSession" FromRole="Session" ToRole="Lesson" />
           <NavigationProperty Name="Room" Relationship="BeaconBoardDatabase.SessionRoom" FromRole="Session" ToRole="Room" />
+          <Property Name="ScheduledEndDate" Type="DateTime" Nullable="false" />
           <Property Name="RoomID" Type="Guid" Nullable="false" />
           <NavigationProperty Name="Lecturers" Relationship="BeaconBoardDatabase.SessionLecturer" FromRole="Session" ToRole="Lecturer" />
         </EntityType>
@@ -652,7 +654,8 @@
         <MappingFragment StoreEntitySet="Sessions">
           <ScalarProperty Name="SessionID" ColumnName="SessionID" />
           <ScalarProperty Name="LessonID" ColumnName="LessonID" />
-          <ScalarProperty Name="ScheduledDate" ColumnName="ScheduledDate" />
+          <ScalarProperty Name="ScheduledStartDate" ColumnName="ScheduledStartDate" />
+          <ScalarProperty Name="ScheduledEndDate" ColumnName="ScheduledEndDate" />
           <ScalarProperty Name="RoomID" ColumnName="RoomID" />
         </MappingFragment>
       </EntityTypeMapping>

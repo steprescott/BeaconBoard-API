@@ -5,11 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="e71c3620e0af4101b1407fc31ea04ea8" Name="Diagram1" ZoomLevel="88" >
-        <EntityTypeShape EntityType="BeaconBoardDatabase.Beacon" Width="1.5" PointX="11.125" PointY="6.875" />
-        <EntityTypeShape EntityType="BeaconBoardDatabase.Room" Width="1.5" PointX="8.875" PointY="7.125" />
+        <EntityTypeShape EntityType="BeaconBoardDatabase.Beacon" Width="1.5" PointX="11.375" PointY="6.875" />
+        <EntityTypeShape EntityType="BeaconBoardDatabase.Room" Width="1.5" PointX="9.125" PointY="7.125" />
         <EntityTypeShape EntityType="BeaconBoardDatabase.Course" Width="1.5" PointX="2.25" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BeaconBoardDatabase.Lesson" Width="1.5" PointX="4.5" PointY="8.875" />
-        <EntityTypeShape EntityType="BeaconBoardDatabase.Session" Width="1.5" PointX="6.75" PointY="7.125" />
+        <EntityTypeShape EntityType="BeaconBoardDatabase.Session" Width="1.75" PointX="6.75" PointY="7.125" />
         <EntityTypeShape EntityType="BeaconBoardDatabase.Resource" Width="1.5" PointX="6.75" PointY="9.875" />
         <EntityTypeShape EntityType="BeaconBoardDatabase.ResourceType" Width="1.5" PointX="9" PointY="10.25" />
         <EntityTypeShape EntityType="BeaconBoardDatabase.User" Width="1.5" PointX="2.25" PointY="3.75" />

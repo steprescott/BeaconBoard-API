@@ -21,7 +21,8 @@ namespace BB.UnitOfWorkEntityFramework
     
         public System.Guid SessionID { get; set; }
         public System.Guid LessonID { get; set; }
-        public System.DateTime ScheduledDate { get; set; }
+        public System.DateTime ScheduledStartDate { get; set; }
+        public System.DateTime ScheduledEndDate { get; set; }
         public System.Guid RoomID { get; set; }
     
         public virtual Lesson Lesson { get; set; }

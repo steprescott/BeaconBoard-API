@@ -109,6 +109,21 @@ namespace BB.BusinessLogicEntityFramework.Logic
             return Mapper.Map<Domain.Session>(obj);
         }
 
+        public Domain.Session GetCurrentSessionForRoomWithID(Guid id)
+        {
+            var obj = _unitOfWork.GetAll<Session>().Where(i => i.RoomID == id && i.ScheduledStartDate < DateTime.Now && i.ScheduledEndDate > DateTime.Now).SingleOrDefault();
+
+            //If there is no current Session for the Room
+            if(obj == null)
+            {
+                //Return null
+                return null;
+            }
+
+            //Return the Session domain object
+            return Mapper.Map<Domain.Session>(obj);
+        }
+
         public CRUDResult Delete(Domain.Session domainObject)
         {
             //Use the ID of the domain object to call the DeleteByID function

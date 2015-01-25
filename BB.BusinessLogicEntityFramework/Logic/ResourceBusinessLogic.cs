@@ -39,9 +39,13 @@ namespace BB.BusinessLogicEntityFramework.Logic
                 var obj = Mapper.Map<Resource>(domainObject);
 
                 //Due to a Many - Many relationship it is too complex for Automapper to do.
-                //
                 var lessons = _unitOfWork.GetAll<Lesson>().Where(i => domainObject.LessonIDs.Contains(i.LessonID));
-                obj.Lessons = lessons.ToList();
+
+                //If the Resource has Lessons linked to it
+                if(obj.Lessons != null && obj.Lessons.Count > 0)
+                {
+                    obj.Lessons = lessons.ToList();
+                }
 
                 //Insert it in the database
                 _unitOfWork.Insert(obj);
@@ -73,7 +77,12 @@ namespace BB.BusinessLogicEntityFramework.Logic
                         //Map the updated values
                         obj = Mapper.Map(domainObject, obj);
                         var lessons = _unitOfWork.GetAll<Lesson>().Where(i => domainObject.LessonIDs.Contains(i.LessonID));
-                        obj.Lessons = lessons.ToList();
+
+                        //If the Resource has Lessons linked to it
+                        if (obj.Lessons != null && obj.Lessons.Count > 0)
+                        {
+                            obj.Lessons = lessons.ToList();
+                        }
 
                         //Update the database to reflect these changes
                         _unitOfWork.Update(obj);

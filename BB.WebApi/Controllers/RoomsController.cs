@@ -104,6 +104,24 @@ namespace BB.WebApi.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, obj);
         }
 
+        [HttpGet]
+        [ResponseType(typeof(Room))]
+        public HttpResponseMessage GetCurrentSession(Guid id)
+        {
+            //Get back the item details for the given ID
+            var obj = BeaconBoardService.RoomBusinessLogic.GetByID(id);
+
+            //If there wasn't an object with the given ID
+            if (obj == null)
+            {
+                //Return HttpResponseMessage with NotFound status code
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No Room found");
+            }
+
+            //Otherwise return the object with a status of OK
+            return Request.CreateResponse(HttpStatusCode.OK, obj);
+        }
+
         /// <summary>
         /// Deletes the Room from the database with the given ID.
         /// </summary>

@@ -18,11 +18,19 @@ namespace BB.Domain
         [Required]
         public Guid SessionID { get; set; }
         /// <summary>
-        /// The Date and Time that the Session is to be ran.
+        /// The Date and Time that the Session is to start.
         /// This is used by the App to see what Session is currently being taught at the current Date and Time.
         /// </summary>
         [Required]
-        public DateTime ScheduledDate { get; set; }
+        [DataType(DataType.DateTime)]
+        public DateTime ScheduledStartDate { get; set; }
+        /// <summary>
+        /// The Date and Time that the Session is to end.
+        /// This is used by the App to see what Session is currently being taught at the current Date and Time.
+        /// </summary>
+        [Required]
+        [DataType(DataType.DateTime)]
+        public DateTime ScheduledEndDate { get; set; }
         /// <summary>
         /// The ID of the Lesson that is being taught for this Session.
         /// This links the Session to the Resources via the Lesson.

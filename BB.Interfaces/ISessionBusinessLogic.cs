@@ -18,6 +18,7 @@ namespace BB.Interfaces
 
         List<Session> GetAll();
         Session GetByID(Guid id);
+        Session GetCurrentSessionForRoomWithID(Guid id);
 
         CRUDResult Delete(Session domainObject);
         CRUDResult DeleteByID(Guid id);

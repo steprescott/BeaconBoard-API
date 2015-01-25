@@ -321,9 +321,15 @@
             Primary key that is unique for the object.
             </summary>
         </member>
-        <member name="P:BB.Domain.Session.ScheduledDate">
+        <member name="P:BB.Domain.Session.ScheduledStartDate">
             <summary>
-            The Date and Time that the Session is to be ran.
+            The Date and Time that the Session is to start.
+            This is used by the App to see what Session is currently being taught at the current Date and Time.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Session.ScheduledEndDate">
+            <summary>
+            The Date and Time that the Session is to end.
             This is used by the App to see what Session is currently being taught at the current Date and Time.
             </summary>
         </member>
