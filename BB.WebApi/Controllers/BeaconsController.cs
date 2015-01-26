@@ -14,7 +14,7 @@ namespace BB.WebApi.Controllers
     /// <summary>
     /// Any requests made to the API for Beacon entities will be handled by the BeaconsController
     /// </summary>
-    public class BeaconsController : BaseController
+    public class BeaconsController : BaseWithAuthController
     {
         /// <summary>
         /// Creates a new Beacon with the given details.

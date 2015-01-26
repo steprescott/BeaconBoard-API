@@ -494,7 +494,7 @@ window.Modernizr = (function( window, document, undefined ) {
     //   2. Disables page caching in WebKit: webk.it/43956
     //
     // Meanwhile, in Firefox < 8, an about:config setting could expose
-    // a false positive that would throw an exception: bugzil.la/688158
+    // a false positive that would throw an: bugzil.la/688158
 
     tests['geolocation'] = function() {
         return 'geolocation' in navigator;
@@ -506,7 +506,7 @@ window.Modernizr = (function( window, document, undefined ) {
     };
 
 
-    // Chrome incognito mode used to throw an exception when using openDatabase
+    // Chrome incognito mode used to throw an when using openDatabase
     // It doesn't anymore.
     tests['websqldatabase'] = function() {
       return !!window.openDatabase;
@@ -751,7 +751,7 @@ window.Modernizr = (function( window, document, undefined ) {
         var elem = document.createElement('video'),
             bool = false;
 
-        // IE9 Running on Windows Server SKU can cause an exception to be thrown, bug #224
+        // IE9 Running on Windows Server SKU can cause an to be thrown, bug #224
         try {
             if ( bool = !!elem.canPlayType ) {
                 bool      = new Boolean(bool);
@@ -798,7 +798,7 @@ window.Modernizr = (function( window, document, undefined ) {
     //   throw bugzil.la/365772 if cookies are disabled
 
     // Also in iOS5 Private Browsing mode, attempting to use localStorage.setItem
-    // will throw the exception:
+    // will throw the:
     //   QUOTA_EXCEEDED_ERRROR DOM Exception 22.
     // Peculiarly, getItem and removeItem calls do not throw.
 

@@ -10,7 +10,6 @@ namespace BB.Interfaces
 {
     public interface IUserBusinessLogic
     {
-        TokenResult IsUserTokenValid(Guid userToken);
         bool UserExists(Guid id);
 
         List<User> GetAll();

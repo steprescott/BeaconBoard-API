@@ -12,7 +12,7 @@
         <EntityTypeShape EntityType="BeaconBoardDatabase.Session" Width="1.75" PointX="6.75" PointY="7.125" />
         <EntityTypeShape EntityType="BeaconBoardDatabase.Resource" Width="1.5" PointX="6.75" PointY="9.875" />
         <EntityTypeShape EntityType="BeaconBoardDatabase.ResourceType" Width="1.5" PointX="9" PointY="10.25" />
-        <EntityTypeShape EntityType="BeaconBoardDatabase.User" Width="1.5" PointX="2.25" PointY="3.75" />
+        <EntityTypeShape EntityType="BeaconBoardDatabase.User" Width="1.5" PointX="2.25" PointY="3.375" />
         <EntityTypeShape EntityType="BeaconBoardDatabase.Student" Width="1.5" PointX="1.125" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BeaconBoardDatabase.Lecturer" Width="1.5" PointX="3.375" PointY="6.75" />
         <AssociationConnector Association="BeaconBoardDatabase.RoomBeacon" />

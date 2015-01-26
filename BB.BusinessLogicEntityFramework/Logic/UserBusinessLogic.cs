@@ -19,13 +19,6 @@ namespace BB.BusinessLogicEntityFramework.Logic
             _unitOfWork = unitOfWork;
         }
 
-        public TokenResult IsUserTokenValid(Guid userToken)
-        {
-            var isValid = _unitOfWork.GetAll<User>().Any(i => i.token == userToken);
-
-            return isValid ? TokenResult.Valid : TokenResult.NotFound;
-        }
-
         public bool UserExists(Guid id)
         {
             return _unitOfWork.GetAll<User>().Any(i => i.UserID == id);
@@ -51,7 +44,7 @@ namespace BB.BusinessLogicEntityFramework.Logic
 
         public Domain.User GetUserForToken(Guid userToken)
         {
-            var obj = _unitOfWork.GetAll<User>().SingleOrDefault(i => i.token == userToken);
+            var obj = _unitOfWork.GetAll<User>().SingleOrDefault(i => i.Token == userToken);
             return Mapper.Map<Domain.User>(obj);
         }
 
@@ -83,7 +76,7 @@ namespace BB.BusinessLogicEntityFramework.Logic
             catch (Exception)
             {
                 //An error has occurred.
-                //We don't want to return the exception over the API as it could
+                //We don't want to return the over the API as it could
                 //expose sensitive information, code snippets and / or stack trace.
                 return CRUDResult.Error;
             }

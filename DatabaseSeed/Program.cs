@@ -13,6 +13,7 @@ using BB.Interfaces;
 using BB.Domain.Enums;
 using BB.BusinessLogicEntityFramework.Utilities;
 using BB.Domain;
+using TH.EncryptionUtilities;
 
 namespace DatabaseSeed
 {
@@ -25,7 +26,7 @@ namespace DatabaseSeed
             Console.WriteLine("Database seeding started\n");
 
             Console.WriteLine("--- Seeding students");
-            var student1 = CreateOrUpdateStudent("731a27a9-840b-49b6-bcfb-6303536c6b79", "Ste", "Christopher", "Prescott", "ste@beaconboard.co.uk", "c0be1a6d-3d4f-4b23-b3ca-54162aeb2022");
+            var student1 = CreateOrUpdateStudent("731a27a9-840b-49b6-bcfb-6303536c6b79", "steprescott", "password", "Ste", "Christopher", "Prescott", "ste@beaconboard.co.uk", "c0be1a6d-3d4f-4b23-b3ca-54162aeb2022");
 
             Console.WriteLine("--- Seeding rooms");
             var room1 = CreateOrUpdateRoom("2eae5485-512d-43e3-9050-7c7b85445e81", "9101");
@@ -57,9 +58,10 @@ namespace DatabaseSeed
             Console.ReadKey();
         }
 
-        static Student CreateOrUpdateStudent(String id, String firstName, String otherNames, String lastName, String emailAddress, String token)
+        static Student CreateOrUpdateStudent(String id, String username, String password, String firstName, String otherNames, String lastName, String emailAddress, String token)
         {
             var businessLogic = BeaconBoardContainer.GetInstance<IStudentBusinessLogic>();
+
             var obj = businessLogic.GetByID(Guid.Parse(id));
 
             if (obj == null)
@@ -67,6 +69,8 @@ namespace DatabaseSeed
                 obj = new Student
                 {
                     UserID = Guid.Parse(id),
+                    Username = username,
+                    Password = BasicEncryptDecryptUtilities.Encrypt(password),
                     FirstName = firstName,
                     OtherNames = otherNames,
                     LastName = lastName,

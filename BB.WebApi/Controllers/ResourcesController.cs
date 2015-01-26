@@ -14,7 +14,7 @@ namespace BB.WebApi.Controllers
     /// <summary>
     /// Any requests made to the API for Resource entities will be handled by the ResourcesController
     /// </summary>
-    public class ResourcesController : BaseController
+    public class ResourcesController : BaseWithAuthController
     {
         /// <summary>
         /// Creates a new Resource with the given details.

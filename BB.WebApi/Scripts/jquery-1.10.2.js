@@ -499,7 +499,7 @@ jQuery.extend({
 				return false;
 			}
 		} catch ( e ) {
-			// IE8,9 Will throw exceptions on certain host objects #9897
+			// IE8,9 Will throws on certain host objects #9897
 			return false;
 		}
 
@@ -1665,7 +1665,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 			// on a disconnected node (IE 9)
 			support.disconnectedMatch = matches.call( div, "div" );
 
-			// This should fail with an exception
+			// This should fail with an
 			// Gecko does not error, returns false instead
 			matches.call( div, "[s!='']:x" );
 			rbuggyMatches.push( "!=", pseudos );
@@ -3761,7 +3761,7 @@ function internalRemoveData( elem, name, pvt ) {
 jQuery.extend({
 	cache: {},
 
-	// The following elements throw uncatchable exceptions if you
+	// The following elements throw uncatchables if you
 	// attempt to add expando properties to them.
 	noData: {
 		"applet": true,
@@ -6180,7 +6180,7 @@ jQuery.fn.extend({
 
 					elem = 0;
 
-				// If using innerHTML throws an exception, use the fallback method
+				// If using innerHTML throws an, use the fallback method
 				} catch(e) {}
 			}
 
@@ -7637,7 +7637,7 @@ var
 	// Avoid comment-prolog char sequence (#10098); must appease lint and evade compression
 	allTypes = "*/".concat("*");
 
-// #8138, IE may throw an exception when accessing
+// #8138, IE may throw an when accessing
 // a field from window.location if document.domain has been set
 try {
 	ajaxLocation = location.href;
@@ -8149,7 +8149,7 @@ jQuery.extend({
 				state = 1;
 				transport.send( requestHeaders, done );
 			} catch ( e ) {
-				// Propagate exception as error if not done
+				// Propagate as error if not done
 				if ( state < 2 ) {
 					done( -1, e );
 				// Simply rethrow otherwise
@@ -8715,7 +8715,7 @@ if ( xhrSupported ) {
 					} catch( err ) {}
 
 					// Do send the request
-					// This may raise an exception which is actually
+					// This may raise an which is actually
 					// handled in jQuery.ajax (so no try/catch here)
 					xhr.send( ( s.hasContent && s.data ) || null );
 
@@ -8723,7 +8723,7 @@ if ( xhrSupported ) {
 					callback = function( _, isAbort ) {
 						var status, responseHeaders, statusText, responses;
 
-						// Firefox throws exceptions when accessing properties
+						// Firefox throwss when accessing properties
 						// of an xhr when a network error occurred
 						// http://helpful.knobs-dials.com/index.php/Component_returned_failure_code:_0x80040111_(NS_ERROR_NOT_AVAILABLE)
 						try {
@@ -8753,13 +8753,13 @@ if ( xhrSupported ) {
 									status = xhr.status;
 									responseHeaders = xhr.getAllResponseHeaders();
 
-									// When requesting binary data, IE6-9 will throw an exception
+									// When requesting binary data, IE6-9 will throw an
 									// on any attempt to access responseText (#11426)
 									if ( typeof xhr.responseText === "string" ) {
 										responses.text = xhr.responseText;
 									}
 
-									// Firefox throws an exception when accessing
+									// Firefox throws an when accessing
 									// statusText for faulty cross-domain requests
 									try {
 										statusText = xhr.statusText;

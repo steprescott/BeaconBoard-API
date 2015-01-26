@@ -15,10 +15,12 @@ namespace BB.UnitOfWorkEntityFramework
     public partial class User
     {
         public System.Guid UserID { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
         public string FirstName { get; set; }
         public string OtherNames { get; set; }
         public string LastName { get; set; }
         public string EmailAddress { get; set; }
-        public Nullable<System.Guid> token { get; set; }
+        public Nullable<System.Guid> Token { get; set; }
     }
 }

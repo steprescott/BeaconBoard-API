@@ -14,7 +14,7 @@ namespace BB.WebApi.Controllers
     /// <summary>
     /// Any requests made to the API for Session entities will be handled by the SessionsController
     /// </summary>
-    public class SessionsController : BaseController
+    public class SessionsController : BaseWithAuthController
     {
         /// <summary>
         /// Creates a new Session with the given details.

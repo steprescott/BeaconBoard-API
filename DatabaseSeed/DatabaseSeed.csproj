@@ -71,6 +71,10 @@
       <Project>{b5f18ade-8779-44bd-9ccf-ed3872c5eb21}</Project>
       <Name>BB.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BB.EncryptionUtilities\BB.EncryptionUtilities.csproj">
+      <Project>{cc1de2dc-282c-418b-9c38-d79f638d9959}</Project>
+      <Name>BB.EncryptionUtilities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BB.Interfaces\BB.Interfaces.csproj">
       <Project>{748eb161-0237-4669-ba07-69c59a90e03d}</Project>
       <Name>BB.Interfaces</Name>

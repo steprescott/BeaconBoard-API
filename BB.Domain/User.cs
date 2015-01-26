@@ -17,6 +17,15 @@ namespace BB.Domain
         [Required]
         public Guid UserID { get; set; }
         /// <summary>
+        /// The username of the user.
+        /// </summary>
+        [Required]
+        public string Username { get; set; }
+        /// <summary>
+        /// The password of the user. This is never returned via the API.
+        /// </summary>
+        public string Password { get; set; }
+        /// <summary>
         /// The first name of the user.
         /// </summary>
         [Required]

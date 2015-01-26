@@ -8,7 +8,7 @@ using BB.WebApi.Handlers;
 namespace BB.WebApi.Controllers
 {
     [ValidationActionFilter]
-    public class BaseController : ApiController
+    public class BaseWithAuthController : ApiController
     {
         private BeaconBoardService _beaconBoardService;
 

@@ -8,9 +8,11 @@ using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace BB.WebApi.Utilities
 {
@@ -144,7 +146,7 @@ namespace BB.WebApi.Utilities
                 var userToken = Guid.Parse(userTokenHeader.Value.First());
 
                 //Check to see if the User Token is valid
-                var result = _beaconBoardService.UserBusinessLogic.IsUserTokenValid(userToken);
+                var result = _beaconBoardService.TokenBusinessLogic.IsUserTokenValid(userToken);
                 
                 //If a User Token is not found
                 if(result == TokenResult.NotFound)
@@ -176,16 +178,10 @@ namespace BB.WebApi.Utilities
                         HttpResponseErrorMessage =  request.CreateErrorResponse(HttpCodes.HttpCodeInvalidToken, "Users account revoked.")
                     };
                 }
-            }
-            //Then the request has no UserToken header field
-            else
-            {
-                //Return the correct RequestValidation
-                return new RequestValidation
-                {
-                    Success = false,
-                    HttpResponseErrorMessage = request.CreateErrorResponse(HttpCodes.HttpCodeTokenRequired, "Missing User Token")
-                };
+
+                //The user has been authenticated
+                var userIdentity = new GenericIdentity("USERNAME");
+                HttpContext.Current.User = new GenericPrincipal(userIdentity, new[] { "ROLE" });
             }
 
             //Everything is OK so return the correct RequestValidation

@@ -14,7 +14,7 @@ namespace BB.WebApi.Controllers
     /// <summary>
     /// Any requests made to the API for Room entities will be handled by the RoomsController
     /// </summary>
-    public class RoomsController : BaseController
+    public class RoomsController : BaseWithAuthController
     {
         /// <summary>
         /// Creates a new Room with the given details.

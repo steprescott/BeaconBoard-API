@@ -385,7 +385,7 @@ namespace BB.WebApi.Areas.HelpPage
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "The exception is recorded as ErrorMessages.")]
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "The is recorded as ErrorMessages.")]
         private static void GenerateSamples(HelpPageApiModel apiModel, HelpPageSampleGenerator sampleGenerator)
         {
             try
@@ -405,7 +405,7 @@ namespace BB.WebApi.Areas.HelpPage
             catch (Exception e)
             {
                 apiModel.ErrorMessages.Add(String.Format(CultureInfo.CurrentCulture,
-                    "An exception has occurred while generating the sample. Exception message: {0}",
+                    "An has occurred while generating the sample. Exception message: {0}",
                     HelpPageSampleGenerator.UnwrapException(e).Message));
             }
         }

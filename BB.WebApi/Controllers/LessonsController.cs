@@ -14,7 +14,7 @@ namespace BB.WebApi.Controllers
     /// <summary>
     /// Any requests made to the API for Lesson entities will be handled by the lessonsController
     /// </summary>
-    public class LessonsController : BaseController
+    public class LessonsController : BaseWithAuthController
     {
         /// <summary>
         /// Creates a new Lesson with the given details.

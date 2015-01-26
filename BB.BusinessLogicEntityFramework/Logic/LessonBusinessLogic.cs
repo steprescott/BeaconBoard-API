@@ -46,10 +46,10 @@ namespace BB.BusinessLogicEntityFramework.Logic
                 _unitOfWork.SaveChanges();
                 return CRUDResult.Created;
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 //An error has occurred.
-                //We don't want to return the exception over the API as it could
+                //We don't want to return the over the API as it could
                 //expose sensitive information, code snippets and / or stack trace.
                 return CRUDResult.Error;
             }
@@ -85,10 +85,10 @@ namespace BB.BusinessLogicEntityFramework.Logic
                         return CRUDResult.NotFound;
                     }
                 }
-                catch (Exception exception)
+                catch (Exception)
                 {
                     //An error has occurred.
-                    //We don't want to return the exception over the API as it could
+                    //We don't want to return the over the API as it could
                     //expose sensitive information, code snippets and / or stack trace.
                     return CRUDResult.Error;
                 }
@@ -143,7 +143,7 @@ namespace BB.BusinessLogicEntityFramework.Logic
             catch (Exception)
             {
                 //An error has occurred.
-                //We don't want to return the exception over the API as it could
+                //We don't want to return the over the API as it could
                 //expose sensitive information, code snippets and / or stack trace.
                 return CRUDResult.Error;
             }

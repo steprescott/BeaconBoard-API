@@ -147,12 +147,14 @@
     <Key>
       <PropertyRef Name="UserID" />
     </Key>
-    <Property Name="UserID" Type="uniqueidentifier" StoreGeneratedPattern="None" Nullable="false" />
+    <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
     <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="OtherNames" Type="nvarchar(max)" Nullable="true" />
     <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="EmailAddress" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="token" Type="uniqueidentifier" Nullable="true" />
+    <Property Name="Token" Type="uniqueidentifier" Nullable="true" />
   </EntityType>
   <EntityType Name="Users_Student">
     <Key>
@@ -528,12 +530,14 @@
           <Key>
             <PropertyRef Name="UserID" />
           </Key>
-          <Property Name="UserID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="UserID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" />
+          <Property Name="Username" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
           <Property Name="FirstName" Type="String" Nullable="false" />
           <Property Name="OtherNames" Type="String" Nullable="true" />
           <Property Name="LastName" Type="String" Nullable="false" />
           <Property Name="EmailAddress" Type="String" Nullable="true" />
-          <Property Name="token" Type="Guid" Nullable="true" />
+          <Property Name="Token" Type="Guid" Nullable="true" />
         </EntityType>
         <EntityType Name="Student" BaseType="BeaconBoardDatabase.User">
           <NavigationProperty Name="Courses" Relationship="BeaconBoardDatabase.StudentCourse" FromRole="Student" ToRole="Course" />
@@ -684,11 +688,13 @@
       <EntityTypeMapping TypeName="IsTypeOf(BeaconBoardDatabase.User)">
         <MappingFragment StoreEntitySet="Users">
           <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="OtherNames" ColumnName="OtherNames" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-          <ScalarProperty Name="token" ColumnName="token" />
+          <ScalarProperty Name="Token" ColumnName="Token" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(BeaconBoardDatabase.Student)">
