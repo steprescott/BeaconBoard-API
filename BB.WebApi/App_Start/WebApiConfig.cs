@@ -22,7 +22,7 @@ namespace BB.WebApi
             );
 
             //Handle checking of the API key
-            GlobalConfiguration.Configuration.MessageHandlers.Add(new ApiKeyHeaderValueHandler());
+            GlobalConfiguration.Configuration.MessageHandlers.Add(new HeaderValueHandler());
         }
     }
 }

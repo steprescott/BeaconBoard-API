@@ -18,7 +18,7 @@ namespace BB.WebApi.Utilities
     /// This controller is to validate all requests made to the API are valid.
     /// A valid request is one that has came from an approved App (API Key) and from a valid user (UserToken).
     /// </summary>
-    public class ApiKeyHeaderValueHandler : DelegatingHandler
+    public class HeaderValueHandler : DelegatingHandler
     {
         private readonly BeaconBoardService _beaconBoardService = new BeaconBoardService();
 
@@ -153,7 +153,7 @@ namespace BB.WebApi.Utilities
                     return new RequestValidation
                     {
                         Success = false,
-                        HttpResponseErrorMessage = request.CreateErrorResponse(HttpStatusCode.NotFound, "User not found.")
+                        HttpResponseErrorMessage = request.CreateErrorResponse(HttpStatusCode.NotFound, "Invalid User Token.")
                     };
                 }
                 //If the User Token has expired
@@ -163,7 +163,7 @@ namespace BB.WebApi.Utilities
                     return new RequestValidation
                     {
                         Success = false,
-                        HttpResponseErrorMessage = request.CreateErrorResponse(HttpCodes.HttpCodeInvalidToken, "User account expired.")
+                        HttpResponseErrorMessage = request.CreateErrorResponse(HttpCodes.HttpCodeInvalidToken, "Users account expired.")
                     };
                 }
                 //If the User Token has been revoked
@@ -173,7 +173,7 @@ namespace BB.WebApi.Utilities
                     return new RequestValidation
                     {
                         Success = false,
-                        HttpResponseErrorMessage =  request.CreateErrorResponse(HttpCodes.HttpCodeInvalidToken, "User account revoked.")
+                        HttpResponseErrorMessage =  request.CreateErrorResponse(HttpCodes.HttpCodeInvalidToken, "Users account revoked.")
                     };
                 }
             }

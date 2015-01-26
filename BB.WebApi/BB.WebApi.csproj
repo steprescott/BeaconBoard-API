@@ -179,7 +179,7 @@
     <Compile Include="Handlers\ValidationActionFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BeaconBoardService.cs" />
-    <Compile Include="Utilities\ApiKeyHeaderValueHandler.cs" />
+    <Compile Include="Utilities\HeaderValueHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\DomainDocumentation.xml" />
