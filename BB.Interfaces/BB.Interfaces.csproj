@@ -43,6 +43,7 @@
     <Compile Include="IResourceTypeBusinessLogic.cs" />
     <Compile Include="ILessonBusinessLogic.cs" />
     <Compile Include="ICourseBusinessLogic.cs" />
+    <Compile Include="ILecturerBusinessLogic.cs" />
     <Compile Include="ITokenBusinessLogic.cs" />
     <Compile Include="IStudentBusinessLogic.cs" />
     <Compile Include="IUserBusinessLogic.cs" />

@@ -13,7 +13,3 @@ DROP TABLE dbo.Rooms;
 DROP TABLE dbo.Users_Student;
 DROP TABLE dbo.Users_Lecturer;
 DROP TABLE dbo.Users;
-
-
-
-

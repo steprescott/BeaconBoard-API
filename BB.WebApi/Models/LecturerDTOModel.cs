@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace BB.Domain
+namespace BB.WebApi.Models
 {
     /// <summary>
     /// DTO to allow the Entity to be passed over the API.
-    /// Subclass of the User entity, this Entity allows a Lecturer to see what Courses they are related to and what Sessions they are teaching.
+    /// Subclass of the User entity, this Entity allows a Lecturer to see what Courses they are enrolled in and therefore what Sessions they can attend.
     /// </summary>
-    public class Lecturer : User
+    public class LecturerDTOModel : UserDTOModel
     {
         /// <summary>
         /// An array of Course IDs that the lecture teaches.

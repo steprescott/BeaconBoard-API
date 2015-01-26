@@ -19,6 +19,11 @@ namespace BB.WebApi.Services
             get { return BeaconBoardContainer.GetInstance<ICourseBusinessLogic>(); }
         }
 
+        public ILecturerBusinessLogic LecturerBusinessLogic
+        {
+            get { return BeaconBoardContainer.GetInstance<ILecturerBusinessLogic>(); }
+        }
+
         public ILessonBusinessLogic LessonBusinessLogic
         {
             get { return BeaconBoardContainer.GetInstance<ILessonBusinessLogic>(); }
@@ -42,6 +47,11 @@ namespace BB.WebApi.Services
         public ISessionBusinessLogic SessionBusinessLogic
         {
             get { return BeaconBoardContainer.GetInstance<ISessionBusinessLogic>(); }
+        }
+
+        public IStudentBusinessLogic StudentBusinessLogic
+        {
+            get { return BeaconBoardContainer.GetInstance<IStudentBusinessLogic>(); }
         }
 
         public ITokenBusinessLogic TokenBusinessLogic

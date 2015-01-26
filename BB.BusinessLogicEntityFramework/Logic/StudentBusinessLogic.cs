@@ -33,6 +33,15 @@ namespace BB.BusinessLogicEntityFramework.Logic
                 //Map the domain object to an Entity Framework object
                 var obj = Mapper.Map<Student>(domainObject);
 
+                //Due to a Many - Many relationship it is too complex for Automapper to do.
+                var courses = _unitOfWork.GetAll<Course>().Where(i => domainObject.CourseIDs.Contains(i.CourseID)).ToList();
+
+                //If the Student has Courses linked to it
+                if (courses != null && courses.Count > 0)
+                {
+                    obj.Courses = courses;
+                }
+
                 //Insert it in the database
                 _unitOfWork.Insert(obj);
                 _unitOfWork.SaveChanges();
@@ -63,6 +72,15 @@ namespace BB.BusinessLogicEntityFramework.Logic
                         //Map the updated values
                         obj = Mapper.Map(domainObject, obj);
 
+                        //Due to a Many - Many relationship it is too complex for Automapper to do.
+                        var courses = _unitOfWork.GetAll<Course>().Where(i => domainObject.CourseIDs.Contains(i.CourseID)).ToList();
+
+                        //If the Student has Courses linked to it
+                        if (courses != null && courses.Count > 0)
+                        {
+                            obj.Courses = courses;
+                        }
+
                         //Update the database to reflect these changes
                         _unitOfWork.Update(obj);
                         _unitOfWork.SaveChanges();
@@ -74,7 +92,7 @@ namespace BB.BusinessLogicEntityFramework.Logic
                         return CRUDResult.NotFound;
                     }
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     //An error has occurred.
                     //We don't want to return the over the API as it could

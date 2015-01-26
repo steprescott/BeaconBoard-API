@@ -38,6 +38,31 @@ namespace BB.BusinessLogicEntityFramework.Logic
                 //Map the domain object to an Entity Framework object
                 var obj = Mapper.Map<Course>(domainObject);
 
+                //Due to a Many - Many relationship it is too complex for Automapper to do.
+                var lecturers = _unitOfWork.GetAll<Lecturer>().Where(i => domainObject.LecturerIDs.Contains(i.UserID)).ToList();
+
+                //If the Course has Lecturers linked to it
+                if (lecturers != null && lecturers.Count > 0)
+                {
+                    obj.Lecturers = lecturers;
+                }
+
+                var lessons = _unitOfWork.GetAll<Lesson>().Where(i => domainObject.LessonIDs.Contains(i.LessonID)).ToList();
+
+                //If the Course has Students linked to it
+                if (lessons != null && lessons.Count > 0)
+                {
+                    obj.Lessons = lessons;
+                }
+
+                var students = _unitOfWork.GetAll<Student>().Where(i => domainObject.StudentIDs.Contains(i.UserID)).ToList();
+
+                //If the Course has Students linked to it
+                if (students != null && students.Count > 0)
+                {
+                    obj.Students = students;
+                }
+
                 //Insert it in the database
                 _unitOfWork.Insert(obj);
                 _unitOfWork.SaveChanges();
@@ -67,6 +92,31 @@ namespace BB.BusinessLogicEntityFramework.Logic
                     {
                         //Map the updated values
                         obj = Mapper.Map(domainObject, obj);
+
+                        //Due to a Many - Many relationship it is too complex for Automapper to do.
+                        var lecturers = _unitOfWork.GetAll<Lecturer>().Where(i => domainObject.LecturerIDs.Contains(i.UserID)).ToList();
+
+                        //If the Course has Lecturers linked to it
+                        if (lecturers != null && lecturers.Count > 0)
+                        {
+                            obj.Lecturers = lecturers;
+                        }
+
+                        var lessons = _unitOfWork.GetAll<Lesson>().Where(i => domainObject.LessonIDs.Contains(i.LessonID)).ToList();
+
+                        //If the Course has Students linked to it
+                        if (lessons != null && lessons.Count > 0)
+                        {
+                            obj.Lessons = lessons;
+                        }
+
+                        var students = _unitOfWork.GetAll<Student>().Where(i => domainObject.StudentIDs.Contains(i.UserID)).ToList();
+
+                        //If the Course has Students linked to it
+                        if (students != null && students.Count > 0)
+                        {
+                            obj.Students = students;
+                        }
 
                         //Update the database to reflect these changes
                         _unitOfWork.Update(obj);

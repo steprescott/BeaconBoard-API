@@ -129,6 +129,53 @@
             Subclass of the User entity, this Entity allows a Lecturer to see what Courses they are related to and what Sessions they are teaching.
             </summary>
         </member>
+        <member name="T:BB.Domain.User">
+            <summary>
+            DTO to allow the Entity to be passed over the API.
+            This entity is used to hold any data that a Lecturer and a Student shares.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.User.UserID">
+            <summary>
+            Primary key that is unique for the object.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.User.Username">
+            <summary>
+            The username of the user.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.User.Password">
+            <summary>
+            The password of the user. This is never returned via the API.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.User.FirstName">
+            <summary>
+            The first name of the user.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.User.OtherNames">
+            <summary>
+            Any other names of the user.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.User.LastName">
+            <summary>
+            The last name of the user.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.User.EmailAddress">
+            <summary>
+            The email address of the user.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.User.Token">
+            <summary>
+            To avoid the passing of passwords to the API a user token system is used.
+            This follows the BasicAuth idea and allows for other security advantages such of revoking of the token and not transferring of passwords.
+            </summary>
+        </member>
         <member name="P:BB.Domain.Lecturer.CourseIDs">
             <summary>
             An array of Course IDs that the lecture teaches.
@@ -235,53 +282,6 @@
             <summary>
             DTO to allow the Entity to be passed over the API.
             Subclass of the User entity, this Entity allows a Student to see what Courses they are enrolled in and therefore what Sessions they can attend.
-            </summary>
-        </member>
-        <member name="T:BB.Domain.User">
-            <summary>
-            DTO to allow the Entity to be passed over the API.
-            This entity is used to hold any data that a Lecturer and a Student shares.
-            </summary>
-        </member>
-        <member name="P:BB.Domain.User.UserID">
-            <summary>
-            Primary key that is unique for the object.
-            </summary>
-        </member>
-        <member name="P:BB.Domain.User.Username">
-            <summary>
-            The username of the user.
-            </summary>
-        </member>
-        <member name="P:BB.Domain.User.Password">
-            <summary>
-            The password of the user. This is never returned via the API.
-            </summary>
-        </member>
-        <member name="P:BB.Domain.User.FirstName">
-            <summary>
-            The first name of the user.
-            </summary>
-        </member>
-        <member name="P:BB.Domain.User.OtherNames">
-            <summary>
-            Any other names of the user.
-            </summary>
-        </member>
-        <member name="P:BB.Domain.User.LastName">
-            <summary>
-            The last name of the user.
-            </summary>
-        </member>
-        <member name="P:BB.Domain.User.EmailAddress">
-            <summary>
-            The email address of the user.
-            </summary>
-        </member>
-        <member name="P:BB.Domain.User.Token">
-            <summary>
-            To avoid the passing of passwords to the API a user token system is used.
-            This follows the BasicAuth idea and allows for other security advantages such of revoking of the token and not transferring of passwords.
             </summary>
         </member>
         <member name="P:BB.Domain.Student.CourseIDs">

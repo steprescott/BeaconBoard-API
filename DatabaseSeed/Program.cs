@@ -49,7 +49,7 @@ namespace DatabaseSeed
             var lesson1 = CreateOrUpdateLesson("75feec01-6cff-4f86-93fe-2d74f4e4995a", new List<Resource> { resource1, resource2 });
 
             Console.WriteLine("--- Seeding courses");
-            var course1 = CreateOrUpdateCourse("cd3b9e14-c648-4501-a0f6-6ff7d878cc04", "MComp Software Engineering", new List<Lesson> { lesson1 });
+            var course1 = CreateOrUpdateCourse("cd3b9e14-c648-4501-a0f6-6ff7d878cc04", "MComp Software Engineering", new List<Lesson> { lesson1 }, new List<Student> { student1 });
 
             Console.WriteLine("--- Seeding sessions");
             var session1 = CreateOrUpdateSession("00fbf224-159b-4921-8d87-c2f3d3832afb", DateTime.Parse("25/01/2015 23:00"), DateTime.Parse("26/01/2015 01:00"), lesson1, room1);
@@ -87,6 +87,14 @@ namespace DatabaseSeed
             }
             else
             {
+                obj.UserID = Guid.Parse(id);
+                obj.Username = username;
+                obj.Password = BasicEncryptDecryptUtilities.Encrypt(password);
+                obj.FirstName = firstName;
+                obj.OtherNames = otherNames;
+                obj.LastName = lastName;
+                obj.EmailAddress = emailAddress;
+                obj.Token = Guid.Parse(token);
                 var result = businessLogic.Update(obj);
 
                 if (result == CRUDResult.Updated)
@@ -121,6 +129,9 @@ namespace DatabaseSeed
             }
             else
             {
+                obj.RoomID = Guid.Parse(id);
+                obj.Number = number;
+
                 var result = businessLogic.Update(obj);
 
                 if (result == CRUDResult.Updated)
@@ -157,6 +168,11 @@ namespace DatabaseSeed
             }
             else
             {
+                obj.BeaconID = Guid.Parse(id);
+                obj.Major = major;
+                obj.Minor = minor;
+                obj.RoomID = room.RoomID;
+
                 var result = businessLogic.Update(obj);
 
                 if (result == CRUDResult.Updated)
@@ -192,6 +208,10 @@ namespace DatabaseSeed
             }
             else
             {
+                obj.ResourceTypeID = Guid.Parse(id);
+                obj.Name = name;
+                obj.Description = description;
+
                 var result = businessLogic.Update(obj);
 
                 if (result == CRUDResult.Updated)
@@ -229,6 +249,12 @@ namespace DatabaseSeed
             }
             else
             {
+                obj.ResourceID = Guid.Parse(id);
+                obj.Name = name;
+                obj.Description = description;
+                obj.URLString = URLString;
+                obj.ResourceTypeID = resourceType.ResourceTypeID;
+
                 var result = businessLogic.Update(obj);
 
                 if (result == CRUDResult.Updated)
@@ -263,7 +289,9 @@ namespace DatabaseSeed
             }
             else
             {
+                obj.LessonID = Guid.Parse(id);
                 obj.ResourceIDs = resources.Select(i => i.ResourceID).ToList();
+
                 var result = businessLogic.Update(obj);
 
                 if (result == CRUDResult.Updated)
@@ -276,7 +304,7 @@ namespace DatabaseSeed
             return null;
         }
 
-        static Course CreateOrUpdateCourse(String id, String name, List<Lesson> lessons)
+        static Course CreateOrUpdateCourse(String id, String name, List<Lesson> lessons, List<Student> students)
         {
             var businessLogic = BeaconBoardContainer.GetInstance<ICourseBusinessLogic>();
             var obj = businessLogic.GetByID(Guid.Parse(id));
@@ -287,7 +315,8 @@ namespace DatabaseSeed
                 {
                     CourseID = Guid.Parse(id),
                     Name = name,
-                    LessonIDs = lessons.Select(i => i.LessonID).ToList()
+                    LessonIDs = lessons.Select(i => i.LessonID).ToList(),
+                    StudentIDs = students.Select(i => i.UserID).ToList()
                 };
 
                 var result = businessLogic.Create(obj);
@@ -299,6 +328,11 @@ namespace DatabaseSeed
             }
             else
             {
+                obj.CourseID = Guid.Parse(id);
+                obj.Name = name;
+                obj.LessonIDs = lessons.Select(i => i.LessonID).ToList();
+                obj.StudentIDs = students.Select(i => i.UserID).ToList();
+
                 var result = businessLogic.Update(obj);
 
                 if (result == CRUDResult.Updated)
@@ -336,6 +370,12 @@ namespace DatabaseSeed
             }
             else
             {
+                obj.SessionID = Guid.Parse(id);
+                obj.ScheduledStartDate = scheduledStartDate;
+                obj.ScheduledEndDate = scheduledEndDate;
+                obj.LessonID = lesson.LessonID;
+                obj.RoomID = room.RoomID;
+
                 var result = businessLogic.Update(obj);
 
                 if (result == CRUDResult.Updated)

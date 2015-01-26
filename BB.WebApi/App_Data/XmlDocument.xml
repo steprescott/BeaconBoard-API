@@ -637,6 +637,84 @@
             <param name="id">The ID of the Course to delete.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         </member>
+        <member name="T:BB.WebApi.Controllers.LecturersController">
+            <summary>
+            Any requests made to the API for Lecturer entities will be handled by the LecturersController
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Controllers.LecturersController.Post(BB.Domain.Lecturer)">
+            <summary>
+            Creates a new Lecturer with the given details.
+            </summary>
+            <param name="Lecturer">The details of the new Lecturer.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.LecturersController.Put(BB.Domain.Lecturer)">
+            <summary>
+            Updates the Lecturer with the given details.
+            </summary>
+            <param name="Lecturer">These are the details that the Lecturer should be update with.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.LecturersController.Get">
+            <summary>
+            Gets all Lecturers that are in the system.
+            </summary>
+            <returns>An array of Lecturer DTOs that holds the details for the Lecturers.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.LecturersController.Get(System.Guid)">
+            <summary>
+            Gets the Lecturer with the given ID.
+            </summary>
+            <param name="id">The ID of the Lecturer that the request is asking for.</param>
+            <returns>Lecturer DTO that holds the details for the Lecturer.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.LecturersController.Delete(System.Guid)">
+            <summary>
+            Deletes the Lecturer from the database with the given ID.
+            </summary>
+            <param name="id">The ID of the Lecturer to delete.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="T:BB.WebApi.Controllers.StudentsController">
+            <summary>
+            Any requests made to the API for Student entities will be handled by the StudentsController
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Controllers.StudentsController.Post(BB.Domain.Student)">
+            <summary>
+            Creates a new Student with the given details.
+            </summary>
+            <param name="Student">The details of the new Student.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.StudentsController.Put(BB.Domain.Student)">
+            <summary>
+            Updates the Student with the given details.
+            </summary>
+            <param name="Student">These are the details that the Student should be update with.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.StudentsController.Get">
+            <summary>
+            Gets all Students that are in the system.
+            </summary>
+            <returns>An array of Student DTOs that holds the details for the Students.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.StudentsController.Get(System.Guid)">
+            <summary>
+            Gets the Student with the given ID.
+            </summary>
+            <param name="id">The ID of the Student that the request is asking for.</param>
+            <returns>Student DTO that holds the details for the Student.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.StudentsController.Delete(System.Guid)">
+            <summary>
+            Deletes the Student from the database with the given ID.
+            </summary>
+            <param name="id">The ID of the Student to delete.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
         <member name="T:BB.WebApi.Controllers.TokensController">
             <summary>
             Following BasicAuth tokens are used to validate request access level. This controller deals with the generation of User Tokens.
@@ -777,6 +855,68 @@
             are populated
             </summary>
             <param name="actionContext">The action which gives access to the model state and response objects</param>
+        </member>
+        <member name="T:BB.WebApi.Models.LecturerDTOModel">
+            <summary>
+            DTO to allow the Entity to be passed over the API.
+            Subclass of the User entity, this Entity allows a Lecturer to see what Courses they are enrolled in and therefore what Sessions they can attend.
+            </summary>
+        </member>
+        <member name="T:BB.WebApi.Models.UserDTOModel">
+            <summary>
+            To avoid the password being set over the API a new User DTO is needed without the Password or token property.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Models.UserDTOModel.UserID">
+            <summary>
+            Primary key that is unique for the object.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Models.UserDTOModel.Username">
+            <summary>
+            The username of the user.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Models.UserDTOModel.FirstName">
+            <summary>
+            The first name of the user.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Models.UserDTOModel.OtherNames">
+            <summary>
+            Any other names of the user.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Models.UserDTOModel.LastName">
+            <summary>
+            The last name of the user.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Models.UserDTOModel.EmailAddress">
+            <summary>
+            The email address of the user.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Models.LecturerDTOModel.CourseIDs">
+            <summary>
+            An array of Course IDs that the lecture teaches.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Models.LecturerDTOModel.SessionIDs">
+            <summary>
+            An array of Sessions IDs that the lecture is teaching / involved in.
+            </summary>
+        </member>
+        <member name="T:BB.WebApi.Models.StudentDTOModel">
+            <summary>
+            DTO to allow the Entity to be passed over the API.
+            Subclass of the User entity, this Entity allows a Student to see what Courses they are enrolled in and therefore what Sessions they can attend.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Models.StudentDTOModel.CourseIDs">
+            <summary>
+            An array of Course IDs that the student is enrolled in.
+            </summary>
         </member>
         <member name="T:BB.WebApi.Models.TokenResponseModel">
             <summary>
