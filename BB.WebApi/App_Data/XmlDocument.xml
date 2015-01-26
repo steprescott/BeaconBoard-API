@@ -676,6 +676,57 @@
             <param name="id">The ID of the Lecturer to delete.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         </member>
+        <member name="T:BB.WebApi.Controllers.UsersController">
+            <summary>
+            Any requests made to the API for User entities will be handled by the UsersController
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Controllers.UsersController.Get">
+            <summary>
+            Gets all Users that are in the system.
+            </summary>
+            <returns>An array of User DTOs that holds the details for the Users.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.UsersController.GetLecturers">
+            <summary>
+            Gets all Lecturers that are in the system.
+            </summary>
+            <returns>An array of Lecturers DTOs that holds the details for the Lecturers.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.UsersController.GetStudents">
+            <summary>
+            Gets all Students that are in the system.
+            </summary>
+            <returns>An array of Student DTOs that holds the details for the Student.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.UsersController.Get(System.Guid)">
+            <summary>
+            Gets the User with the given ID.
+            </summary>
+            <param name="id">The ID of the User that the request is asking for.</param>
+            <returns>User DTO that holds the details for the User.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.UsersController.GetLecturer(System.Guid)">
+            <summary>
+            Gets the Lecturer with the given ID.
+            </summary>
+            <param name="id">The ID of the Lecturer that the request is asking for.</param>
+            <returns>Lecturer DTO that holds the details for the Lecturer.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.UsersController.GetStudent(System.Guid)">
+            <summary>
+            Gets the Student with the given ID.
+            </summary>
+            <param name="id">The ID of the Student that the request is asking for.</param>
+            <returns>Student DTO that holds the details for the Student.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.UsersController.Delete(System.Guid)">
+            <summary>
+            Deletes the User from the database with the given ID.
+            </summary>
+            <param name="id">The ID of the User to delete.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
         <member name="T:BB.WebApi.Controllers.StudentsController">
             <summary>
             Any requests made to the API for Student entities will be handled by the StudentsController

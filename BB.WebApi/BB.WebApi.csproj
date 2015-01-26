@@ -169,6 +169,7 @@
     <Compile Include="Controllers\LessonsController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\LecturersController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\TokensController.cs" />
     <Compile Include="Controllers\SessionsController.cs" />

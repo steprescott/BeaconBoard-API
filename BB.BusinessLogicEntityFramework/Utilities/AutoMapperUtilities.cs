@@ -20,6 +20,10 @@ namespace BB.BusinessLogicEntityFramework.Utilities
                                                                 .ForMember(dest => dest.LecturerIDs, opt => opt.MapFrom(c => c.Lecturers.Select(i => i.UserID).ToList()));
             Mapper.CreateMap<Domain.Course, Course>();
 
+            Mapper.CreateMap<Lecturer, Domain.Lecturer>().ForMember(dest => dest.CourseIDs, opt => opt.MapFrom(c => c.Courses.Select(i => i.CourseID).ToList()))
+                .ForMember(dest => dest.SessionIDs, opt => opt.MapFrom(c => c.Sessions.Select(i => i.SessionID).ToList()));
+            Mapper.CreateMap<Domain.Lecturer, Lecturer>();
+
             Mapper.CreateMap<Lesson, Domain.Lesson>().ForMember(dest => dest.SessionIDs, opt => opt.MapFrom(so => so.Sessions.Select(i => i.SessionID).ToList()))
                 .ForMember(dest => dest.ResourceIDs, opt => opt.MapFrom(so => so.Resources.Select(i => i.ResourceID).ToList()))
                 .ForMember(dest => dest.CourseIDs, opt => opt.MapFrom(so => so.Courses.Select(i => i.CourseID).ToList()));
@@ -40,6 +44,9 @@ namespace BB.BusinessLogicEntityFramework.Utilities
 
             Mapper.CreateMap<Student, Domain.Student>().ForMember(dest => dest.CourseIDs, opt => opt.MapFrom(c => c.Courses.Select(i => i.CourseID).ToList()));
             Mapper.CreateMap<Domain.Student, Student>();
+
+            Mapper.CreateMap<User, Domain.User>();
+            Mapper.CreateMap<Domain.User, User>();
         }
     }
 }
