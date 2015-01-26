@@ -43,5 +43,10 @@ namespace BB.WebApi.Services
         {
             get { return BeaconBoardContainer.GetInstance<ISessionBusinessLogic>(); }
         }
+
+        public IUserBusinessLogic UserBusinessLogic
+        {
+            get { return BeaconBoardContainer.GetInstance<IUserBusinessLogic>(); }
+        }
     }
 }

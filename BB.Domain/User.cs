@@ -33,11 +33,12 @@ namespace BB.Domain
         /// <summary>
         /// The email address of the user.
         /// </summary>
+        [EmailAddress]
         public string EmailAddress { get; set; }
         /// <summary>
         /// To avoid the passing of passwords to the API a user token system is used.
         /// This follows the BasicAuth idea and allows for other security advantages such of revoking of the token and not transferring of passwords.
         /// </summary>
-        public Guid token { get; set; }
+        public Guid Token { get; set; }
     }
 }

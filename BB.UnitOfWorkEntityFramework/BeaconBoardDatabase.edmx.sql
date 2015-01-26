@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/25/2015 22:02:25
+-- Date Created: 01/26/2015 01:03:37
 -- Generated from EDMX file: C:\Users\steprescott\Documents\Visual Studio 2013\Projects\BeaconBoard\BB.UnitOfWorkEntityFramework\BeaconBoardDatabase.edmx
 -- --------------------------------------------------
 

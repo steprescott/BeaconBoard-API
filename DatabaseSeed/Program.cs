@@ -12,6 +12,7 @@ using BB.Container;
 using BB.Interfaces;
 using BB.Domain.Enums;
 using BB.BusinessLogicEntityFramework.Utilities;
+using BB.Domain;
 
 namespace DatabaseSeed
 {
@@ -23,8 +24,8 @@ namespace DatabaseSeed
 
             Console.WriteLine("Database seeding started\n");
 
-            //Console.WriteLine("--- Seeding lecturers");
-            //var lecturer1 = 
+            Console.WriteLine("--- Seeding students");
+            var student1 = CreateOrUpdateStudent("731a27a9-840b-49b6-bcfb-6303536c6b79", "Ste", "Christopher", "Prescott", "ste@beaconboard.co.uk", "c0be1a6d-3d4f-4b23-b3ca-54162aeb2022");
 
             Console.WriteLine("--- Seeding rooms");
             var room1 = CreateOrUpdateRoom("2eae5485-512d-43e3-9050-7c7b85445e81", "9101");
@@ -56,39 +57,43 @@ namespace DatabaseSeed
             Console.ReadKey();
         }
 
-        //static Room CreateOrUpdateStudent(String id, String firstName, String otherNames, String lastName, String emailAddress, String token)
-        //{
-        //    var businessLogic = BeaconBoardContainer.GetInstance<IUserBusinessLogic>();
-        //    var obj = businessLogic.GetByID(Guid.Parse(id));
+        static Student CreateOrUpdateStudent(String id, String firstName, String otherNames, String lastName, String emailAddress, String token)
+        {
+            var businessLogic = BeaconBoardContainer.GetInstance<IStudentBusinessLogic>();
+            var obj = businessLogic.GetByID(Guid.Parse(id));
 
-        //    if (obj == null)
-        //    {
-        //        obj = new Room
-        //        {
-        //            RoomID = Guid.Parse(id),
-        //            Number = number
-        //        };
+            if (obj == null)
+            {
+                obj = new Student
+                {
+                    UserID = Guid.Parse(id),
+                    FirstName = firstName,
+                    OtherNames = otherNames,
+                    LastName = lastName,
+                    EmailAddress = emailAddress,
+                    Token = Guid.Parse(token)
+                };
 
-        //        var result = businessLogic.Create(obj);
+                var result = businessLogic.Create(obj);
 
-        //        if (result == CRUDResult.Created)
-        //        {
-        //            return obj;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        var result = businessLogic.Update(obj);
+                if (result == CRUDResult.Created)
+                {
+                    return obj;
+                }
+            }
+            else
+            {
+                var result = businessLogic.Update(obj);
 
-        //        if (result == CRUDResult.Updated)
-        //        {
-        //            return obj;
-        //        }
-        //    }
+                if (result == CRUDResult.Updated)
+                {
+                    return obj;
+                }
+            }
 
-        //    Console.WriteLine("    Error occurred");
-        //    return null;
-        //}
+            Console.WriteLine("    Error occurred");
+            return null;
+        }
 
         static Room CreateOrUpdateRoom(String id, String number)
         {

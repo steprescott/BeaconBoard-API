@@ -38,8 +38,11 @@ namespace BB.BusinessLogicEntityFramework.Utilities
             Mapper.CreateMap<Session, Domain.Session>().ForMember(dest => dest.LecturerIDs, opt => opt.MapFrom(c => c.Lecturers.Select(i => i.UserID).ToList()));
             Mapper.CreateMap<Domain.Session, Session>();
 
-            Mapper.CreateMap<Domain.User, User>();
-            Mapper.CreateMap<User, Domain.Session>();
+            //Mapper.CreateMap<User, Domain.User>();
+            //Mapper.CreateMap<Domain.User, User>();
+
+            Mapper.CreateMap<Student, Domain.Student>().ForMember(dest => dest.CourseIDs, opt => opt.MapFrom(c => c.Courses.Select(i => i.CourseID).ToList()));
+            Mapper.CreateMap<Domain.Student, Student>();
         }
     }
 }

@@ -268,7 +268,7 @@
             The email address of the user.
             </summary>
         </member>
-        <member name="P:BB.Domain.User.token">
+        <member name="P:BB.Domain.User.Token">
             <summary>
             To avoid the passing of passwords to the API a user token system is used.
             This follows the BasicAuth idea and allows for other security advantages such of revoking of the token and not transferring of passwords.

@@ -766,5 +766,18 @@
             </summary>
             <param name="actionContext">The action which gives access to the model state and response objects</param>
         </member>
+        <member name="T:BB.WebApi.Utilities.ApiKeyHeaderValueHandler">
+            <summary>
+            This controller is to validate all requests made to the API are valid.
+            A valid request is one that has came from an approved App (API Key) and from a valid user (UserToken)
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Utilities.ApiKeyHeaderValueHandler.RequestHasValidApiKey(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Determines if a request contains a valid API key
+            </summary>
+            <param name="request">The HTTP request made</param>
+            <returns>Boolean indicating if the request contains a valid API key</returns>
+        </member>
     </members>
 </doc>
