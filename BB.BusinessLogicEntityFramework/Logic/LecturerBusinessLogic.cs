@@ -33,21 +33,30 @@ namespace BB.BusinessLogicEntityFramework.Logic
                 //Map the domain object to an Entity Framework object
                 var obj = Mapper.Map<Lecturer>(domainObject);
 
-                //Due to a Many - Many relationship it is too complex for Automapper to do.
-                var courses = _unitOfWork.GetAll<Course>().Where(i => domainObject.CourseIDs.Contains(i.CourseID)).ToList();
-
-                //If the Lecturer has Courses linked to it
-                if (courses != null && courses.Count > 0)
+                //If there are Courses to map
+                if(domainObject.CourseIDs != null)
                 {
-                    obj.Courses = courses;
+                    //Due to a Many - Many relationship it is too complex for Automapper to do.
+                    var courses = _unitOfWork.GetAll<Course>().Where(i => domainObject.CourseIDs.Contains(i.CourseID)).ToList();
+
+                    //If the Lecturer has Courses linked to it
+                    if (courses != null && courses.Count > 0)
+                    {
+                        obj.Courses = courses;
+                    }
                 }
 
-                var sessions = _unitOfWork.GetAll<Session>().Where(i => domainObject.SessionIDs.Contains(i.SessionID)).ToList();
-
-                //If the Lecturer has Sessions linked to it
-                if (sessions != null && sessions.Count > 0)
+                //If there are Sessions to map
+                if(domainObject.SessionIDs != null)
                 {
-                    obj.Sessions = sessions;
+                    //Due to a Many - Many relationship it is too complex for Automapper to do.
+                    var sessions = _unitOfWork.GetAll<Session>().Where(i => domainObject.SessionIDs.Contains(i.SessionID)).ToList();
+
+                    //If the Lecturer has Sessions linked to it
+                    if (sessions != null && sessions.Count > 0)
+                    {
+                        obj.Sessions = sessions;
+                    }
                 }
 
                 //Insert it in the database
@@ -80,21 +89,30 @@ namespace BB.BusinessLogicEntityFramework.Logic
                         //Map the updated values
                         obj = Mapper.Map(domainObject, obj);
 
-                        //Due to a Many - Many relationship it is too complex for Automapper to do.
-                        var courses = _unitOfWork.GetAll<Course>().Where(i => domainObject.CourseIDs.Contains(i.CourseID)).ToList();
-
-                        //If the Lecturer has Courses linked to it
-                        if (courses != null && courses.Count > 0)
+                        //If there are Courses to map
+                        if (domainObject.CourseIDs != null)
                         {
-                            obj.Courses = courses;
+                            //Due to a Many - Many relationship it is too complex for Automapper to do.
+                            var courses = _unitOfWork.GetAll<Course>().Where(i => domainObject.CourseIDs.Contains(i.CourseID)).ToList();
+
+                            //If the Lecturer has Courses linked to it
+                            if (courses != null && courses.Count > 0)
+                            {
+                                obj.Courses = courses;
+                            }
                         }
 
-                        var sessions = _unitOfWork.GetAll<Session>().Where(i => domainObject.SessionIDs.Contains(i.SessionID)).ToList();
-
-                        //If the Lecturer has Sessions linked to it
-                        if (sessions != null && sessions.Count > 0)
+                        //If there are Sessions to map
+                        if (domainObject.SessionIDs != null)
                         {
-                            obj.Sessions = sessions;
+                            //Due to a Many - Many relationship it is too complex for Automapper to do.
+                            var sessions = _unitOfWork.GetAll<Session>().Where(i => domainObject.SessionIDs.Contains(i.SessionID)).ToList();
+
+                            //If the Lecturer has Sessions linked to it
+                            if (sessions != null && sessions.Count > 0)
+                            {
+                                obj.Sessions = sessions;
+                            }
                         }
 
                         //Update the database to reflect these changes

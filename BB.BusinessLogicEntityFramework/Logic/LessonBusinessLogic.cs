@@ -38,23 +38,32 @@ namespace BB.BusinessLogicEntityFramework.Logic
                 //Map the domain object to an Entity Framework object
                 var obj = Mapper.Map<Lesson>(domainObject);
 
-                //Due to a Many - Many relationship it is too complex for Automapper to do.
-                var courses = _unitOfWork.GetAll<Course>().Where(i => domainObject.CourseIDs.Contains(i.CourseID)).ToList();
-
-                //If the Course has Students linked to it
-                if (courses != null && courses.Count > 0)
+                //If there are Courses to map
+                if(domainObject.CourseIDs != null)
                 {
-                    obj.Courses = courses;
+                    //Due to a Many - Many relationship it is too complex for Automapper to do.
+                    var courses = _unitOfWork.GetAll<Course>().Where(i => domainObject.CourseIDs.Contains(i.CourseID)).ToList();
+
+                    //If the Course has Students linked to it
+                    if (courses != null && courses.Count > 0)
+                    {
+                        obj.Courses = courses;
+                    }
                 }
 
-                var resources = _unitOfWork.GetAll<Resource>().Where(i => domainObject.ResourceIDs.Contains(i.ResourceID)).ToList();
-
-                //If the Resource has Lessons linked to it
-                if (resources != null && resources.Count > 0)
+                //If there are Resources to map
+                if(domainObject.ResourceIDs != null)
                 {
-                    obj.Resources = resources;
-                }
+                    //Due to a Many - Many relationship it is too complex for Automapper to do.
+                    var resources = _unitOfWork.GetAll<Resource>().Where(i => domainObject.ResourceIDs.Contains(i.ResourceID)).ToList();
 
+                    //If the Resource has Lessons linked to it
+                    if (resources != null && resources.Count > 0)
+                    {
+                        obj.Resources = resources;
+                    }
+                }
+                
                 //Insert it in the database
                 _unitOfWork.Insert(obj);
                 _unitOfWork.SaveChanges();
@@ -85,21 +94,30 @@ namespace BB.BusinessLogicEntityFramework.Logic
                         //Map the updated values
                         obj = Mapper.Map(domainObject, obj);
 
-                        //Due to a Many - Many relationship it is too complex for Automapper to do.
-                        var courses = _unitOfWork.GetAll<Course>().Where(i => domainObject.CourseIDs.Contains(i.CourseID)).ToList();
-
-                        //If the Course has Students linked to it
-                        if (courses != null && courses.Count > 0)
+                        //If there are Courses to map
+                        if (domainObject.CourseIDs != null)
                         {
-                            obj.Courses = courses;
+                            //Due to a Many - Many relationship it is too complex for Automapper to do.
+                            var courses = _unitOfWork.GetAll<Course>().Where(i => domainObject.CourseIDs.Contains(i.CourseID)).ToList();
+
+                            //If the Course has Students linked to it
+                            if (courses != null && courses.Count > 0)
+                            {
+                                obj.Courses = courses;
+                            }
                         }
 
-                        var resources = _unitOfWork.GetAll<Resource>().Where(i => domainObject.ResourceIDs.Contains(i.ResourceID)).ToList();
-
-                        //If the Resource has Lessons linked to it
-                        if (resources != null && resources.Count > 0)
+                        //If there are Resources to map
+                        if (domainObject.ResourceIDs != null)
                         {
-                            obj.Resources = resources;
+                            //Due to a Many - Many relationship it is too complex for Automapper to do.
+                            var resources = _unitOfWork.GetAll<Resource>().Where(i => domainObject.ResourceIDs.Contains(i.ResourceID)).ToList();
+
+                            //If the Resource has Lessons linked to it
+                            if (resources != null && resources.Count > 0)
+                            {
+                                obj.Resources = resources;
+                            }
                         }
 
                         //Update the database to reflect these changes

@@ -38,12 +38,6 @@ namespace BB.BusinessLogicEntityFramework.Logic
                 //Map the domain object to an Entity Framework object
                 var obj = Mapper.Map<Room>(domainObject);
 
-                //var obj = new Room
-                //{
-                //    RoomID = domainObject.RoomID,
-                //    Number = domainObject.Number
-                //};
-
                 //Insert it in the database
                 _unitOfWork.Insert(obj);
                 _unitOfWork.SaveChanges();

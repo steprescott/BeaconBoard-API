@@ -38,13 +38,17 @@ namespace BB.BusinessLogicEntityFramework.Logic
                 //Map the domain object to an Entity Framework object
                 var obj = Mapper.Map<Session>(domainObject);
 
-                //Due to a Many - Many relationship it is too complex for Automapper to do.
-                var lecturers = _unitOfWork.GetAll<Lecturer>().Where(i => domainObject.LecturerIDs.Contains(i.UserID)).ToList();
-
-                //If the Session has Lectures linked to it
-                if (lecturers != null && lecturers.Count > 0)
+                //If there are any Lecturers to map
+                if(domainObject.LecturerIDs != null)
                 {
-                    obj.Lecturers = lecturers;
+                    //Due to a Many - Many relationship it is too complex for Automapper to do.
+                    var lecturers = _unitOfWork.GetAll<Lecturer>().Where(i => domainObject.LecturerIDs.Contains(i.UserID)).ToList();
+
+                    //If the Session has Lectures linked to it
+                    if (lecturers != null && lecturers.Count > 0)
+                    {
+                        obj.Lecturers = lecturers;
+                    }
                 }
 
                 //Insert it in the database
@@ -77,13 +81,17 @@ namespace BB.BusinessLogicEntityFramework.Logic
                         //Map the updated values
                         obj = Mapper.Map(domainObject, obj);
 
-                        //Due to a Many - Many relationship it is too complex for Automapper to do.
-                        var lecturers = _unitOfWork.GetAll<Lecturer>().Where(i => domainObject.LecturerIDs.Contains(i.UserID)).ToList();
-
-                        //If the Session has Lectures linked to it
-                        if (lecturers != null && lecturers.Count > 0)
+                        //If there are any Lecturers to map
+                        if (domainObject.LecturerIDs != null)
                         {
-                            obj.Lecturers = lecturers;
+                            //Due to a Many - Many relationship it is too complex for Automapper to do.
+                            var lecturers = _unitOfWork.GetAll<Lecturer>().Where(i => domainObject.LecturerIDs.Contains(i.UserID)).ToList();
+
+                            //If the Session has Lectures linked to it
+                            if (lecturers != null && lecturers.Count > 0)
+                            {
+                                obj.Lecturers = lecturers;
+                            }
                         }
 
                         //Update the database to reflect these changes
