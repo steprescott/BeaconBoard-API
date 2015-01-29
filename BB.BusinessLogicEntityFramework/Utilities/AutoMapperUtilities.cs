@@ -35,6 +35,9 @@ namespace BB.BusinessLogicEntityFramework.Utilities
             Mapper.CreateMap<ResourceType, Domain.ResourceType>().ForMember(dest => dest.ResourceIDs, opt => opt.MapFrom(c => c.Resources.Select(i => i.ResourceID).ToList()));
             Mapper.CreateMap<Domain.ResourceType, ResourceType>();
 
+            Mapper.CreateMap<Role, Domain.Role>().ForMember(dest => dest.UserIDs, opt => opt.MapFrom(c => c.Users.Select(i => i.UserID).ToList()));
+            Mapper.CreateMap<Domain.Role, Role>();
+
             Mapper.CreateMap<Room, Domain.Room>().ForMember(dest => dest.BeaconIDs, opt => opt.MapFrom(c => c.Beacons.Select(i => i.BeaconID).ToList()))
                 .ForMember(dest => dest.SessionIDs, opt => opt.MapFrom(c => c.Sessions.Select(i => i.SessionID).ToList()));
             Mapper.CreateMap<Domain.Room, Room>();

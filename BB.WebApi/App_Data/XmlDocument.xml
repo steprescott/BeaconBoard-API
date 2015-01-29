@@ -676,6 +676,45 @@
             <param name="id">The ID of the Lecturer to delete.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         </member>
+        <member name="T:BB.WebApi.Controllers.RolesController">
+            <summary>
+            Any requests made to the API for Role entities will be handled by the RolesController
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Controllers.RolesController.Post(BB.Domain.Role)">
+            <summary>
+            Creates a new Role with the given details.
+            </summary>
+            <param name="Role">The details of the new Role.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.RolesController.Put(BB.Domain.Role)">
+            <summary>
+            Updates the Role with the given details.
+            </summary>
+            <param name="Role">These are the details that the Role should be update with.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.RolesController.Get">
+            <summary>
+            Gets all Roles that are in the system.
+            </summary>
+            <returns>An array of Role DTOs that holds the details for the Roles.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.RolesController.Get(System.Guid)">
+            <summary>
+            Gets the Role with the given ID.
+            </summary>
+            <param name="id">The ID of the Role that the request is asking for.</param>
+            <returns>Role DTO that holds the details for the Role.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.RolesController.Delete(System.Guid)">
+            <summary>
+            Deletes the Role from the database with the given ID.
+            </summary>
+            <param name="id">The ID of the Role to delete.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
         <member name="T:BB.WebApi.Controllers.UsersController">
             <summary>
             Any requests made to the API for User entities will be handled by the UsersController

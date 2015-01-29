@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/26/2015 19:02:18
+-- Date Created: 01/29/2015 19:51:29
 -- Generated from EDMX file: C:\Users\steprescott\Documents\Visual Studio 2013\Projects\BeaconBoard\BB.UnitOfWorkEntityFramework\BeaconBoardDatabase.edmx
 -- --------------------------------------------------
 
@@ -186,7 +186,15 @@ CREATE TABLE [dbo].[Users] (
     [OtherNames] nvarchar(max)  NULL,
     [LastName] nvarchar(max)  NOT NULL,
     [EmailAddress] nvarchar(max)  NULL,
-    [Token] uniqueidentifier  NULL
+    [Token] uniqueidentifier  NULL,
+    [RoleID] uniqueidentifier  NOT NULL
+);
+GO
+
+-- Creating table 'Roles'
+CREATE TABLE [dbo].[Roles] (
+    [RoleID] uniqueidentifier  NOT NULL,
+    [Name] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -287,6 +295,12 @@ GO
 ALTER TABLE [dbo].[Users]
 ADD CONSTRAINT [PK_Users]
     PRIMARY KEY CLUSTERED ([UserID] ASC);
+GO
+
+-- Creating primary key on [RoleID] in table 'Roles'
+ALTER TABLE [dbo].[Roles]
+ADD CONSTRAINT [PK_Roles]
+    PRIMARY KEY CLUSTERED ([RoleID] ASC);
 GO
 
 -- Creating primary key on [UserID] in table 'Users_Student'
@@ -513,6 +527,21 @@ GO
 CREATE INDEX [IX_FK_SessionLecturer_Lecturer]
 ON [dbo].[SessionLecturer]
     ([Lecturers_UserID]);
+GO
+
+-- Creating foreign key on [RoleID] in table 'Users'
+ALTER TABLE [dbo].[Users]
+ADD CONSTRAINT [FK_UserRole]
+    FOREIGN KEY ([RoleID])
+    REFERENCES [dbo].[Roles]
+        ([RoleID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserRole'
+CREATE INDEX [IX_FK_UserRole]
+ON [dbo].[Users]
+    ([RoleID]);
 GO
 
 -- Creating foreign key on [UserID] in table 'Users_Student'

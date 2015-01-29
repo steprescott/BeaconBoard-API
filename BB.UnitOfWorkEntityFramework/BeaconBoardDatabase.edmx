@@ -14,6 +14,7 @@
     <EntitySet Name="Resources" EntityType="BeaconBoardDatabase.Store.Resources" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ResourceTypes" EntityType="BeaconBoardDatabase.Store.ResourceTypes" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Users" EntityType="BeaconBoardDatabase.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Roles" EntityType="BeaconBoardDatabase.Store.Roles" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Users_Student" EntityType="BeaconBoardDatabase.Store.Users_Student" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Users_Lecturer" EntityType="BeaconBoardDatabase.Store.Users_Lecturer" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CourseLesson" EntityType="BeaconBoardDatabase.Store.CourseLesson" store:Type="Tables" Schema="dbo" />
@@ -76,6 +77,10 @@
     <AssociationSet Name="FK_SessionLecturer_Lecturer" Association="BeaconBoardDatabase.Store.FK_SessionLecturer_Lecturer">
       <End Role="Lecturer" EntitySet="Users_Lecturer" />
       <End Role="SessionLecturer" EntitySet="SessionLecturer" />
+    </AssociationSet>
+    <AssociationSet Name="UserRole" Association="BeaconBoardDatabase.Store.UserRole">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Role" EntitySet="Roles" />
     </AssociationSet>
     <AssociationSet Name="FK_Student_inherits_User" Association="BeaconBoardDatabase.Store.FK_Student_inherits_User">
       <End Role="User" EntitySet="Users" />
@@ -155,6 +160,14 @@
     <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="EmailAddress" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Token" Type="uniqueidentifier" Nullable="true" />
+    <Property Name="RoleID" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Users_Student">
     <Key>
@@ -253,6 +266,18 @@
       </Principal>
       <Dependent Role="Resource">
         <PropertyRef Name="ResourceTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserRole">
+    <End Role="User" Type="BeaconBoardDatabase.Store.Users" Multiplicity="*" />
+    <End Role="Role" Type="BeaconBoardDatabase.Store.Roles" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="RoleID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -453,6 +478,11 @@
             <End Role="Session" EntitySet="Sessions" />
             <End Role="Lecturer" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="Roles" EntityType="BeaconBoardDatabase.Role" />
+          <AssociationSet Name="UserRole" Association="BeaconBoardDatabase.UserRole">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Beacon">
           <Key>
@@ -538,6 +568,8 @@
           <Property Name="LastName" Type="String" Nullable="false" />
           <Property Name="EmailAddress" Type="String" Nullable="true" />
           <Property Name="Token" Type="Guid" Nullable="true" />
+          <NavigationProperty Name="Role" Relationship="BeaconBoardDatabase.UserRole" FromRole="User" ToRole="Role" />
+          <Property Name="RoleID" Type="Guid" Nullable="false" />
         </EntityType>
         <EntityType Name="Student" BaseType="BeaconBoardDatabase.User">
           <NavigationProperty Name="Courses" Relationship="BeaconBoardDatabase.StudentCourse" FromRole="Student" ToRole="Course" />
@@ -613,6 +645,26 @@
         <Association Name="SessionLecturer">
           <End Type="BeaconBoardDatabase.Session" Role="Session" Multiplicity="*" />
           <End Type="BeaconBoardDatabase.Lecturer" Role="Lecturer" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="BeaconBoardDatabase.UserRole" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <Association Name="UserRole">
+          <End Type="BeaconBoardDatabase.User" Role="User" Multiplicity="*" />
+          <End Type="BeaconBoardDatabase.Role" Role="Role" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -695,6 +747,7 @@
           <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
           <ScalarProperty Name="Token" ColumnName="Token" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(BeaconBoardDatabase.Student)">
@@ -705,6 +758,14 @@
       <EntityTypeMapping TypeName="IsTypeOf(BeaconBoardDatabase.Lecturer)">
         <MappingFragment StoreEntitySet="Users_Lecturer">
           <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="IsTypeOf(BeaconBoardDatabase.Role)">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

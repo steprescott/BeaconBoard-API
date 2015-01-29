@@ -33,5 +33,6 @@ namespace BB.UnitOfWorkEntityFramework
         public virtual DbSet<Resource> Resources { get; set; }
         public virtual DbSet<ResourceType> ResourceTypes { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
     }
 }

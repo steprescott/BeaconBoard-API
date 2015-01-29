@@ -26,6 +26,8 @@
         <AssociationConnector Association="BeaconBoardDatabase.LessonResource" />
         <AssociationConnector Association="BeaconBoardDatabase.ResourceResourceType" />
         <AssociationConnector Association="BeaconBoardDatabase.SessionLecturer" />
+        <EntityTypeShape EntityType="BeaconBoardDatabase.Role" Width="1.5" PointX="5.75" PointY="3.75" />
+        <AssociationConnector Association="BeaconBoardDatabase.UserRole" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

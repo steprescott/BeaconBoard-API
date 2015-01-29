@@ -45,6 +45,12 @@ namespace BB.Domain
         [EmailAddress]
         public string EmailAddress { get; set; }
         /// <summary>
+        /// A user has a Role. This allows access level of the API.
+        /// This is so Students won't be able to create a new Course only view it.
+        /// </summary>
+        [Required]
+        public Guid RoleID { get; set; }
+        /// <summary>
         /// To avoid the passing of passwords to the API a user token system is used.
         /// This follows the BasicAuth idea and allows for other security advantages such of revoking of the token and not transferring of passwords.
         /// </summary>

@@ -35,6 +35,7 @@ namespace BB.Container
             _unityContainer.RegisterType<ILessonBusinessLogic, LessonBusinessLogic>(new ContainerControlledLifetimeManager());
             _unityContainer.RegisterType<IResourceBusinessLogic, ResourceBusinessLogic>(new ContainerControlledLifetimeManager());
             _unityContainer.RegisterType<IResourceTypeBusinessLogic, ResourceTypeBusinessLogic>(new ContainerControlledLifetimeManager());
+            _unityContainer.RegisterType<IRoleBusinessLogic, RoleBusinessLogic>(new ContainerControlledLifetimeManager());
             _unityContainer.RegisterType<IRoomBusinessLogic, RoomBusinessLogic>(new ContainerControlledLifetimeManager());
             _unityContainer.RegisterType<ISessionBusinessLogic, SessionBusinessLogic>(new ContainerControlledLifetimeManager());
 

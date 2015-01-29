@@ -84,6 +84,9 @@
     <Compile Include="ResourceType.cs">
       <DependentUpon>BeaconBoardDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Role.cs">
+      <DependentUpon>BeaconBoardDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Room.cs">
       <DependentUpon>BeaconBoardDatabase.tt</DependentUpon>
     </Compile>

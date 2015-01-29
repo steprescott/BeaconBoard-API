@@ -170,6 +170,12 @@
             The email address of the user.
             </summary>
         </member>
+        <member name="P:BB.Domain.User.RoleID">
+            <summary>
+            A user has a Role. This allows access level of the API.
+            This is so Students won't be able to create a new Course only view it.
+            </summary>
+        </member>
         <member name="P:BB.Domain.User.Token">
             <summary>
             To avoid the passing of passwords to the API a user token system is used.
@@ -276,6 +282,29 @@
         <member name="P:BB.Domain.ResourceType.ResourceIDs">
             <summary>
             An array of Resources that are of this type.
+            </summary>
+        </member>
+        <member name="T:BB.Domain.Role">
+            <summary>
+            DTO to allow the Entity to be passed over the API.
+            A Room can contain several Beacons that can be used by the App to locate what Room the user is in.
+            From that the App can determine what Session is currently running and validate if the user should be there.
+            If they are the Room entity can link the App to the Lesson of for the current Session and give them access to the Resources of the Lesson.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Role.RoleID">
+            <summary>
+            Primary key that is unique for the object.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Role.Name">
+            <summary>
+            This is a value that could be displayed to the user in order to identify a Users Role.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Role.UserIDs">
+            <summary>
+            An array of Users that have this Role.
             </summary>
         </member>
         <member name="T:BB.Domain.Student">
