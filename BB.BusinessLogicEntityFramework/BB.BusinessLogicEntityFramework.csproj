@@ -53,6 +53,7 @@
     <Compile Include="Logic\LessonBusinessLogic.cs" />
     <Compile Include="Logic\CourseBusinessLogic.cs" />
     <Compile Include="Logic\LecturerBusinessLogic.cs" />
+    <Compile Include="Logic\AttendanceBusinessLogic.cs" />
     <Compile Include="Logic\RoleBusinessLogic.cs" />
     <Compile Include="Logic\StudentBusinessLogic.cs" />
     <Compile Include="Logic\TokenBusinessLogic.cs" />

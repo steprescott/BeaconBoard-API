@@ -103,6 +103,31 @@ namespace BB.WebApi.Controllers
         }
 
         /// <summary>
+        /// Gets all the sessions that are upcoming for the given Course ID.
+        /// </summary>
+        /// <param name="courseID">The Course ID that should be used to filter the upcoming Sessions.</param>
+        /// <returns>An array of Session DTOs that holds the details for the Sessions that are upcoming for the given Course ID.</returns>
+        [HttpGet]
+        [Route("sessions/upcoming")]
+        [ResponseType(typeof(List<Session>))]
+        public HttpResponseMessage GetUpcomingSessions(Guid courseID)
+        {
+            //Get all the sessions that are upcoming for the Course with the given ID. That is Sessions that are to be ran for the Course.
+            var obj = BeaconBoardService.CourseBusinessLogic.GetByID(courseID);
+
+            //If there isn't a Course with the given ID
+            if(obj == null)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Course with the ID of '" + courseID + "' was not found.");
+            }
+
+            var items = BeaconBoardService.SessionBusinessLogic.GetAllUpcomingSessionsForCourseWithID(courseID);
+
+            //Otherwise return the object with a status of OK
+            return Request.CreateResponse(HttpStatusCode.OK, items);
+        }
+
+        /// <summary>
         /// Gets the Session with the given ID.
         /// </summary>
         /// <param name="id">The ID of the Session that the request is asking for.</param>

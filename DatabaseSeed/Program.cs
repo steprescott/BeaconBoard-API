@@ -55,15 +55,25 @@ namespace DatabaseSeed
             Console.WriteLine("--- Seeding resources");
             var resource1 = CreateOrUpdateResource("accd09fc-083d-4897-b4ed-04a6ea3f4217", "Test PDF", "This is to test if we can see resources.", "http://www.energy.umich.edu/sites/default/files/pdf-sample.pdf", resourceTypePDF);
             var resource2 = CreateOrUpdateResource("b9c222e0-7f47-4e22-9ed6-2e92daca7eca", "Test doc", "Another test to see if resources are returned correctly.", "http://homepages.inf.ed.ac.uk/neilb/TestWordDoc.doc", resourceTypeDoc);
+            var resource3 = CreateOrUpdateResource("41502cea-05af-4078-bc97-bb3ed10cdb9b", "Introduction to Programming Through Game Development.", "This book teaches programming in a gaming context.", "http://www.andrews.edu/~greenley/cs2/IntroProgXNAGameStudio_eBook.pdf", resourceTypePDF);
 
             Console.WriteLine("--- Seeding lessons");
             var lesson1 = CreateOrUpdateLesson("75feec01-6cff-4f86-93fe-2d74f4e4995a", new List<Resource> { resource1, resource2 });
+            var lesson2 = CreateOrUpdateLesson("62344945-d4be-42c2-8e0b-504dda3a642a", new List<Resource> { resource1, resource3 });
 
             Console.WriteLine("--- Seeding courses");
-            var course1 = CreateOrUpdateCourse("cd3b9e14-c648-4501-a0f6-6ff7d878cc04", "MComp Software Engineering", new List<Lesson> { lesson1 }, new List<Lecturer> { lecturer1, lecturer2 }, new List<Student> { student1, student2, student3, student4 });
+            var course1 = CreateOrUpdateCourse("cd3b9e14-c648-4501-a0f6-6ff7d878cc04", "MComp Software Engineering", new List<Lesson> { lesson1 }, new List<Lecturer> { lecturer1, lecturer2 }, new List<Student> { student1, student2, student4 });
+            var course2 = CreateOrUpdateCourse("2965c284-d6a9-4d7d-8217-8a91a14e5e0b", "BSC Games Development", new List<Lesson> { lesson2 }, new List<Lecturer> { lecturer1, lecturer2 }, new List<Student> { student3 });
 
             Console.WriteLine("--- Seeding sessions");
             var session1 = CreateOrUpdateSession("00fbf224-159b-4921-8d87-c2f3d3832afb", DateTime.Parse("25/01/2015 23:00"), DateTime.Parse("26/01/2015 01:00"), lesson1, room1, new List<Lecturer> { lecturer1 });
+            var session2 = CreateOrUpdateSession("8d79f5cb-814e-41e8-b0eb-f6396d4f75c2", DateTime.Now.AddDays(1), DateTime.Now.AddDays(1).AddHours(1), lesson1, room2, new List<Lecturer> { lecturer1, lecturer2 });
+            var session3 = CreateOrUpdateSession("9e7532b4-bcd8-4ea9-9412-e7a14d268498", DateTime.Now.AddDays(2), DateTime.Now.AddDays(2).AddHours(1), lesson2, room2, new List<Lecturer> { lecturer1 });
+
+            Console.WriteLine("--- Seeding attendances");
+            var attendance1 = CreateAttendance("1440006f-e593-4207-ba46-5fd7d6dabce6", student1, session1);
+            var attendance2 = CreateAttendance("db0d4446-8950-4072-92ba-29468f31048f", student2, session1);
+            var attendance3 = CreateAttendance("acc3640c-0fe9-460c-a636-20dc9193c24f", student4, session1);
 
             Console.WriteLine("\nDone");
             Console.ReadKey();
@@ -421,7 +431,7 @@ namespace DatabaseSeed
                     Name = name,
                     LessonIDs = lessons.Select(i => i.LessonID).ToList(),
                     LecturerIDs = lecturers.Select(i => i.UserID).ToList(),
-                    StudentIDs = students.Select(i => i.UserID).ToList()
+                    StudentIDs = students.Select(i => i.UserID).ToList(),
                 };
 
                 var result = businessLogic.Create(obj);
@@ -493,6 +503,34 @@ namespace DatabaseSeed
             }
 
             Console.WriteLine("    Error occurred");
+            return null;
+        }
+
+        static Attendance CreateAttendance(String id, Student student, Session session)
+        {
+            var businessLogic = BeaconBoardContainer.GetInstance<IAttendanceBusinessLogic>();
+            var obj = businessLogic.GetByID(Guid.Parse(id));
+
+            if (obj == null)
+            {
+                obj = new Attendance
+                {
+                    AttendanceID = Guid.Parse(id),
+                    StudentID = student.UserID,
+                    SessionID = session.SessionID
+                };
+
+                var result = businessLogic.Create(obj);
+
+                if (result == CRUDResult.Error)
+                {
+                    Console.WriteLine("    Error occurred");
+                    return null;
+                }
+
+                return obj;
+            }
+
             return null;
         }
     }

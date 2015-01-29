@@ -12,6 +12,9 @@ namespace BB.BusinessLogicEntityFramework.Utilities
     {
         public static void RegisterMappings()
         {
+            Mapper.CreateMap<Attendance, Domain.Attendance>();
+            Mapper.CreateMap<Domain.Attendance, Attendance>();
+
             Mapper.CreateMap<Beacon, Domain.Beacon>();
             Mapper.CreateMap<Domain.Beacon, Beacon>();
 
@@ -42,7 +45,8 @@ namespace BB.BusinessLogicEntityFramework.Utilities
                 .ForMember(dest => dest.SessionIDs, opt => opt.MapFrom(c => c.Sessions.Select(i => i.SessionID).ToList()));
             Mapper.CreateMap<Domain.Room, Room>();
 
-            Mapper.CreateMap<Session, Domain.Session>().ForMember(dest => dest.LecturerIDs, opt => opt.MapFrom(c => c.Lecturers.Select(i => i.UserID).ToList()));
+            Mapper.CreateMap<Session, Domain.Session>().ForMember(dest => dest.LecturerIDs, opt => opt.MapFrom(c => c.Lecturers.Select(i => i.UserID).ToList()))
+                .ForMember(dest => dest.AttendanceIDs, opt => opt.MapFrom(c => c.Attendances.Select(i => i.AttendanceID).ToList()));
             Mapper.CreateMap<Domain.Session, Session>();
 
             Mapper.CreateMap<Student, Domain.Student>().ForMember(dest => dest.CourseIDs, opt => opt.MapFrom(c => c.Courses.Select(i => i.CourseID).ToList()));

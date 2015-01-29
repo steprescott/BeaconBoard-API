@@ -30,6 +30,7 @@ namespace BB.Container
 
             _unityContainer.RegisterType<IUnitOfWork, UnitOfWorkEntityFrameworkImplementation>(new ContainerControlledLifetimeManager());
 
+            _unityContainer.RegisterType<IAttendanceBusinessLogic, AttendanceBusinessLogic>(new ContainerControlledLifetimeManager());
             _unityContainer.RegisterType<IBeaconBusinessLogic, BeaconBusinessLogic>(new ContainerControlledLifetimeManager());
             _unityContainer.RegisterType<ICourseBusinessLogic, CourseBusinessLogic>(new ContainerControlledLifetimeManager());
             _unityContainer.RegisterType<ILessonBusinessLogic, LessonBusinessLogic>(new ContainerControlledLifetimeManager());

@@ -17,6 +17,7 @@ namespace BB.UnitOfWorkEntityFramework
         public Session()
         {
             this.Lecturers = new HashSet<Lecturer>();
+            this.Attendances = new HashSet<Attendance>();
         }
     
         public System.Guid SessionID { get; set; }
@@ -28,5 +29,6 @@ namespace BB.UnitOfWorkEntityFramework
         public virtual Lesson Lesson { get; set; }
         public virtual Room Room { get; set; }
         public virtual ICollection<Lecturer> Lecturers { get; set; }
+        public virtual ICollection<Attendance> Attendances { get; set; }
     }
 }

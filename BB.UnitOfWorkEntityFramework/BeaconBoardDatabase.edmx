@@ -15,6 +15,7 @@
     <EntitySet Name="ResourceTypes" EntityType="BeaconBoardDatabase.Store.ResourceTypes" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Users" EntityType="BeaconBoardDatabase.Store.Users" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Roles" EntityType="BeaconBoardDatabase.Store.Roles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Attendances" EntityType="BeaconBoardDatabase.Store.Attendances" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Users_Student" EntityType="BeaconBoardDatabase.Store.Users_Student" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Users_Lecturer" EntityType="BeaconBoardDatabase.Store.Users_Lecturer" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CourseLesson" EntityType="BeaconBoardDatabase.Store.CourseLesson" store:Type="Tables" Schema="dbo" />
@@ -81,6 +82,14 @@
     <AssociationSet Name="UserRole" Association="BeaconBoardDatabase.Store.UserRole">
       <End Role="User" EntitySet="Users" />
       <End Role="Role" EntitySet="Roles" />
+    </AssociationSet>
+    <AssociationSet Name="AttendanceSession" Association="BeaconBoardDatabase.Store.AttendanceSession">
+      <End Role="Attendance" EntitySet="Attendances" />
+      <End Role="Session" EntitySet="Sessions" />
+    </AssociationSet>
+    <AssociationSet Name="StudentAttendance" Association="BeaconBoardDatabase.Store.StudentAttendance">
+      <End Role="Student" EntitySet="Users_Student" />
+      <End Role="Attendance" EntitySet="Attendances" />
     </AssociationSet>
     <AssociationSet Name="FK_Student_inherits_User" Association="BeaconBoardDatabase.Store.FK_Student_inherits_User">
       <End Role="User" EntitySet="Users" />
@@ -168,6 +177,14 @@
     </Key>
     <Property Name="RoleID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Attendances">
+    <Key>
+      <PropertyRef Name="AttendanceID" />
+    </Key>
+    <Property Name="AttendanceID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SessionID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="StudentID" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
   <EntityType Name="Users_Student">
     <Key>
@@ -278,6 +295,30 @@
       </Principal>
       <Dependent Role="User">
         <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AttendanceSession">
+    <End Role="Attendance" Type="BeaconBoardDatabase.Store.Attendances" Multiplicity="*" />
+    <End Role="Session" Type="BeaconBoardDatabase.Store.Sessions" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Session">
+        <PropertyRef Name="SessionID" />
+      </Principal>
+      <Dependent Role="Attendance">
+        <PropertyRef Name="SessionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StudentAttendance">
+    <End Role="Student" Type="BeaconBoardDatabase.Store.Users_Student" Multiplicity="1" />
+    <End Role="Attendance" Type="BeaconBoardDatabase.Store.Attendances" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Attendance">
+        <PropertyRef Name="StudentID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -483,6 +524,15 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Role" EntitySet="Roles" />
           </AssociationSet>
+          <EntitySet Name="Attendances" EntityType="BeaconBoardDatabase.Attendance" />
+          <AssociationSet Name="AttendanceSession" Association="BeaconBoardDatabase.AttendanceSession">
+            <End Role="Attendance" EntitySet="Attendances" />
+            <End Role="Session" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="StudentAttendance" Association="BeaconBoardDatabase.StudentAttendance">
+            <End Role="Student" EntitySet="Users" />
+            <End Role="Attendance" EntitySet="Attendances" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Beacon">
           <Key>
@@ -534,6 +584,7 @@
           <Property Name="ScheduledEndDate" Type="DateTime" Nullable="false" />
           <Property Name="RoomID" Type="Guid" Nullable="false" />
           <NavigationProperty Name="Lecturers" Relationship="BeaconBoardDatabase.SessionLecturer" FromRole="Session" ToRole="Lecturer" />
+          <NavigationProperty Name="Attendances" Relationship="BeaconBoardDatabase.AttendanceSession" FromRole="Session" ToRole="Attendance" />
         </EntityType>
         <EntityType Name="Resource">
           <Key>
@@ -573,6 +624,7 @@
         </EntityType>
         <EntityType Name="Student" BaseType="BeaconBoardDatabase.User">
           <NavigationProperty Name="Courses" Relationship="BeaconBoardDatabase.StudentCourse" FromRole="Student" ToRole="Course" />
+          <NavigationProperty Name="Attendances" Relationship="BeaconBoardDatabase.StudentAttendance" FromRole="Student" ToRole="Attendance" />
         </EntityType>
         <EntityType Name="Lecturer" BaseType="BeaconBoardDatabase.User">
           <NavigationProperty Name="Courses" Relationship="BeaconBoardDatabase.LecturerCourse" FromRole="Lecturer" ToRole="Course" />
@@ -663,6 +715,40 @@
             </Principal>
             <Dependent Role="User">
               <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="AttendanceID" />
+          </Key>
+          <Property Name="AttendanceID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <NavigationProperty Name="Session" Relationship="BeaconBoardDatabase.AttendanceSession" FromRole="Attendance" ToRole="Session" />
+          <Property Name="SessionID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="BeaconBoardDatabase.StudentAttendance" FromRole="Attendance" ToRole="Student" />
+          <Property Name="StudentID" Type="Guid" Nullable="false" />
+        </EntityType>
+        <Association Name="AttendanceSession">
+          <End Type="BeaconBoardDatabase.Attendance" Role="Attendance" Multiplicity="*" />
+          <End Type="BeaconBoardDatabase.Session" Role="Session" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="SessionID" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="SessionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="StudentAttendance">
+          <End Type="BeaconBoardDatabase.Student" Role="Student" Multiplicity="1" />
+          <End Type="BeaconBoardDatabase.Attendance" Role="Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="StudentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -766,6 +852,15 @@
         <MappingFragment StoreEntitySet="Roles">
           <ScalarProperty Name="RoleID" ColumnName="RoleID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Attendances">
+      <EntityTypeMapping TypeName="IsTypeOf(BeaconBoardDatabase.Attendance)">
+        <MappingFragment StoreEntitySet="Attendances">
+          <ScalarProperty Name="AttendanceID" ColumnName="AttendanceID" />
+          <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

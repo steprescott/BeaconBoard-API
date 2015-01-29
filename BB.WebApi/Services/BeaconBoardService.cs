@@ -9,6 +9,11 @@ namespace BB.WebApi.Services
 {
     public class BeaconBoardService
     {
+        public IAttendanceBusinessLogic AttendanceBusinessLogic
+        {
+            get { return BeaconBoardContainer.GetInstance<IAttendanceBusinessLogic>(); }
+        }
+
         public IBeaconBusinessLogic BeaconBusinessLogic
         {
             get { return BeaconBoardContainer.GetInstance<IBeaconBusinessLogic>(); }

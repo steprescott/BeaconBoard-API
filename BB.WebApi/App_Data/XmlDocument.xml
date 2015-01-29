@@ -691,6 +691,31 @@
             <param name="id">The ID of the Lecturer to delete.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         </member>
+        <member name="T:BB.WebApi.Controllers.AttendancesController">
+            <summary>
+            Any requests made to the API for Attendance entities will be handled by the AttendancesController
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Controllers.AttendancesController.Post(BB.Domain.Attendance)">
+            <summary>
+            Creates a new Attendance with the given details.
+            </summary>
+            <param name="attendance">The details of the new Attendance.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.AttendancesController.Get">
+            <summary>
+            Gets all Attendances that are in the system.
+            </summary>
+            <returns>An array of Attendance DTOs that holds the details for the Attendances.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.AttendancesController.Get(System.Guid)">
+            <summary>
+            Gets the Attendance with the given ID.
+            </summary>
+            <param name="id">The ID of the Attendance that the request is asking for.</param>
+            <returns>Attendance DTO that holds the details for the Attendance.</returns>
+        </member>
         <member name="T:BB.WebApi.Controllers.RolesController">
             <summary>
             Any requests made to the API for Role entities will be handled by the RolesController
@@ -873,6 +898,13 @@
             That is Sessions that are to be ran.
             </summary>
             <returns>An array of Session DTOs that holds the details for the Sessions that are upcoming.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.SessionsController.GetUpcomingSessions(System.Guid)">
+            <summary>
+            Gets all the sessions that are upcoming for the given Course ID.
+            </summary>
+            <param name="courseID">The Course ID that should be used to filter the upcoming Sessions.</param>
+            <returns>An array of Session DTOs that holds the details for the Sessions that are upcoming for the given Course ID.</returns>
         </member>
         <member name="M:BB.WebApi.Controllers.SessionsController.Get(System.Guid)">
             <summary>

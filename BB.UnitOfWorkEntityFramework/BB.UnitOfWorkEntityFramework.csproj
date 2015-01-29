@@ -50,6 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attendance.cs">
+      <DependentUpon>BeaconBoardDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Beacon.cs">
       <DependentUpon>BeaconBoardDatabase.tt</DependentUpon>
     </Compile>

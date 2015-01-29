@@ -20,6 +20,8 @@ namespace BB.Interfaces
 
         List<Session> GetAllUpcomingSessions();
 
+        List<Session> GetAllUpcomingSessionsForCourseWithID(Guid id);
+
         Session GetByID(Guid id);
         Session GetCurrentSessionForRoomWithID(Guid id);
 

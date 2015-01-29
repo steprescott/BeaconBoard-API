@@ -12,16 +12,13 @@ namespace BB.UnitOfWorkEntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class Student : User
+    public partial class Attendance
     {
-        public Student()
-        {
-            this.Courses = new HashSet<Course>();
-            this.Attendances = new HashSet<Attendance>();
-        }
+        public System.Guid AttendanceID { get; set; }
+        public System.Guid SessionID { get; set; }
+        public System.Guid StudentID { get; set; }
     
-    
-        public virtual ICollection<Course> Courses { get; set; }
-        public virtual ICollection<Attendance> Attendances { get; set; }
+        public virtual Session Session { get; set; }
+        public virtual Student Student { get; set; }
     }
 }

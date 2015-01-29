@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/29/2015 21:04:46
+-- Date Created: 01/29/2015 21:43:02
 -- Generated from EDMX file: C:\Users\steprescott\Documents\Visual Studio 2013\Projects\BeaconBoard\BB.UnitOfWorkEntityFramework\BeaconBoardDatabase.edmx
 -- --------------------------------------------------
 
@@ -204,6 +204,14 @@ CREATE TABLE [dbo].[Roles] (
 );
 GO
 
+-- Creating table 'Attendances'
+CREATE TABLE [dbo].[Attendances] (
+    [AttendanceID] uniqueidentifier  NOT NULL,
+    [SessionID] uniqueidentifier  NOT NULL,
+    [StudentID] uniqueidentifier  NOT NULL
+);
+GO
+
 -- Creating table 'Users_Student'
 CREATE TABLE [dbo].[Users_Student] (
     [UserID] uniqueidentifier  NOT NULL
@@ -307,6 +315,12 @@ GO
 ALTER TABLE [dbo].[Roles]
 ADD CONSTRAINT [PK_Roles]
     PRIMARY KEY CLUSTERED ([RoleID] ASC);
+GO
+
+-- Creating primary key on [AttendanceID] in table 'Attendances'
+ALTER TABLE [dbo].[Attendances]
+ADD CONSTRAINT [PK_Attendances]
+    PRIMARY KEY CLUSTERED ([AttendanceID] ASC);
 GO
 
 -- Creating primary key on [UserID] in table 'Users_Student'
@@ -548,6 +562,36 @@ GO
 CREATE INDEX [IX_FK_UserRole]
 ON [dbo].[Users]
     ([RoleID]);
+GO
+
+-- Creating foreign key on [SessionID] in table 'Attendances'
+ALTER TABLE [dbo].[Attendances]
+ADD CONSTRAINT [FK_AttendanceSession]
+    FOREIGN KEY ([SessionID])
+    REFERENCES [dbo].[Sessions]
+        ([SessionID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_AttendanceSession'
+CREATE INDEX [IX_FK_AttendanceSession]
+ON [dbo].[Attendances]
+    ([SessionID]);
+GO
+
+-- Creating foreign key on [StudentID] in table 'Attendances'
+ALTER TABLE [dbo].[Attendances]
+ADD CONSTRAINT [FK_StudentAttendance]
+    FOREIGN KEY ([StudentID])
+    REFERENCES [dbo].[Users_Student]
+        ([UserID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_StudentAttendance'
+CREATE INDEX [IX_FK_StudentAttendance]
+ON [dbo].[Attendances]
+    ([StudentID]);
 GO
 
 -- Creating foreign key on [UserID] in table 'Users_Student'

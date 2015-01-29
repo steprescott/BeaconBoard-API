@@ -284,6 +284,26 @@
             An array of Resources that are of this type.
             </summary>
         </member>
+        <member name="T:BB.Domain.Attendance">
+            <summary>
+            DTO to allow the Entity to be passed over the API.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Attendance.AttendanceID">
+            <summary>
+            Primary key that is unique for the object.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Attendance.SessionID">
+            <summary>
+            The SessionID that was attended.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Attendance.StudentID">
+            <summary>
+            The StudentID that attended the Session.
+            </summary>
+        </member>
         <member name="T:BB.Domain.Role">
             <summary>
             DTO to allow the Entity to be passed over the API.
@@ -387,6 +407,12 @@
         <member name="P:BB.Domain.Session.LecturerIDs">
             <summary>
             An array of Lecturer IDs that are involved with this Session.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Session.AttendanceIDs">
+            <summary>
+            An array of Attendance IDs.
+            This allows the system to see what Students attended this Session.
             </summary>
         </member>
     </members>

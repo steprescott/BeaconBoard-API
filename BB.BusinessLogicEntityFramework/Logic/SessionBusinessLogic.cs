@@ -128,8 +128,25 @@ namespace BB.BusinessLogicEntityFramework.Logic
 
         public List<Domain.Session> GetAllUpcomingSessions()
         {
-            //Get all the Entity Framework items from the database
+            //Get all the Sessions from the database that have a end date later than now.
             var items = _unitOfWork.GetAll<Session>().Where(i => i.ScheduledEndDate > DateTime.Now).ToList();
+
+            //Map all the Entity Framework items to a list of domain objects
+            return Mapper.Map<List<Domain.Session>>(items);
+        }
+
+        public List<Domain.Session> GetAllUpcomingSessionsForCourseWithID(Guid id)
+        {
+            //Get the course from the database with the given ID
+            var course = _unitOfWork.GetById<Course>(id);
+
+            if(course == null)
+            {
+                return null;
+            }
+
+            //Get all the Sessions from the database that have a end date later than now.
+            var items = course.Lessons.SelectMany(i => i.Sessions).Where(i => i.ScheduledEndDate > DateTime.Now);
 
             //Map all the Entity Framework items to a list of domain objects
             return Mapper.Map<List<Domain.Session>>(items);

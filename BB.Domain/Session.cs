@@ -48,5 +48,10 @@ namespace BB.Domain
         /// An array of Lecturer IDs that are involved with this Session.
         /// </summary>
         public List<Guid> LecturerIDs { get; set; }
+        /// <summary>
+        /// An array of Attendance IDs.
+        /// This allows the system to see what Students attended this Session.
+        /// </summary>
+        public List<Guid> AttendanceIDs { get; set; }
     }
 }
