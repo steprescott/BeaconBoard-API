@@ -86,6 +86,23 @@ namespace BB.WebApi.Controllers
         }
 
         /// <summary>
+        /// Gets all the sessions that are upcoming.
+        /// That is Sessions that are to be ran.
+        /// </summary>
+        /// <returns>An array of Session DTOs that holds the details for the Sessions that are upcoming.</returns>
+        [HttpGet]
+        [Route("sessions/upcoming")]
+        [ResponseType(typeof(List<Session>))]
+        public HttpResponseMessage GetUpcomingSessions()
+        {
+            //Get all the sessions that are upcoming. That is Sessions that are to be ran.
+            var items = BeaconBoardService.SessionBusinessLogic.GetAllUpcomingSessions();
+
+            //Otherwise return the object with a status of OK
+            return Request.CreateResponse(HttpStatusCode.OK, items);
+        }
+
+        /// <summary>
         /// Gets the Session with the given ID.
         /// </summary>
         /// <param name="id">The ID of the Session that the request is asking for.</param>

@@ -126,6 +126,15 @@ namespace BB.BusinessLogicEntityFramework.Logic
             return Mapper.Map<List<Domain.Session>>(items);
         }
 
+        public List<Domain.Session> GetAllUpcomingSessions()
+        {
+            //Get all the Entity Framework items from the database
+            var items = _unitOfWork.GetAll<Session>().Where(i => i.ScheduledEndDate > DateTime.Now).ToList();
+
+            //Map all the Entity Framework items to a list of domain objects
+            return Mapper.Map<List<Domain.Session>>(items);
+        }
+
         public Domain.Session GetByID(Guid id)
         {
             //Get all the Entity Framework item with the given ID from the database

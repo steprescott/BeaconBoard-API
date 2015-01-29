@@ -867,6 +867,13 @@
             </summary>
             <returns>An array of Session DTOs that holds the details for the Sessions.</returns>
         </member>
+        <member name="M:BB.WebApi.Controllers.SessionsController.GetUpcomingSessions">
+            <summary>
+            Gets all the sessions that are upcoming.
+            That is Sessions that are to be ran.
+            </summary>
+            <returns>An array of Session DTOs that holds the details for the Sessions that are upcoming.</returns>
+        </member>
         <member name="M:BB.WebApi.Controllers.SessionsController.Get(System.Guid)">
             <summary>
             Gets the Session with the given ID.

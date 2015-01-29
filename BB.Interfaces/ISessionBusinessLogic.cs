@@ -17,6 +17,9 @@ namespace BB.Interfaces
         CRUDResult Update(Session dominObject);
 
         List<Session> GetAll();
+
+        List<Session> GetAllUpcomingSessions();
+
         Session GetByID(Guid id);
         Session GetCurrentSessionForRoomWithID(Guid id);
 
