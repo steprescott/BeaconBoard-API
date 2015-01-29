@@ -126,7 +126,7 @@ namespace BB.BusinessLogicEntityFramework.Logic
                         return CRUDResult.NotFound;
                     }
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     //An error has occurred.
                     //We don't want to return the over the API as it could
