@@ -163,7 +163,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Classes\HTTP\HttpCodes.cs" />
     <Compile Include="Classes\RequestValidation.cs" />
-    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BaseWithAuthController.cs" />
     <Compile Include="Controllers\ResourcesController.cs" />
     <Compile Include="Controllers\ResourceTypesController.cs" />
     <Compile Include="Controllers\LessonsController.cs" />

@@ -40,5 +40,11 @@ namespace BB.WebApi.Models
         /// </summary>
         [EmailAddress]
         public string EmailAddress { get; set; }
+        /// <summary>
+        /// A user has a Role. This allows access level of the API.
+        /// This is so Students won't be able to create a new Course only view it.
+        /// </summary>
+        [Required]
+        public Guid RoleID { get; set; }
     }
 }

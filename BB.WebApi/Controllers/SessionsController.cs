@@ -18,10 +18,12 @@ namespace BB.WebApi.Controllers
     {
         /// <summary>
         /// Creates a new Session with the given details.
+        /// Only Lecturers can call this action.
         /// </summary>
         /// <param name="Session">The details of the new Session.</param>
         /// <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         [HttpPost]
+        [Authorize(Roles = "Lecturer")]
         public HttpResponseMessage Post([FromBody] Session Session)
         {
             //Create a new item with the given details
@@ -40,10 +42,12 @@ namespace BB.WebApi.Controllers
 
         /// <summary>
         /// Updates the Session with the given details.
+        /// Only Lecturers can call this action.
         /// </summary>
         /// <param name="Session">These are the details that the Session should be update with.</param>
         /// <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         [HttpPut]
+        [Authorize(Roles = "Lecturer")]
         public HttpResponseMessage Put([FromBody] Session Session)
         {
             //Update the item that is in the database with the given details
@@ -125,10 +129,12 @@ namespace BB.WebApi.Controllers
 
         /// <summary>
         /// Deletes the Session from the database with the given ID.
+        /// Only Lecturers can call this action.
         /// </summary>
         /// <param name="id">The ID of the Session to delete.</param>
         /// <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         [HttpDelete]
+        [Authorize(Roles = "Lecturer")]
         public HttpResponseMessage Delete(Guid id)
         {
             //Delete the item from the database with the given ID

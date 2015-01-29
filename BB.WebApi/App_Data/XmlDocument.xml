@@ -489,6 +489,7 @@
         <member name="M:BB.WebApi.Controllers.ResourcesController.Post(BB.Domain.Resource)">
             <summary>
             Creates a new Resource with the given details.
+            Only Lecturers can call this action.
             </summary>
             <param name="Resource">The details of the new Resource.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -496,6 +497,7 @@
         <member name="M:BB.WebApi.Controllers.ResourcesController.Put(BB.Domain.Resource)">
             <summary>
             Updates the Resource with the given details.
+            Only Lecturers can call this action.
             </summary>
             <param name="Resource">These are the details that the Resource should be update with.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -516,6 +518,7 @@
         <member name="M:BB.WebApi.Controllers.ResourcesController.Delete(System.Guid)">
             <summary>
             Deletes the Resource from the database with the given ID.
+            Only Lecturers can call this action.
             </summary>
             <param name="id">The ID of the Resource to delete.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -528,6 +531,7 @@
         <member name="M:BB.WebApi.Controllers.ResourceTypeTypesController.Post(BB.Domain.ResourceType)">
             <summary>
             Creates a new Resource Type with the given details.
+            Only Lecturers can call this action.
             </summary>
             <param name="ResourceType">The details of the new Resource Type.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -535,6 +539,7 @@
         <member name="M:BB.WebApi.Controllers.ResourceTypeTypesController.Put(BB.Domain.ResourceType)">
             <summary>
             Updates the Resource Type with the given details.
+            Only Lecturers can call this action.
             </summary>
             <param name="ResourceType">These are the details that the Resource Type should be update with.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -555,6 +560,7 @@
         <member name="M:BB.WebApi.Controllers.ResourceTypeTypesController.Delete(System.Guid)">
             <summary>
             Deletes the Resource Type from the database with the given ID.
+            Only Lecturers can call this action.
             </summary>
             <param name="id">The ID of the Resource Type to delete.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -567,6 +573,7 @@
         <member name="M:BB.WebApi.Controllers.LessonsController.Post(BB.Domain.Lesson)">
             <summary>
             Creates a new Lesson with the given details.
+            Only Lecturers can call this action.
             </summary>
             <param name="Lesson">The details of the new Lesson.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -574,6 +581,7 @@
         <member name="M:BB.WebApi.Controllers.LessonsController.Put(BB.Domain.Lesson)">
             <summary>
             Updates the Lesson with the given details.
+            Only Lecturers can call this action.
             </summary>
             <param name="Lesson">These are the details that the Lesson should be update with.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -594,6 +602,7 @@
         <member name="M:BB.WebApi.Controllers.LessonsController.Delete(System.Guid)">
             <summary>
             Deletes the Lesson from the database with the given ID.
+            Only Lecturers can call this action.
             </summary>
             <param name="id">The ID of the Lesson to delete.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -606,6 +615,7 @@
         <member name="M:BB.WebApi.Controllers.CoursesController.Post(BB.Domain.Course)">
             <summary>
             Creates a new Course with the given details.
+            Only Lecturers can call this action.
             </summary>
             <param name="Course">The details of the new Course.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -613,6 +623,7 @@
         <member name="M:BB.WebApi.Controllers.CoursesController.Put(BB.Domain.Course)">
             <summary>
             Updates the Course with the given details.
+            Only Lecturers can call this action.
             </summary>
             <param name="Course">These are the details that the Course should be update with.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -633,6 +644,7 @@
         <member name="M:BB.WebApi.Controllers.CoursesController.Delete(System.Guid)">
             <summary>
             Deletes the Course from the database with the given ID.
+            Only Lecturers can call this action.
             </summary>
             <param name="id">The ID of the Course to delete.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -645,6 +657,7 @@
         <member name="M:BB.WebApi.Controllers.LecturersController.Post(BB.Domain.Lecturer)">
             <summary>
             Creates a new Lecturer with the given details.
+            Only Lecturers can call this action.
             </summary>
             <param name="Lecturer">The details of the new Lecturer.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -652,6 +665,7 @@
         <member name="M:BB.WebApi.Controllers.LecturersController.Put(BB.Domain.Lecturer)">
             <summary>
             Updates the Lecturer with the given details.
+            Only Lecturers can call this action.
             </summary>
             <param name="Lecturer">These are the details that the Lecturer should be update with.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -672,6 +686,7 @@
         <member name="M:BB.WebApi.Controllers.LecturersController.Delete(System.Guid)">
             <summary>
             Deletes the Lecturer from the database with the given ID.
+            Only Lecturers can call this action.
             </summary>
             <param name="id">The ID of the Lecturer to delete.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -684,6 +699,7 @@
         <member name="M:BB.WebApi.Controllers.RolesController.Post(BB.Domain.Role)">
             <summary>
             Creates a new Role with the given details.
+            Only Lecturers can call this action.
             </summary>
             <param name="Role">The details of the new Role.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -691,6 +707,7 @@
         <member name="M:BB.WebApi.Controllers.RolesController.Put(BB.Domain.Role)">
             <summary>
             Updates the Role with the given details.
+            Only Lecturers can call this action.
             </summary>
             <param name="Role">These are the details that the Role should be update with.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -711,6 +728,7 @@
         <member name="M:BB.WebApi.Controllers.RolesController.Delete(System.Guid)">
             <summary>
             Deletes the Role from the database with the given ID.
+            Only Lecturers can call this action.
             </summary>
             <param name="id">The ID of the Role to delete.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -762,6 +780,7 @@
         <member name="M:BB.WebApi.Controllers.UsersController.Delete(System.Guid)">
             <summary>
             Deletes the User from the database with the given ID.
+            Only Lecturers can call this action.
             </summary>
             <param name="id">The ID of the User to delete.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -774,6 +793,7 @@
         <member name="M:BB.WebApi.Controllers.StudentsController.Post(BB.Domain.Student)">
             <summary>
             Creates a new Student with the given details.
+            Only Lecturers can call this action.
             </summary>
             <param name="Student">The details of the new Student.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -781,6 +801,7 @@
         <member name="M:BB.WebApi.Controllers.StudentsController.Put(BB.Domain.Student)">
             <summary>
             Updates the Student with the given details.
+            Only Lecturers can call this action.
             </summary>
             <param name="Student">These are the details that the Student should be update with.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -801,6 +822,7 @@
         <member name="M:BB.WebApi.Controllers.StudentsController.Delete(System.Guid)">
             <summary>
             Deletes the Student from the database with the given ID.
+            Only Lecturers can call this action.
             </summary>
             <param name="id">The ID of the Student to delete.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -808,6 +830,7 @@
         <member name="T:BB.WebApi.Controllers.TokensController">
             <summary>
             Following BasicAuth tokens are used to validate request access level. This controller deals with the generation of User Tokens.
+            This is the only controller that can be access without the requirement of a User Token.
             </summary>
         </member>
         <member name="M:BB.WebApi.Controllers.TokensController.Post(BB.WebApi.Models.TokenRequestModel)">
@@ -825,6 +848,7 @@
         <member name="M:BB.WebApi.Controllers.SessionsController.Post(BB.Domain.Session)">
             <summary>
             Creates a new Session with the given details.
+            Only Lecturers can call this action.
             </summary>
             <param name="Session">The details of the new Session.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -832,6 +856,7 @@
         <member name="M:BB.WebApi.Controllers.SessionsController.Put(BB.Domain.Session)">
             <summary>
             Updates the Session with the given details.
+            Only Lecturers can call this action.
             </summary>
             <param name="Session">These are the details that the Session should be update with.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -852,6 +877,7 @@
         <member name="M:BB.WebApi.Controllers.SessionsController.Delete(System.Guid)">
             <summary>
             Deletes the Session from the database with the given ID.
+            Only Lecturers can call this action.
             </summary>
             <param name="id">The ID of the Session to delete.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -864,6 +890,7 @@
         <member name="M:BB.WebApi.Controllers.RoomsController.Post(BB.Domain.Room)">
             <summary>
             Creates a new Room with the given details.
+            Only Lecturers can call this action.
             </summary>
             <param name="Room">The details of the new Room.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -871,6 +898,7 @@
         <member name="M:BB.WebApi.Controllers.RoomsController.Put(BB.Domain.Room)">
             <summary>
             Updates the Room with the given details.
+            Only Lecturers can call this action.
             </summary>
             <param name="Room">These are the details that the Room should be update with.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -891,6 +919,7 @@
         <member name="M:BB.WebApi.Controllers.RoomsController.Delete(System.Guid)">
             <summary>
             Deletes the Room from the database with the given ID.
+            Only Lecturers can call this action.
             </summary>
             <param name="id">The ID of the Room to delete.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -903,6 +932,7 @@
         <member name="M:BB.WebApi.Controllers.BeaconsController.Post(BB.Domain.Beacon)">
             <summary>
             Creates a new Beacon with the given details.
+            Only Lecturers can call this action.
             </summary>
             <param name="beacon">The details of the new beacon.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -910,6 +940,7 @@
         <member name="M:BB.WebApi.Controllers.BeaconsController.Put(BB.Domain.Beacon)">
             <summary>
             Updates the Beacon with the given details.
+            Only Lecturers can call this action.
             </summary>
             <param name="beacon">These are the details that the Beacon should be update with.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -930,6 +961,7 @@
         <member name="M:BB.WebApi.Controllers.BeaconsController.Delete(System.Guid)">
             <summary>
             Deletes the beacon from the database with the given ID.
+            Only Lecturers can call this action.
             </summary>
             <param name="id">The ID of the beacon to delete.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
@@ -985,6 +1017,12 @@
         <member name="P:BB.WebApi.Models.UserDTOModel.EmailAddress">
             <summary>
             The email address of the user.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Models.UserDTOModel.RoleID">
+            <summary>
+            A user has a Role. This allows access level of the API.
+            This is so Students won't be able to create a new Course only view it.
             </summary>
         </member>
         <member name="P:BB.WebApi.Models.LecturerDTOModel.CourseIDs">

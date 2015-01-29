@@ -43,7 +43,7 @@ namespace BB.BusinessLogicEntityFramework.Logic
                 _unitOfWork.SaveChanges();
                 return CRUDResult.Created;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 //An error has occurred.
                 //We don't want to return the over the API as it could

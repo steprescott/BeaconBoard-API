@@ -18,10 +18,12 @@ namespace BB.WebApi.Controllers
     {
         /// <summary>
         /// Creates a new Lesson with the given details.
+        /// Only Lecturers can call this action.
         /// </summary>
         /// <param name="Lesson">The details of the new Lesson.</param>
         /// <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         [HttpPost]
+        [Authorize(Roles = "Lecturer")]
         public HttpResponseMessage Post([FromBody] Lesson Lesson)
         {
             //Create a new item with the given details
@@ -40,10 +42,12 @@ namespace BB.WebApi.Controllers
 
         /// <summary>
         /// Updates the Lesson with the given details.
+        /// Only Lecturers can call this action.
         /// </summary>
         /// <param name="Lesson">These are the details that the Lesson should be update with.</param>
         /// <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         [HttpPut]
+        [Authorize(Roles = "Lecturer")]
         public HttpResponseMessage Put([FromBody] Lesson Lesson)
         {
             //Update the item that is in the database with the given details
@@ -106,10 +110,12 @@ namespace BB.WebApi.Controllers
 
         /// <summary>
         /// Deletes the Lesson from the database with the given ID.
+        /// Only Lecturers can call this action.
         /// </summary>
         /// <param name="id">The ID of the Lesson to delete.</param>
         /// <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         [HttpDelete]
+        [Authorize(Roles = "Lecturer")]
         public HttpResponseMessage Delete(Guid id)
         {
             //Delete the item from the database with the given ID

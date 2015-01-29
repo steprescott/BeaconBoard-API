@@ -18,10 +18,12 @@ namespace BB.WebApi.Controllers
     {
         /// <summary>
         /// Creates a new Resource Type with the given details.
+        /// Only Lecturers can call this action.
         /// </summary>
         /// <param name="ResourceType">The details of the new Resource Type.</param>
         /// <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         [HttpPost]
+        [Authorize(Roles = "Lecturer")]
         public HttpResponseMessage Post([FromBody] ResourceType ResourceType)
         {
             //Create a new item with the given details
@@ -40,10 +42,12 @@ namespace BB.WebApi.Controllers
 
         /// <summary>
         /// Updates the Resource Type with the given details.
+        /// Only Lecturers can call this action.
         /// </summary>
         /// <param name="ResourceType">These are the details that the Resource Type should be update with.</param>
         /// <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         [HttpPut]
+        [Authorize(Roles = "Lecturer")]
         public HttpResponseMessage Put([FromBody] ResourceType ResourceType)
         {
             //Update the item that is in the database with the given details
@@ -106,10 +110,12 @@ namespace BB.WebApi.Controllers
 
         /// <summary>
         /// Deletes the Resource Type from the database with the given ID.
+        /// Only Lecturers can call this action.
         /// </summary>
         /// <param name="id">The ID of the Resource Type to delete.</param>
         /// <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         [HttpDelete]
+        [Authorize(Roles = "Lecturer")]
         public HttpResponseMessage Delete(Guid id)
         {
             //Delete the item from the database with the given ID

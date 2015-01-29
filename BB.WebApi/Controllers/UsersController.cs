@@ -30,16 +30,17 @@ namespace BB.WebApi.Controllers
 
             var Users = new List<UserDTOModel>();
 
-            foreach (User User in items)
+            foreach (User user in items)
             {
                 Users.Add(new UserDTOModel
                 {
-                    UserID = User.UserID,
-                    Username = User.Username,
-                    FirstName = User.FirstName,
-                    OtherNames = User.OtherNames,
-                    LastName = User.LastName,
-                    EmailAddress = User.EmailAddress
+                    UserID = user.UserID,
+                    Username = user.Username,
+                    FirstName = user.FirstName,
+                    OtherNames = user.OtherNames,
+                    LastName = user.LastName,
+                    EmailAddress = user.EmailAddress,
+                    RoleID = user.RoleID
                 });
             }
 
@@ -71,6 +72,7 @@ namespace BB.WebApi.Controllers
                     OtherNames = lecturer.OtherNames,
                     LastName = lecturer.LastName,
                     EmailAddress = lecturer.EmailAddress,
+                    RoleID = lecturer.RoleID,
                     CourseIDs = lecturer.CourseIDs,
                     SessionIDs = lecturer.SessionIDs
                 });
@@ -104,6 +106,7 @@ namespace BB.WebApi.Controllers
                     OtherNames = student.OtherNames,
                     LastName = student.LastName,
                     EmailAddress = student.EmailAddress,
+                    RoleID = student.RoleID,
                     CourseIDs = student.CourseIDs
                 });
             }
@@ -138,7 +141,8 @@ namespace BB.WebApi.Controllers
                 FirstName = obj.FirstName,
                 OtherNames = obj.OtherNames,
                 LastName = obj.LastName,
-                EmailAddress = obj.EmailAddress
+                EmailAddress = obj.EmailAddress,
+                RoleID = obj.RoleID
             };
 
             //Otherwise return the object with a status of OK
@@ -173,6 +177,7 @@ namespace BB.WebApi.Controllers
                 OtherNames = obj.OtherNames,
                 LastName = obj.LastName,
                 EmailAddress = obj.EmailAddress,
+                RoleID = obj.RoleID,
                 CourseIDs = obj.CourseIDs,
                 SessionIDs = obj.SessionIDs
             };
@@ -209,6 +214,7 @@ namespace BB.WebApi.Controllers
                 OtherNames = obj.OtherNames,
                 LastName = obj.LastName,
                 EmailAddress = obj.EmailAddress,
+                RoleID = obj.RoleID,
                 CourseIDs = obj.CourseIDs
             };
 
@@ -218,10 +224,12 @@ namespace BB.WebApi.Controllers
 
         /// <summary>
         /// Deletes the User from the database with the given ID.
+        /// Only Lecturers can call this action.
         /// </summary>
         /// <param name="id">The ID of the User to delete.</param>
         /// <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         [HttpDelete]
+        [Authorize(Roles = "Lecturer")]
         public HttpResponseMessage Delete(Guid id)
         {
             //Delete the item from the database with the given ID

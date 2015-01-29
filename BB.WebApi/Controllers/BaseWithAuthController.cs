@@ -8,6 +8,7 @@ using BB.WebApi.Handlers;
 namespace BB.WebApi.Controllers
 {
     [ValidationActionFilter]
+    [Authorize(Roles = "Lecturer, Student")]
     public class BaseWithAuthController : ApiController
     {
         private BeaconBoardService _beaconBoardService;

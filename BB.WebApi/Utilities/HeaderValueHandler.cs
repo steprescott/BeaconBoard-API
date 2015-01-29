@@ -179,9 +179,14 @@ namespace BB.WebApi.Utilities
                     };
                 }
 
-                //The user has been authenticated
-                var userIdentity = new GenericIdentity("USERNAME");
-                HttpContext.Current.User = new GenericPrincipal(userIdentity, new[] { "ROLE" });
+                //If the UserToken is fine then get the user and their role
+                var user = _beaconBoardService.UserBusinessLogic.GetUserForToken(userToken);
+                var role = _beaconBoardService.RoleBusinessLogic.GetByID(user.RoleID);
+
+                //Set the user and role of the request to that from the UserToken
+                //This is used for access control of each endpoint of the API
+                var userIdentity = new GenericIdentity(user.Username);
+                HttpContext.Current.User = new GenericPrincipal(userIdentity, new[] { role.Name });
             }
 
             //Everything is OK so return the correct RequestValidation

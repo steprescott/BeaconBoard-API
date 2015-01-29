@@ -14,7 +14,9 @@ namespace BB.WebApi.Controllers
 {
     /// <summary>
     /// Following BasicAuth tokens are used to validate request access level. This controller deals with the generation of User Tokens.
+    /// This is the only controller that can be access without the requirement of a User Token.
     /// </summary>
+    [System.Web.Http.AllowAnonymous]
     public class TokensController : BaseWithAuthController
     {
         /// <summary>

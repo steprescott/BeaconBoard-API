@@ -18,10 +18,12 @@ namespace BB.WebApi.Controllers
     {
         /// <summary>
         /// Creates a new Beacon with the given details.
+        /// Only Lecturers can call this action.
         /// </summary>
         /// <param name="beacon">The details of the new beacon.</param>
         /// <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         [HttpPost]
+        [Authorize(Roles = "Lecturer")]
         public HttpResponseMessage Post([FromBody] Beacon beacon)
         {
             //Create a new item with the given details
@@ -40,10 +42,12 @@ namespace BB.WebApi.Controllers
 
         /// <summary>
         /// Updates the Beacon with the given details.
+        /// Only Lecturers can call this action.
         /// </summary>
         /// <param name="beacon">These are the details that the Beacon should be update with.</param>
         /// <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         [HttpPut]
+        [Authorize(Roles = "Lecturer")]
         public HttpResponseMessage Put([FromBody] Beacon beacon)
         {
             //Update the item that is in the database with the given details
@@ -106,10 +110,12 @@ namespace BB.WebApi.Controllers
 
         /// <summary>
         /// Deletes the beacon from the database with the given ID.
+        /// Only Lecturers can call this action.
         /// </summary>
         /// <param name="id">The ID of the beacon to delete.</param>
         /// <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         [HttpDelete]
+        [Authorize(Roles = "Lecturer")]
         public HttpResponseMessage Delete(Guid id)
         {
             //Delete the item from the database with the given ID

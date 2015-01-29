@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/29/2015 19:51:29
+-- Date Created: 01/29/2015 21:04:46
 -- Generated from EDMX file: C:\Users\steprescott\Documents\Visual Studio 2013\Projects\BeaconBoard\BB.UnitOfWorkEntityFramework\BeaconBoardDatabase.edmx
 -- --------------------------------------------------
 
@@ -59,6 +59,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_SessionLecturer_Lecturer]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[SessionLecturer] DROP CONSTRAINT [FK_SessionLecturer_Lecturer];
 GO
+IF OBJECT_ID(N'[dbo].[FK_UserRole]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Users] DROP CONSTRAINT [FK_UserRole];
+GO
 IF OBJECT_ID(N'[dbo].[FK_Student_inherits_User]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Users_Student] DROP CONSTRAINT [FK_Student_inherits_User];
 GO
@@ -93,6 +96,9 @@ IF OBJECT_ID(N'[dbo].[ResourceTypes]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Users];
+GO
+IF OBJECT_ID(N'[dbo].[Roles]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Roles];
 GO
 IF OBJECT_ID(N'[dbo].[Users_Student]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Users_Student];

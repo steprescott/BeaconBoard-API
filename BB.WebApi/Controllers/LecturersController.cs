@@ -19,10 +19,12 @@ namespace BB.WebApi.Controllers
     {
         /// <summary>
         /// Creates a new Lecturer with the given details.
+        /// Only Lecturers can call this action.
         /// </summary>
         /// <param name="Lecturer">The details of the new Lecturer.</param>
         /// <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         [HttpPost]
+        [Authorize(Roles = "Lecturer")]
         public HttpResponseMessage Post([FromBody] Lecturer Lecturer)
         {
             //Create a new item with the given details
@@ -41,10 +43,12 @@ namespace BB.WebApi.Controllers
 
         /// <summary>
         /// Updates the Lecturer with the given details.
+        /// Only Lecturers can call this action.
         /// </summary>
         /// <param name="Lecturer">These are the details that the Lecturer should be update with.</param>
         /// <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         [HttpPut]
+        [Authorize(Roles = "Lecturer")]
         public HttpResponseMessage Put([FromBody] Lecturer Lecturer)
         {
             //Update the item that is in the database with the given details
@@ -80,18 +84,19 @@ namespace BB.WebApi.Controllers
 
             var Lecturers = new List<LecturerDTOModel>();
 
-            foreach (Lecturer Lecturer in items)
+            foreach (Lecturer lecturer in items)
             {
                 Lecturers.Add(new LecturerDTOModel
                 {
-                    UserID = Lecturer.UserID,
-                    Username = Lecturer.Username,
-                    FirstName = Lecturer.FirstName,
-                    OtherNames = Lecturer.OtherNames,
-                    LastName = Lecturer.LastName,
-                    EmailAddress = Lecturer.EmailAddress,
-                    CourseIDs = Lecturer.CourseIDs,
-                    SessionIDs = Lecturer.SessionIDs
+                    UserID = lecturer.UserID,
+                    Username = lecturer.Username,
+                    FirstName = lecturer.FirstName,
+                    OtherNames = lecturer.OtherNames,
+                    LastName = lecturer.LastName,
+                    EmailAddress = lecturer.EmailAddress,
+                    RoleID = lecturer.RoleID,
+                    CourseIDs = lecturer.CourseIDs,
+                    SessionIDs = lecturer.SessionIDs
                 });
             }
 
@@ -126,6 +131,7 @@ namespace BB.WebApi.Controllers
                 OtherNames = obj.OtherNames,
                 LastName = obj.LastName,
                 EmailAddress = obj.EmailAddress,
+                RoleID = obj.RoleID,
                 CourseIDs = obj.CourseIDs,
                 SessionIDs = obj.SessionIDs
             };
@@ -136,10 +142,12 @@ namespace BB.WebApi.Controllers
 
         /// <summary>
         /// Deletes the Lecturer from the database with the given ID.
+        /// Only Lecturers can call this action.
         /// </summary>
         /// <param name="id">The ID of the Lecturer to delete.</param>
         /// <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         [HttpDelete]
+        [Authorize(Roles = "Lecturer")]
         public HttpResponseMessage Delete(Guid id)
         {
             //Delete the item from the database with the given ID

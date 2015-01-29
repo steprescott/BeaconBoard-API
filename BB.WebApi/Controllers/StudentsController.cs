@@ -19,10 +19,12 @@ namespace BB.WebApi.Controllers
     {
         /// <summary>
         /// Creates a new Student with the given details.
+        /// Only Lecturers can call this action.
         /// </summary>
         /// <param name="Student">The details of the new Student.</param>
         /// <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         [HttpPost]
+        [Authorize(Roles = "Lecturer")]
         public HttpResponseMessage Post([FromBody] Student Student)
         {
             //Create a new item with the given details
@@ -41,10 +43,12 @@ namespace BB.WebApi.Controllers
 
         /// <summary>
         /// Updates the Student with the given details.
+        /// Only Lecturers can call this action.
         /// </summary>
         /// <param name="Student">These are the details that the Student should be update with.</param>
         /// <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         [HttpPut]
+        [Authorize(Roles = "Lecturer")]
         public HttpResponseMessage Put([FromBody] Student Student)
         {
             //Update the item that is in the database with the given details
@@ -90,6 +94,7 @@ namespace BB.WebApi.Controllers
                     OtherNames = student.OtherNames,
                     LastName = student.LastName,
                     EmailAddress = student.EmailAddress,
+                    RoleID = student.RoleID,
                     CourseIDs = student.CourseIDs
                 });
             }
@@ -125,6 +130,7 @@ namespace BB.WebApi.Controllers
                 OtherNames = obj.OtherNames,
                 LastName = obj.LastName,
                 EmailAddress = obj.EmailAddress,
+                RoleID = obj.RoleID,
                 CourseIDs = obj.CourseIDs
             };
 
@@ -134,10 +140,12 @@ namespace BB.WebApi.Controllers
 
         /// <summary>
         /// Deletes the Student from the database with the given ID.
+        /// Only Lecturers can call this action.
         /// </summary>
         /// <param name="id">The ID of the Student to delete.</param>
         /// <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         [HttpDelete]
+        [Authorize(Roles = "Lecturer")]
         public HttpResponseMessage Delete(Guid id)
         {
             //Delete the item from the database with the given ID
