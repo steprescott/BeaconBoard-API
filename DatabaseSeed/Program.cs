@@ -26,7 +26,14 @@ namespace DatabaseSeed
             Console.WriteLine("Database seeding started\n");
 
             Console.WriteLine("--- Seeding students");
-            var student1 = CreateOrUpdateStudent("731a27a9-840b-49b6-bcfb-6303536c6b79", "steprescott", "password", "Ste", "Christopher", "Prescott", "ste@beaconboard.co.uk", "c0be1a6d-3d4f-4b23-b3ca-54162aeb2022");
+            var student1 = CreateOrUpdateStudent("2715f8a0-4d09-410e-bc02-37982d0e4632", "student1", "password", "Jonny", null, "Booker", "ste@beaconboard.co.uk", "4e279f6a-b28a-4815-8555-51c667952abe");
+            var student2 = CreateOrUpdateStudent("5ac1333c-9eeb-48dc-a6dd-a6ceaa1ad821", "student2", "password", "Tom", "Markus", "Windowson", "ste@beaconboard.co.uk", "752e098f-27b4-4d38-92d9-42afdc73f08f");
+            var student3 = CreateOrUpdateStudent("3cc3c708-2b37-44c7-8bc3-a29d79d97102", "student3", "password", "Joe", "Christopher Andrew", "Fletcher", "ste@beaconboard.co.uk", "c88432ec-0f70-450b-999b-cfd7a968c205");
+            var student4 = CreateOrUpdateStudent("731a27a9-840b-49b6-bcfb-6303536c6b79", "steprescott", "password", "Ste", "Christopher", "Prescott", "ste@beaconboard.co.uk", "c0be1a6d-3d4f-4b23-b3ca-54162aeb2022");
+            
+            Console.WriteLine("--- Seeding lecturer");
+            var lecturer1 = CreateOrUpdateLecturer("39c05e8f-2c65-44c9-bfb7-bb92f480dbdf", "lecturer1", "password", "Bob", null, "Smith", "bob@domain.com", "568472a2-8d0c-4c32-bb87-0ca8608de3a8");
+            var lecturer2 = CreateOrUpdateLecturer("1e80abc5-d3e7-40c1-be6e-e907d0943918", "lecturer2", "password", "Jane", null, "Doe", "jane@website.co.uk", "b96dab00-d711-4926-a87f-4a1a7ea7838a");
 
             Console.WriteLine("--- Seeding rooms");
             var room1 = CreateOrUpdateRoom("2eae5485-512d-43e3-9050-7c7b85445e81", "9101");
@@ -49,7 +56,7 @@ namespace DatabaseSeed
             var lesson1 = CreateOrUpdateLesson("75feec01-6cff-4f86-93fe-2d74f4e4995a", new List<Resource> { resource1, resource2 });
 
             Console.WriteLine("--- Seeding courses");
-            var course1 = CreateOrUpdateCourse("cd3b9e14-c648-4501-a0f6-6ff7d878cc04", "MComp Software Engineering", new List<Lesson> { lesson1 }, new List<Student> { student1 });
+            var course1 = CreateOrUpdateCourse("cd3b9e14-c648-4501-a0f6-6ff7d878cc04", "MComp Software Engineering", new List<Lesson> { lesson1 }, new List<Lecturer> { lecturer1, lecturer2 }, new List<Student> { student1, student2, student3, student4 });
 
             Console.WriteLine("--- Seeding sessions");
             var session1 = CreateOrUpdateSession("00fbf224-159b-4921-8d87-c2f3d3832afb", DateTime.Parse("25/01/2015 23:00"), DateTime.Parse("26/01/2015 01:00"), lesson1, room1);
@@ -67,6 +74,55 @@ namespace DatabaseSeed
             if (obj == null)
             {
                 obj = new Student
+                {
+                    UserID = Guid.Parse(id),
+                    Username = username,
+                    Password = BasicEncryptDecryptUtilities.Encrypt(password),
+                    FirstName = firstName,
+                    OtherNames = otherNames,
+                    LastName = lastName,
+                    EmailAddress = emailAddress,
+                    Token = Guid.Parse(token)
+                };
+
+                var result = businessLogic.Create(obj);
+
+                if (result == CRUDResult.Created)
+                {
+                    return obj;
+                }
+            }
+            else
+            {
+                obj.UserID = Guid.Parse(id);
+                obj.Username = username;
+                obj.Password = BasicEncryptDecryptUtilities.Encrypt(password);
+                obj.FirstName = firstName;
+                obj.OtherNames = otherNames;
+                obj.LastName = lastName;
+                obj.EmailAddress = emailAddress;
+                obj.Token = Guid.Parse(token);
+                var result = businessLogic.Update(obj);
+
+                if (result == CRUDResult.Updated)
+                {
+                    return obj;
+                }
+            }
+
+            Console.WriteLine("    Error occurred");
+            return null;
+        }
+
+        static Lecturer CreateOrUpdateLecturer(String id, String username, String password, String firstName, String otherNames, String lastName, String emailAddress, String token)
+        {
+            var businessLogic = BeaconBoardContainer.GetInstance<ILecturerBusinessLogic>();
+
+            var obj = businessLogic.GetByID(Guid.Parse(id));
+
+            if (obj == null)
+            {
+                obj = new Lecturer
                 {
                     UserID = Guid.Parse(id),
                     Username = username,
@@ -304,7 +360,7 @@ namespace DatabaseSeed
             return null;
         }
 
-        static Course CreateOrUpdateCourse(String id, String name, List<Lesson> lessons, List<Student> students)
+        static Course CreateOrUpdateCourse(String id, String name, List<Lesson> lessons, List<Lecturer> lecturers, List<Student> students)
         {
             var businessLogic = BeaconBoardContainer.GetInstance<ICourseBusinessLogic>();
             var obj = businessLogic.GetByID(Guid.Parse(id));
@@ -316,6 +372,7 @@ namespace DatabaseSeed
                     CourseID = Guid.Parse(id),
                     Name = name,
                     LessonIDs = lessons.Select(i => i.LessonID).ToList(),
+                    LecturerIDs = lecturers.Select(i => i.UserID).ToList(),
                     StudentIDs = students.Select(i => i.UserID).ToList()
                 };
 
@@ -331,6 +388,7 @@ namespace DatabaseSeed
                 obj.CourseID = Guid.Parse(id);
                 obj.Name = name;
                 obj.LessonIDs = lessons.Select(i => i.LessonID).ToList();
+                obj.LecturerIDs = lecturers.Select(i => i.UserID).ToList();
                 obj.StudentIDs = students.Select(i => i.UserID).ToList();
 
                 var result = businessLogic.Update(obj);
