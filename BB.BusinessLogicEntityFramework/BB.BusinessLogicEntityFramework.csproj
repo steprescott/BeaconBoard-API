@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6F1A1411-0BDF-47AE-AD50-7E307D9F148C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BB.BusinessLogicEntityFramework</RootNamespace>
+    <AssemblyName>BB.BusinessLogicEntityFramework</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.3.0\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.3.0\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Logic\BeaconBusinessLogic.cs" />
+    <Compile Include="Logic\ResourceBusinessLogic.cs" />
+    <Compile Include="Logic\ResourceTypeBusinessLogic.cs" />
+    <Compile Include="Logic\LessonBusinessLogic.cs" />
+    <Compile Include="Logic\CourseBusinessLogic.cs" />
+    <Compile Include="Logic\LecturerBusinessLogic.cs" />
+    <Compile Include="Logic\AttendanceBusinessLogic.cs" />
+    <Compile Include="Logic\RoleBusinessLogic.cs" />
+    <Compile Include="Logic\StudentBusinessLogic.cs" />
+    <Compile Include="Logic\TokenBusinessLogic.cs" />
+    <Compile Include="Logic\UserBusinessLogic.cs" />
+    <Compile Include="Logic\SessionBusinessLogic.cs" />
+    <Compile Include="Logic\RoomBusinessLogic.cs" />
+    <Compile Include="Utilities\AutoMapperUtilities.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BB.Domain\BB.Domain.csproj">
+      <Project>{b5f18ade-8779-44bd-9ccf-ed3872c5eb21}</Project>
+      <Name>BB.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BB.EncryptionUtilities\BB.EncryptionUtilities.csproj">
+      <Project>{cc1de2dc-282c-418b-9c38-d79f638d9959}</Project>
+      <Name>BB.EncryptionUtilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BB.Interfaces\BB.Interfaces.csproj">
+      <Project>{748eb161-0237-4669-ba07-69c59a90e03d}</Project>
+      <Name>BB.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BB.UnitOfWorkEntityFramework\BB.UnitOfWorkEntityFramework.csproj">
+      <Project>{44af2d14-7ffd-43a6-a9b6-84f0c2cfc135}</Project>
+      <Name>BB.UnitOfWorkEntityFramework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <Import Project="..\packages\AutoMapper.3.3.0\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.0\tools\AutoMapper.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

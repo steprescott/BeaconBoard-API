@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e71c3620e0af4101b1407fc31ea04ea8" Name="Diagram1" ZoomLevel="88" >
+        <EntityTypeShape EntityType="BeaconBoardDatabase.Beacon" Width="1.5" PointX="11.375" PointY="6.875" />
+        <EntityTypeShape EntityType="BeaconBoardDatabase.Room" Width="1.5" PointX="9.125" PointY="6.875" />
+        <EntityTypeShape EntityType="BeaconBoardDatabase.Course" Width="1.5" PointX="2.25" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeaconBoardDatabase.Lesson" Width="1.5" PointX="4.5" PointY="8.875" />
+        <EntityTypeShape EntityType="BeaconBoardDatabase.Session" Width="1.75" PointX="6.75" PointY="6.875" />
+        <EntityTypeShape EntityType="BeaconBoardDatabase.Resource" Width="1.5" PointX="6.75" PointY="9.875" />
+        <EntityTypeShape EntityType="BeaconBoardDatabase.ResourceType" Width="1.5" PointX="4.5" PointY="11" />
+        <EntityTypeShape EntityType="BeaconBoardDatabase.User" Width="1.5" PointX="2.25" PointY="3" />
+        <EntityTypeShape EntityType="BeaconBoardDatabase.Student" Width="1.5" PointX="1" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeaconBoardDatabase.Lecturer" Width="1.5" PointX="3.5" PointY="6.875" />
+        <AssociationConnector Association="BeaconBoardDatabase.RoomBeacon" />
+        <AssociationConnector Association="BeaconBoardDatabase.CourseLesson" />
+        <AssociationConnector Association="BeaconBoardDatabase.StudentCourse" />
+        <AssociationConnector Association="BeaconBoardDatabase.LecturerCourse" />
+        <AssociationConnector Association="BeaconBoardDatabase.LessonSession" />
+        <InheritanceConnector EntityType="BeaconBoardDatabase.Student" />
+        <InheritanceConnector EntityType="BeaconBoardDatabase.Lecturer" />
+        <AssociationConnector Association="BeaconBoardDatabase.SessionRoom" />
+        <AssociationConnector Association="BeaconBoardDatabase.LessonResource" />
+        <AssociationConnector Association="BeaconBoardDatabase.ResourceResourceType" />
+        <AssociationConnector Association="BeaconBoardDatabase.SessionLecturer" />
+        <EntityTypeShape EntityType="BeaconBoardDatabase.Role" Width="1.5" PointX="4.625" PointY="3.75" />
+        <AssociationConnector Association="BeaconBoardDatabase.UserRole" />
+        <EntityTypeShape EntityType="BeaconBoardDatabase.Attendance" Width="1.5" PointX="2.25" PointY="11.875" />
+        <AssociationConnector Association="BeaconBoardDatabase.AttendanceSession" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="BeaconBoardDatabase.StudentAttendance" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

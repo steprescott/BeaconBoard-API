@@ -1,0 +1,1164 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BB.WebApi</name>
+    </assembly>
+    <members>
+        <member name="M:BB.WebApi.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+            </summary>
+            <param name="description">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The ID as a string.</returns>
+        </member>
+        <member name="T:BB.WebApi.Areas.HelpPage.HelpPageConfig">
+            <summary>
+            Use this class to customize the Help Page.
+            For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> to supply the documentation
+            or you can provide the samples for the requests/responses.
+            </summary>
+        </member>
+        <member name="T:BB.WebApi.Areas.HelpPage.Controllers.HelpController">
+            <summary>
+            The controller that will handle requests for the help page.
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)">
+            <summary>
+            Sets the documentation provider for help page.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="documentationProvider">The documentation provider.</param>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleObjects(System.Web.Http.HttpConfiguration,System.Collections.Generic.IDictionary{System.Type,System.Object})">
+            <summary>
+            Sets the objects that will be used by the formatters to produce sample requests/responses.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleObjects">The sample objects.</param>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type and action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample request directly for the specified media type and action with parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type of the action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample response directly for the specified media type of the action with specific parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForMediaType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Sets the sample directly for all actions with the specified media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Sets the sample directly for all actions with the specified type and media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The parameter type or return type of an action.</param>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <returns>The help page sample generator.</returns>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration,BB.WebApi.Areas.HelpPage.HelpPageSampleGenerator)">
+            <summary>
+            Sets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleGenerator">The help page sample generator.</param>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.GetModelDescriptionGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the model description generator.
+            </summary>
+            <param name="config">The configuration.</param>
+            <returns>The <see cref="T:BB.WebApi.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator"/></returns>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageApiModel(System.Web.Http.HttpConfiguration,System.String)">
+            <summary>
+            Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="apiDescriptionId">The <see cref="T:System.Web.Http.Description.ApiDescription"/> ID.</param>
+            <returns>
+            An <see cref="T:BB.WebApi.Areas.HelpPage.Models.HelpPageApiModel"/>
+            </returns>
+        </member>
+        <member name="T:BB.WebApi.Areas.HelpPage.ModelDescriptions.ModelDescription">
+            <summary>
+            Describes a type model.
+            </summary>
+        </member>
+        <member name="T:BB.WebApi.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator">
+            <summary>
+            Generates model descriptions for given types.
+            </summary>
+        </member>
+        <member name="T:BB.WebApi.Areas.HelpPage.ModelDescriptions.ModelNameAttribute">
+            <summary>
+            Use this attribute to change the name of the <see cref="T:BB.WebApi.Areas.HelpPage.ModelDescriptions.ModelDescription"/> generated for a type.
+            </summary>
+        </member>
+        <member name="T:BB.WebApi.Areas.HelpPage.Models.HelpPageApiModel">
+            <summary>
+            The model that represents an API displayed on the help page.
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.Models.HelpPageApiModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BB.WebApi.Areas.HelpPage.Models.HelpPageApiModel"/> class.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription">
+            <summary>
+            Gets or sets the <see cref="P:BB.WebApi.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription"/> that describes the API.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Areas.HelpPage.Models.HelpPageApiModel.UriParameters">
+            <summary>
+            Gets or sets the <see cref="T:BB.WebApi.Areas.HelpPage.ModelDescriptions.ParameterDescription"/> collection that describes the URI parameters for the API.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Areas.HelpPage.Models.HelpPageApiModel.RequestDocumentation">
+            <summary>
+            Gets or sets the documentation for the request.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Areas.HelpPage.Models.HelpPageApiModel.RequestModelDescription">
+            <summary>
+            Gets or sets the <see cref="T:BB.WebApi.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the request body.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Areas.HelpPage.Models.HelpPageApiModel.RequestBodyParameters">
+            <summary>
+            Gets the request body parameter descriptions.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Areas.HelpPage.Models.HelpPageApiModel.ResourceDescription">
+            <summary>
+            Gets or sets the <see cref="T:BB.WebApi.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the resource.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Areas.HelpPage.Models.HelpPageApiModel.ResourceProperties">
+            <summary>
+            Gets the resource property descriptions.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Areas.HelpPage.Models.HelpPageApiModel.SampleRequests">
+            <summary>
+            Gets the sample requests associated with the API.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Areas.HelpPage.Models.HelpPageApiModel.SampleResponses">
+            <summary>
+            Gets the sample responses associated with the API.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Areas.HelpPage.Models.HelpPageApiModel.ErrorMessages">
+            <summary>
+            Gets the error messages associated with this model.
+            </summary>
+        </member>
+        <member name="T:BB.WebApi.Areas.HelpPage.HelpPageSampleGenerator">
+            <summary>
+            This class will generate the samples for the help page.
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageSampleGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BB.WebApi.Areas.HelpPage.HelpPageSampleGenerator"/> class.
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageSampleGenerator.GetSampleResponses(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageSampleGenerator.GetSample(System.Web.Http.Description.ApiDescription,BB.WebApi.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Gets the request or response body samples.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageSampleGenerator.GetActionSample(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Type,System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,BB.WebApi.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Search for samples that are provided directly through <see cref="P:BB.WebApi.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples"/>.
+            </summary>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="type">The CLR type.</param>
+            <param name="formatter">The formatter.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The sample that matches the parameters.</returns>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageSampleGenerator.GetSampleObject(System.Type)">
+            <summary>
+            Gets the sample object that will be serialized by the formatters. 
+            First, it will look at the <see cref="P:BB.WebApi.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects"/>. If no sample object is found, it will try to create
+            one using <see cref="M:BB.WebApi.Areas.HelpPage.HelpPageSampleGenerator.DefaultSampleObjectFactory(BB.WebApi.Areas.HelpPage.HelpPageSampleGenerator,System.Type)"/> (which wraps an <see cref="T:BB.WebApi.Areas.HelpPage.ObjectGenerator"/>) and other
+            factories in <see cref="P:BB.WebApi.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The sample object.</returns>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageSampleGenerator.ResolveHttpRequestMessageType(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Resolves the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The type.</returns>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageSampleGenerator.ResolveType(System.Web.Http.Description.ApiDescription,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},BB.WebApi.Areas.HelpPage.SampleDirection,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter}@)">
+            <summary>
+            Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> is used.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param>
+            <param name="formatters">The formatters.</param>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageSampleGenerator.WriteSampleObjectUsingFormatter(System.Net.Http.Formatting.MediaTypeFormatter,System.Object,System.Type,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Writes the sample object using formatter.
+            </summary>
+            <param name="formatter">The formatter.</param>
+            <param name="value">The value.</param>
+            <param name="type">The type.</param>
+            <param name="mediaType">Type of the media.</param>
+            <returns></returns>
+        </member>
+        <member name="P:BB.WebApi.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+            <summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+            <summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+            <summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories">
+            <summary>
+            Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
+            stopping when the factory successfully returns a non-<see langref="null"/> object.
+            </summary>
+            <remarks>
+            Collection includes just <see cref="M:BB.WebApi.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"/> initially. Use
+            <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
+            <code>SampleObjectFactories.Add(func)</code> to provide a fallback.</remarks>
+        </member>
+        <member name="T:BB.WebApi.Areas.HelpPage.HelpPageSampleKey">
+            <summary>
+            This is used to identify the place where the sample should be applied.
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Creates a new <see cref="T:BB.WebApi.Areas.HelpPage.HelpPageSampleKey"/> based on media type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Creates a new <see cref="T:BB.WebApi.Areas.HelpPage.HelpPageSampleKey"/> based on media type and CLR type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The CLR type.</param>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageSampleKey.#ctor(BB.WebApi.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:BB.WebApi.Areas.HelpPage.HelpPageSampleKey"/> based on <see cref="P:BB.WebApi.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="sampleDirection">The <see cref="P:BB.WebApi.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,BB.WebApi.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:BB.WebApi.Areas.HelpPage.HelpPageSampleKey"/> based on media type, <see cref="P:BB.WebApi.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The <see cref="P:BB.WebApi.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="P:BB.WebApi.Areas.HelpPage.HelpPageSampleKey.ControllerName">
+            <summary>
+            Gets the name of the controller.
+            </summary>
+            <value>
+            The name of the controller.
+            </value>
+        </member>
+        <member name="P:BB.WebApi.Areas.HelpPage.HelpPageSampleKey.ActionName">
+            <summary>
+            Gets the name of the action.
+            </summary>
+            <value>
+            The name of the action.
+            </value>
+        </member>
+        <member name="P:BB.WebApi.Areas.HelpPage.HelpPageSampleKey.MediaType">
+            <summary>
+            Gets the media type.
+            </summary>
+            <value>
+            The media type.
+            </value>
+        </member>
+        <member name="P:BB.WebApi.Areas.HelpPage.HelpPageSampleKey.ParameterNames">
+            <summary>
+            Gets the parameter names.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Areas.HelpPage.HelpPageSampleKey.SampleDirection">
+            <summary>
+            Gets the <see cref="P:BB.WebApi.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.
+            </summary>
+        </member>
+        <member name="T:BB.WebApi.Areas.HelpPage.ImageSample">
+            <summary>
+            This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.ImageSample.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BB.WebApi.Areas.HelpPage.ImageSample"/> class.
+            </summary>
+            <param name="src">The URL of an image.</param>
+        </member>
+        <member name="T:BB.WebApi.Areas.HelpPage.InvalidSample">
+            <summary>
+            This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:BB.WebApi.Areas.HelpPage.ObjectGenerator">
+            <summary>
+            This class will create an object of a given type and populate it with sample data.
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)">
+            <summary>
+            Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
+            Simple types: <see cref="T:System.Int32"/>, <see cref="T:System.String"/>, <see cref="T:System.Enum"/>, <see cref="T:System.DateTime"/>, <see cref="T:System.Uri"/>, etc.
+            Complex types: POCO types.
+            Nullables: <see cref="T:System.Nullable`1"/>.
+            Arrays: arrays of simple types or complex types.
+            Key value pairs: <see cref="T:System.Collections.Generic.KeyValuePair`2"/>
+            Tuples: <see cref="T:System.Tuple`1"/>, <see cref="T:System.Tuple`2"/>, etc
+            Dictionaries: <see cref="T:System.Collections.Generic.IDictionary`2"/> or anything deriving from <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            Collections: <see cref="T:System.Collections.Generic.IList`1"/>, <see cref="T:System.Collections.Generic.IEnumerable`1"/>, <see cref="T:System.Collections.Generic.ICollection`1"/>, <see cref="T:System.Collections.IList"/>, <see cref="T:System.Collections.IEnumerable"/>, <see cref="T:System.Collections.ICollection"/> or anything deriving from <see cref="T:System.Collections.Generic.ICollection`1"/> or <see cref="T:System.Collections.IList"/>.
+            Queryables: <see cref="T:System.Linq.IQueryable"/>, <see cref="T:System.Linq.IQueryable`1"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>An object of the given type.</returns>
+        </member>
+        <member name="T:BB.WebApi.Areas.HelpPage.SampleDirection">
+            <summary>
+            Indicates whether the sample is used for request or response
+            </summary>
+        </member>
+        <member name="T:BB.WebApi.Areas.HelpPage.TextSample">
+            <summary>
+            This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:BB.WebApi.Areas.HelpPage.XmlDocumentationProvider">
+            <summary>
+            A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Areas.HelpPage.XmlDocumentationProvider.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BB.WebApi.Areas.HelpPage.XmlDocumentationProvider"/> class.
+            </summary>
+            <param name="documentPath">The physical path to XML document.</param>
+        </member>
+        <member name="T:BB.WebApi.Controllers.ResourcesController">
+            <summary>
+            Any requests made to the API for Resource entities will be handled by the ResourcesController
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Controllers.ResourcesController.Post(BB.Domain.Resource)">
+            <summary>
+            Creates a new Resource with the given details.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="Resource">The details of the new Resource.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.ResourcesController.Put(BB.Domain.Resource)">
+            <summary>
+            Updates the Resource with the given details.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="Resource">These are the details that the Resource should be update with.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.ResourcesController.Get">
+            <summary>
+            Gets all Resources that are in the system.
+            </summary>
+            <returns>An array of Resource DTOs that holds the details for the Resources.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.ResourcesController.Get(System.Guid)">
+            <summary>
+            Gets the Resource with the given ID.
+            </summary>
+            <param name="id">The ID of the Resource that the request is asking for.</param>
+            <returns>Resource DTO that holds the details for the Resource.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.ResourcesController.Delete(System.Guid)">
+            <summary>
+            Deletes the Resource from the database with the given ID.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="id">The ID of the Resource to delete.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="T:BB.WebApi.Controllers.ResourceTypeTypesController">
+            <summary>
+            Any requests made to the API for ResourceType entities will be handled by the ResourceTypesController
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Controllers.ResourceTypeTypesController.Post(BB.Domain.ResourceType)">
+            <summary>
+            Creates a new Resource Type with the given details.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="ResourceType">The details of the new Resource Type.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.ResourceTypeTypesController.Put(BB.Domain.ResourceType)">
+            <summary>
+            Updates the Resource Type with the given details.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="ResourceType">These are the details that the Resource Type should be update with.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.ResourceTypeTypesController.Get">
+            <summary>
+            Gets all Resource Types that are in the system.
+            </summary>
+            <returns>An array of Resource Type DTOs that holds the details for the Resource Types.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.ResourceTypeTypesController.Get(System.Guid)">
+            <summary>
+            Gets the ResourceType with the given ID.
+            </summary>
+            <param name="id">The ID of the Resource Type that the request is asking for.</param>
+            <returns>Resource Type DTO that holds the details for the Resource Type.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.ResourceTypeTypesController.Delete(System.Guid)">
+            <summary>
+            Deletes the Resource Type from the database with the given ID.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="id">The ID of the Resource Type to delete.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="T:BB.WebApi.Controllers.LessonsController">
+            <summary>
+            Any requests made to the API for Lesson entities will be handled by the lessonsController
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Controllers.LessonsController.Post(BB.Domain.Lesson)">
+            <summary>
+            Creates a new Lesson with the given details.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="Lesson">The details of the new Lesson.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.LessonsController.Put(BB.Domain.Lesson)">
+            <summary>
+            Updates the Lesson with the given details.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="Lesson">These are the details that the Lesson should be update with.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.LessonsController.Get">
+            <summary>
+            Gets all Lessons that are in the system.
+            </summary>
+            <returns>An array of Lesson DTOs that holds the details for the Lessons.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.LessonsController.Get(System.Guid)">
+            <summary>
+            Gets the Lesson with the given ID.
+            </summary>
+            <param name="id">The ID of the Lesson that the request is asking for.</param>
+            <returns>Lesson DTO that holds the details for the Lesson.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.LessonsController.Delete(System.Guid)">
+            <summary>
+            Deletes the Lesson from the database with the given ID.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="id">The ID of the Lesson to delete.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="T:BB.WebApi.Controllers.CoursesController">
+            <summary>
+            Any requests made to the API for Course entities will be handled by the CoursesController
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Controllers.CoursesController.Post(BB.Domain.Course)">
+            <summary>
+            Creates a new Course with the given details.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="Course">The details of the new Course.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.CoursesController.Put(BB.Domain.Course)">
+            <summary>
+            Updates the Course with the given details.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="Course">These are the details that the Course should be update with.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.CoursesController.Get">
+            <summary>
+            Gets all Courses that are in the system.
+            </summary>
+            <returns>An array of Course DTOs that holds the details for the Courses.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.CoursesController.Get(System.Guid)">
+            <summary>
+            Gets the Course with the given ID.
+            </summary>
+            <param name="id">The ID of the Course that the request is asking for.</param>
+            <returns>Course DTO that holds the details for the Course.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.CoursesController.Delete(System.Guid)">
+            <summary>
+            Deletes the Course from the database with the given ID.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="id">The ID of the Course to delete.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="T:BB.WebApi.Controllers.LecturersController">
+            <summary>
+            Any requests made to the API for Lecturer entities will be handled by the LecturersController
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Controllers.LecturersController.Post(BB.Domain.Lecturer)">
+            <summary>
+            Creates a new Lecturer with the given details.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="Lecturer">The details of the new Lecturer.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.LecturersController.Put(BB.Domain.Lecturer)">
+            <summary>
+            Updates the Lecturer with the given details.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="Lecturer">These are the details that the Lecturer should be update with.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.LecturersController.Get">
+            <summary>
+            Gets all Lecturers that are in the system.
+            </summary>
+            <returns>An array of Lecturer DTOs that holds the details for the Lecturers.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.LecturersController.Get(System.Guid)">
+            <summary>
+            Gets the Lecturer with the given ID.
+            </summary>
+            <param name="id">The ID of the Lecturer that the request is asking for.</param>
+            <returns>Lecturer DTO that holds the details for the Lecturer.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.LecturersController.Delete(System.Guid)">
+            <summary>
+            Deletes the Lecturer from the database with the given ID.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="id">The ID of the Lecturer to delete.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="T:BB.WebApi.Controllers.AttendancesController">
+            <summary>
+            Any requests made to the API for Attendance entities will be handled by the AttendancesController
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Controllers.AttendancesController.Post(BB.Domain.Attendance)">
+            <summary>
+            Creates a new Attendance with the given details.
+            </summary>
+            <param name="attendance">The details of the new Attendance.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.AttendancesController.Get">
+            <summary>
+            Gets all Attendances that are in the system.
+            </summary>
+            <returns>An array of Attendance DTOs that holds the details for the Attendances.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.AttendancesController.Get(System.Guid)">
+            <summary>
+            Gets the Attendance with the given ID.
+            </summary>
+            <param name="id">The ID of the Attendance that the request is asking for.</param>
+            <returns>Attendance DTO that holds the details for the Attendance.</returns>
+        </member>
+        <member name="T:BB.WebApi.Controllers.RolesController">
+            <summary>
+            Any requests made to the API for Role entities will be handled by the RolesController
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Controllers.RolesController.Post(BB.Domain.Role)">
+            <summary>
+            Creates a new Role with the given details.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="Role">The details of the new Role.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.RolesController.Put(BB.Domain.Role)">
+            <summary>
+            Updates the Role with the given details.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="Role">These are the details that the Role should be update with.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.RolesController.Get">
+            <summary>
+            Gets all Roles that are in the system.
+            </summary>
+            <returns>An array of Role DTOs that holds the details for the Roles.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.RolesController.Get(System.Guid)">
+            <summary>
+            Gets the Role with the given ID.
+            </summary>
+            <param name="id">The ID of the Role that the request is asking for.</param>
+            <returns>Role DTO that holds the details for the Role.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.RolesController.Delete(System.Guid)">
+            <summary>
+            Deletes the Role from the database with the given ID.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="id">The ID of the Role to delete.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="T:BB.WebApi.Controllers.UsersController">
+            <summary>
+            Any requests made to the API for User entities will be handled by the UsersController
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Controllers.UsersController.Get">
+            <summary>
+            Gets all Users that are in the system.
+            </summary>
+            <returns>An array of User DTOs that holds the details for the Users.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.UsersController.GetLecturers">
+            <summary>
+            Gets all Lecturers that are in the system.
+            </summary>
+            <returns>An array of Lecturers DTOs that holds the details for the Lecturers.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.UsersController.GetStudents">
+            <summary>
+            Gets all Students that are in the system.
+            </summary>
+            <returns>An array of Student DTOs that holds the details for the Student.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.UsersController.Get(System.Guid)">
+            <summary>
+            Gets the User with the given ID.
+            </summary>
+            <param name="id">The ID of the User that the request is asking for.</param>
+            <returns>User DTO that holds the details for the User.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.UsersController.GetLecturer(System.Guid)">
+            <summary>
+            Gets the Lecturer with the given ID.
+            </summary>
+            <param name="id">The ID of the Lecturer that the request is asking for.</param>
+            <returns>Lecturer DTO that holds the details for the Lecturer.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.UsersController.GetStudent(System.Guid)">
+            <summary>
+            Gets the Student with the given ID.
+            </summary>
+            <param name="id">The ID of the Student that the request is asking for.</param>
+            <returns>Student DTO that holds the details for the Student.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.UsersController.Delete(System.Guid)">
+            <summary>
+            Deletes the User from the database with the given ID.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="id">The ID of the User to delete.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="T:BB.WebApi.Controllers.StudentsController">
+            <summary>
+            Any requests made to the API for Student entities will be handled by the StudentsController
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Controllers.StudentsController.Post(BB.Domain.Student)">
+            <summary>
+            Creates a new Student with the given details.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="Student">The details of the new Student.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.StudentsController.Put(BB.Domain.Student)">
+            <summary>
+            Updates the Student with the given details.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="Student">These are the details that the Student should be update with.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.StudentsController.Get">
+            <summary>
+            Gets all Students that are in the system.
+            </summary>
+            <returns>An array of Student DTOs that holds the details for the Students.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.StudentsController.Get(System.Guid)">
+            <summary>
+            Gets the Student with the given ID.
+            </summary>
+            <param name="id">The ID of the Student that the request is asking for.</param>
+            <returns>Student DTO that holds the details for the Student.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.StudentsController.Delete(System.Guid)">
+            <summary>
+            Deletes the Student from the database with the given ID.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="id">The ID of the Student to delete.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="T:BB.WebApi.Controllers.TokensController">
+            <summary>
+            Following BasicAuth tokens are used to validate request access level. This controller deals with the generation of User Tokens.
+            This is the only controller that can be access without the requirement of a User Token.
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Controllers.TokensController.Post(BB.WebApi.Models.TokenRequestModel)">
+            <summary>
+            Authenticates if a username and password has access to the system.
+            </summary>
+            <param name="model">The token model that holds the Username and Password of the User to be authenticated.</param>
+            <returns>HttpResponseMessage with the UserToken if authenticated.</returns>
+        </member>
+        <member name="T:BB.WebApi.Controllers.SessionsController">
+            <summary>
+            Any requests made to the API for Session entities will be handled by the SessionsController
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Controllers.SessionsController.Post(BB.Domain.Session)">
+            <summary>
+            Creates a new Session with the given details.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="Session">The details of the new Session.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.SessionsController.Put(BB.Domain.Session)">
+            <summary>
+            Updates the Session with the given details.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="Session">These are the details that the Session should be update with.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.SessionsController.Get">
+            <summary>
+            Gets all Sessions that are in the system.
+            </summary>
+            <returns>An array of Session DTOs that holds the details for the Sessions.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.SessionsController.GetUpcomingSessions">
+            <summary>
+            Gets all the sessions that are upcoming.
+            That is Sessions that are to be ran.
+            </summary>
+            <returns>An array of Session DTOs that holds the details for the Sessions that are upcoming.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.SessionsController.GetUpcomingSessions(System.Guid)">
+            <summary>
+            Gets all the sessions that are upcoming for the given Course ID.
+            </summary>
+            <param name="courseID">The Course ID that should be used to filter the upcoming Sessions.</param>
+            <returns>An array of Session DTOs that holds the details for the Sessions that are upcoming for the given Course ID.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.SessionsController.Get(System.Guid)">
+            <summary>
+            Gets the Session with the given ID.
+            </summary>
+            <param name="id">The ID of the Session that the request is asking for.</param>
+            <returns>Session DTO that holds the details for the Session.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.SessionsController.GetCurrentSessionByRoomID(System.Guid)">
+            <summary>
+            Gets the current Session that is ongoing, if there is one, for the room with the given ID.
+            </summary>
+            <param name="id">The room ID that is to be checked for a ongoing session.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.SessionsController.Delete(System.Guid)">
+            <summary>
+            Deletes the Session from the database with the given ID.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="id">The ID of the Session to delete.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="T:BB.WebApi.Controllers.RoomsController">
+            <summary>
+            Any requests made to the API for Room entities will be handled by the RoomsController
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Controllers.RoomsController.Post(BB.Domain.Room)">
+            <summary>
+            Creates a new Room with the given details.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="Room">The details of the new Room.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.RoomsController.Put(BB.Domain.Room)">
+            <summary>
+            Updates the Room with the given details.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="Room">These are the details that the Room should be update with.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.RoomsController.Get">
+            <summary>
+            Gets all Rooms that are in the system.
+            </summary>
+            <returns>An array of Room DTOs that holds the details for the Rooms.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.RoomsController.Get(System.Guid)">
+            <summary>
+            Gets the Room with the given ID.
+            </summary>
+            <param name="id">The ID of the Room that the request is asking for.</param>
+            <returns>Room DTO that holds the details for the Room.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.RoomsController.Delete(System.Guid)">
+            <summary>
+            Deletes the Room from the database with the given ID.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="id">The ID of the Room to delete.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="T:BB.WebApi.Controllers.BeaconsController">
+            <summary>
+            Any requests made to the API for Beacon entities will be handled by the BeaconsController
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Controllers.BeaconsController.Post(BB.Domain.Beacon)">
+            <summary>
+            Creates a new Beacon with the given details.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="beacon">The details of the new beacon.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.BeaconsController.Put(BB.Domain.Beacon)">
+            <summary>
+            Updates the Beacon with the given details.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="beacon">These are the details that the Beacon should be update with.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.BeaconsController.Get">
+            <summary>
+            Gets all Beacons that are in the system.
+            </summary>
+            <returns>An array of Beacon DTOs that holds the details for the Beacons.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.BeaconsController.Get(System.Guid)">
+            <summary>
+            Gets the Beacon with the given ID.
+            </summary>
+            <param name="id">The ID of the Beacon that the request is asking for.</param>
+            <returns>Beacon DTO that holds the details for the Beacon.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.BeaconsController.Delete(System.Guid)">
+            <summary>
+            Deletes the beacon from the database with the given ID.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="id">The ID of the beacon to delete.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="T:BB.WebApi.Handlers.ValidationActionFilter">
+            <summary>
+            Filter which will check all required properties are adhered to
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Handlers.ValidationActionFilter.OnActionExecuting(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            On action executing, check the model being sent up to ensure all required fields
+            are populated
+            </summary>
+            <param name="actionContext">The action which gives access to the model state and response objects</param>
+        </member>
+        <member name="T:BB.WebApi.Models.LecturerDTOModel">
+            <summary>
+            DTO to allow the Entity to be passed over the API.
+            Subclass of the User entity, this Entity allows a Lecturer to see what Courses they are enrolled in and therefore what Sessions they can attend.
+            </summary>
+        </member>
+        <member name="T:BB.WebApi.Models.UserDTOModel">
+            <summary>
+            To avoid the password being set over the API a new User DTO is needed without the Password or token property.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Models.UserDTOModel.UserID">
+            <summary>
+            Primary key that is unique for the object.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Models.UserDTOModel.Username">
+            <summary>
+            The username of the user.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Models.UserDTOModel.FirstName">
+            <summary>
+            The first name of the user.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Models.UserDTOModel.OtherNames">
+            <summary>
+            Any other names of the user.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Models.UserDTOModel.LastName">
+            <summary>
+            The last name of the user.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Models.UserDTOModel.EmailAddress">
+            <summary>
+            The email address of the user.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Models.UserDTOModel.RoleID">
+            <summary>
+            A user has a Role. This allows access level of the API.
+            This is so Students won't be able to create a new Course only view it.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Models.LecturerDTOModel.CourseIDs">
+            <summary>
+            An array of Course IDs that the lecture teaches.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Models.LecturerDTOModel.SessionIDs">
+            <summary>
+            An array of Sessions IDs that the lecture is teaching / involved in.
+            </summary>
+        </member>
+        <member name="T:BB.WebApi.Models.StudentDTOModel">
+            <summary>
+            DTO to allow the Entity to be passed over the API.
+            Subclass of the User entity, this Entity allows a Student to see what Courses they are enrolled in and therefore what Sessions they can attend.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Models.StudentDTOModel.CourseIDs">
+            <summary>
+            An array of Course IDs that the student is enrolled in.
+            </summary>
+        </member>
+        <member name="T:BB.WebApi.Models.TokenResponseModel">
+            <summary>
+            This wraps the response of the authentication request to hold a User Token.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Models.TokenResponseModel.UserToken">
+            <summary>
+            If successful the users User Token will be populated.
+            </summary>
+        </member>
+        <member name="T:BB.WebApi.Models.TokenRequestModel">
+            <summary>
+            In order to send the authenticate request via HTTP POST this model is used to encapsulate the two Strings in one object.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Models.TokenRequestModel.Username">
+            <summary>
+            The username of the account to be authenticated
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Models.TokenRequestModel.Password">
+            <summary>
+            The password of the account to be authenticated
+            </summary>
+        </member>
+        <member name="T:BB.WebApi.Utilities.HeaderValueHandler">
+            <summary>
+            This controller is to validate all requests made to the API are valid.
+            A valid request is one that has came from an approved App (API Key) and from a valid user (UserToken).
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Utilities.HeaderValueHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <summary>
+            Overridden function to allow validation of header fields.
+            </summary>
+            <param name="request">The HTTP request made.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The Task.</returns>
+        </member>
+        <member name="M:BB.WebApi.Utilities.HeaderValueHandler.RequestHasValidApiKey(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Determines if a request contains a valid API Key.
+            </summary>
+            <param name="request">The HTTP request made.</param>
+            <returns>RequestValidation with a success Boolean and a HttpResponseErrorMessage for the correct response.</returns>
+        </member>
+        <member name="M:BB.WebApi.Utilities.HeaderValueHandler.ValidateUserRequest(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Determines if a request contains a valid User Token.
+            </summary>
+            <param name="request">The HTTP request made.</param>
+            <returns>RequestValidation with a success Boolean and a HttpResponseErrorMessage for the correct response.</returns>
+        </member>
+        <member name="P:BB.WebApi.Utilities.HeaderValueHandler.ApiKeyHeader">
+            <summary>
+            Gets the key for the PublicAPIKey from the App.Config.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Utilities.HeaderValueHandler.PublicApiKey">
+            <summary>
+            Gets the value for the PublicAPIKey from the App.Config.
+            </summary>
+        </member>
+        <member name="P:BB.WebApi.Utilities.HeaderValueHandler.UserTokenHeader">
+            <summary>
+            Gets the key for the UserTokenHeader from the App.Config.
+            </summary>
+        </member>
+    </members>
+</doc>
