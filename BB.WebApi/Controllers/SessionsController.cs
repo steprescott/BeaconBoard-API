@@ -150,6 +150,11 @@ namespace BB.WebApi.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, obj);
         }
 
+        /// <summary>
+        /// Gets the current Session that is ongoing, if there is one, for the room with the given ID.
+        /// </summary>
+        /// <param name="id">The room ID that is to be checked for a ongoing session.</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("sessions/GetCurrentSessionByRoomID")]
         [ResponseType(typeof(Session))]

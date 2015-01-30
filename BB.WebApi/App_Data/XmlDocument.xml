@@ -913,6 +913,13 @@
             <param name="id">The ID of the Session that the request is asking for.</param>
             <returns>Session DTO that holds the details for the Session.</returns>
         </member>
+        <member name="M:BB.WebApi.Controllers.SessionsController.GetCurrentSessionByRoomID(System.Guid)">
+            <summary>
+            Gets the current Session that is ongoing, if there is one, for the room with the given ID.
+            </summary>
+            <param name="id">The room ID that is to be checked for a ongoing session.</param>
+            <returns></returns>
+        </member>
         <member name="M:BB.WebApi.Controllers.SessionsController.Delete(System.Guid)">
             <summary>
             Deletes the Session from the database with the given ID.
