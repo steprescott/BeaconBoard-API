@@ -30,21 +30,29 @@ namespace BB.WebApi.Controllers
         {
             if (model != null)
             {
-                //Authenticate the user
-                var token = BeaconBoardService.TokenBusinessLogic.authenticateUsernameAndPassword(model.Username, model.Password);
-
-                //If there is no user with the given details
-                if (token == null)
+                if(model.Username != null && model.Password != null)
                 {
-                    //Return HttpResponseMessage with NotFound status code
-                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Incorrect username or password.");
-                }
+                    //Authenticate the user
+                    var token = BeaconBoardService.TokenBusinessLogic.authenticateUsernameAndPassword(model.Username, model.Password);
 
-                //Otherwise return with a status of OK with the User Token
-                return Request.CreateResponse(HttpStatusCode.OK, new TokenResponseModel { UserToken = token });
+                    //If there is no user with the given details
+                    if (token == null)
+                    {
+                        //Return HttpResponseMessage with NotFound status code
+                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Incorrect username or password.");
+                    }
+
+                    //Otherwise return with a status of OK with the User Token
+                    return Request.CreateResponse(HttpStatusCode.OK, new TokenResponseModel { UserToken = token });
+                }
+                else
+                {
+                    //Return HttpResponseMessage with BadRequest status code
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Missing credentials.");
+                }
             }
 
-            //Return HttpResponseMessage with NotFound status code
+            //Return HttpResponseMessage with BadRequest status code
             return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "No credentials sent.");
         }
     }
