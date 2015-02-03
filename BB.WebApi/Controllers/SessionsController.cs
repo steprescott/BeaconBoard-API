@@ -165,7 +165,7 @@ namespace BB.WebApi.Controllers
 
             //Return the object with a status of OK
             //If there is no current Session for the Room then it will return an empty array
-            return Request.CreateResponse(HttpStatusCode.OK, obj != null ? obj : new List());
+            return Request.CreateResponse(HttpStatusCode.OK, obj != null ? obj : new {};
         }
 
         /// <summary>
