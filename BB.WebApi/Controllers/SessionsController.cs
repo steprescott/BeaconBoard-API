@@ -163,9 +163,9 @@ namespace BB.WebApi.Controllers
             //Get back the current Session that is happening in the Room with the given ID
             var obj = BeaconBoardService.SessionBusinessLogic.GetCurrentSessionForRoomWithID(id);
 
-            //Return the object with a status of OK.
-            //If there is no current Session for the Room then it will return null
-            return Request.CreateResponse(HttpStatusCode.OK, obj);
+            //Return the object with a status of OK
+            //If there is no current Session for the Room then it will return an empty array
+            return Request.CreateResponse(HttpStatusCode.OK, obj != null ? obj : new List());
         }
 
         /// <summary>
