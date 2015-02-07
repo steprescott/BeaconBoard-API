@@ -523,12 +523,12 @@
             <param name="id">The ID of the Resource to delete.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         </member>
-        <member name="T:BB.WebApi.Controllers.ResourceTypeTypesController">
+        <member name="T:BB.WebApi.Controllers.ResourceTypesController">
             <summary>
             Any requests made to the API for ResourceType entities will be handled by the ResourceTypesController
             </summary>
         </member>
-        <member name="M:BB.WebApi.Controllers.ResourceTypeTypesController.Post(BB.Domain.ResourceType)">
+        <member name="M:BB.WebApi.Controllers.ResourceTypesController.Post(BB.Domain.ResourceType)">
             <summary>
             Creates a new Resource Type with the given details.
             Only Lecturers can call this action.
@@ -536,7 +536,7 @@
             <param name="ResourceType">The details of the new Resource Type.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         </member>
-        <member name="M:BB.WebApi.Controllers.ResourceTypeTypesController.Put(BB.Domain.ResourceType)">
+        <member name="M:BB.WebApi.Controllers.ResourceTypesController.Put(BB.Domain.ResourceType)">
             <summary>
             Updates the Resource Type with the given details.
             Only Lecturers can call this action.
@@ -544,20 +544,20 @@
             <param name="ResourceType">These are the details that the Resource Type should be update with.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         </member>
-        <member name="M:BB.WebApi.Controllers.ResourceTypeTypesController.Get">
+        <member name="M:BB.WebApi.Controllers.ResourceTypesController.Get">
             <summary>
             Gets all Resource Types that are in the system.
             </summary>
             <returns>An array of Resource Type DTOs that holds the details for the Resource Types.</returns>
         </member>
-        <member name="M:BB.WebApi.Controllers.ResourceTypeTypesController.Get(System.Guid)">
+        <member name="M:BB.WebApi.Controllers.ResourceTypesController.Get(System.Guid)">
             <summary>
             Gets the ResourceType with the given ID.
             </summary>
             <param name="id">The ID of the Resource Type that the request is asking for.</param>
             <returns>Resource Type DTO that holds the details for the Resource Type.</returns>
         </member>
-        <member name="M:BB.WebApi.Controllers.ResourceTypeTypesController.Delete(System.Guid)">
+        <member name="M:BB.WebApi.Controllers.ResourceTypesController.Delete(System.Guid)">
             <summary>
             Deletes the Resource Type from the database with the given ID.
             Only Lecturers can call this action.

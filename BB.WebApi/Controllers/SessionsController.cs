@@ -75,6 +75,7 @@ namespace BB.WebApi.Controllers
         /// </summary>
         /// <returns>An array of Session DTOs that holds the details for the Sessions.</returns>
         [HttpGet]
+        [Route("sessions")]
         [ResponseType(typeof(List<Session>))]
         public HttpResponseMessage Get()
         {
@@ -133,6 +134,7 @@ namespace BB.WebApi.Controllers
         /// <param name="id">The ID of the Session that the request is asking for.</param>
         /// <returns>Session DTO that holds the details for the Session.</returns>
         [HttpGet]
+        [Route("sessions/{id}")]
         [ResponseType(typeof(Session))]
         public HttpResponseMessage Get(Guid id)
         {
@@ -165,7 +167,7 @@ namespace BB.WebApi.Controllers
 
             //Return the object with a status of OK
             //If there is no current Session for the Room then it will return an empty array
-            return Request.CreateResponse(HttpStatusCode.OK, obj != null ? obj : new {};
+            return Request.CreateResponse(HttpStatusCode.OK, obj);
         }
 
         /// <summary>
