@@ -31,13 +31,13 @@ namespace DatabaseSeed
 
             Console.WriteLine("--- Seeding students");
             var student1 = CreateOrUpdateStudent("2715f8a0-4d09-410e-bc02-37982d0e4632", "student1", "password", "Jonny", null, "Booker", "ste@beaconboard.co.uk", "4e279f6a-b28a-4815-8555-51c667952abe", studentRole);
-            var student2 = CreateOrUpdateStudent("5ac1333c-9eeb-48dc-a6dd-a6ceaa1ad821", "student2", "password", "Tom", "Markus", "Windowson", "ste@beaconboard.co.uk", "752e098f-27b4-4d38-92d9-42afdc73f08f", studentRole);
-            var student3 = CreateOrUpdateStudent("3cc3c708-2b37-44c7-8bc3-a29d79d97102", "student3", "password", "Joe", "Christopher Andrew", "Fletcher", "ste@beaconboard.co.uk", "c88432ec-0f70-450b-999b-cfd7a968c205", studentRole);
-            var student4 = CreateOrUpdateStudent("731a27a9-840b-49b6-bcfb-6303536c6b79", "steprescott", "password", "Ste", "Christopher", "Prescott", "ste@beaconboard.co.uk", "c0be1a6d-3d4f-4b23-b3ca-54162aeb2022", studentRole);
+            var student2 = CreateOrUpdateStudent("5ac1333c-9eeb-48dc-a6dd-a6ceaa1ad821", "student2", "password", "Tom", "Markus", "Windowson", "tom@email.com", "752e098f-27b4-4d38-92d9-42afdc73f08f", studentRole);
+            var student3 = CreateOrUpdateStudent("3cc3c708-2b37-44c7-8bc3-a29d79d97102", "student3", "password", "Joe", "Christopher Andrew", "Fletcher", "joe@email.com", "c88432ec-0f70-450b-999b-cfd7a968c205", studentRole);
+            var student4 = CreateOrUpdateStudent("731a27a9-840b-49b6-bcfb-6303536c6b79", "steprescott", "password", "Ste", "Christopher", "Prescott", "jonny@email.com", "c0be1a6d-3d4f-4b23-b3ca-54162aeb2022", studentRole);
             
             Console.WriteLine("--- Seeding lecturer");
-            var lecturer1 = CreateOrUpdateLecturer("39c05e8f-2c65-44c9-bfb7-bb92f480dbdf", "lecturer1", "password", "Bob", null, "Smith", "bob@domain.com", "568472a2-8d0c-4c32-bb87-0ca8608de3a8", lectureRole);
-            var lecturer2 = CreateOrUpdateLecturer("1e80abc5-d3e7-40c1-be6e-e907d0943918", "lecturer2", "password", "Jane", null, "Doe", "jane@website.co.uk", "b96dab00-d711-4926-a87f-4a1a7ea7838a", lectureRole);
+            var lecturer1 = CreateOrUpdateLecturer("39c05e8f-2c65-44c9-bfb7-bb92f480dbdf", "lecturer1", "password", "Bob", null, "Smith", "bob@email.com", "568472a2-8d0c-4c32-bb87-0ca8608de3a8", lectureRole);
+            var lecturer2 = CreateOrUpdateLecturer("1e80abc5-d3e7-40c1-be6e-e907d0943918", "lecturer2", "password", "Jane", null, "Doe", "jane@email.com", "b96dab00-d711-4926-a87f-4a1a7ea7838a", lectureRole);
 
             Console.WriteLine("--- Seeding rooms");
             var room1 = CreateOrUpdateRoom("2eae5485-512d-43e3-9050-7c7b85445e81", "9101");
@@ -66,7 +66,7 @@ namespace DatabaseSeed
             var course2 = CreateOrUpdateCourse("2965c284-d6a9-4d7d-8217-8a91a14e5e0b", "BSC Games Development", new List<Lesson> { lesson2 }, new List<Lecturer> { lecturer1, lecturer2 }, new List<Student> { student3 });
 
             Console.WriteLine("--- Seeding sessions");
-            var session1 = CreateOrUpdateSession("00fbf224-159b-4921-8d87-c2f3d3832afb", DateTime.Parse("25/01/2015 23:00"), DateTime.Parse("26/01/2015 01:00"), lesson1, room1, new List<Lecturer> { lecturer1 });
+            var session1 = CreateOrUpdateSession("00fbf224-159b-4921-8d87-c2f3d3832afb", DateTime.Now.AddDays(-1), DateTime.Now.AddDays(-1).AddHours(1), lesson1, room1, new List<Lecturer> { lecturer1 });
             var session2 = CreateOrUpdateSession("8d79f5cb-814e-41e8-b0eb-f6396d4f75c2", DateTime.Now.AddDays(1), DateTime.Now.AddDays(1).AddHours(1), lesson1, room2, new List<Lecturer> { lecturer1, lecturer2 });
             var session3 = CreateOrUpdateSession("9e7532b4-bcd8-4ea9-9412-e7a14d268498", DateTime.Now.AddDays(2), DateTime.Now.AddDays(2).AddHours(1), lesson2, room2, new List<Lecturer> { lecturer1 });
 
