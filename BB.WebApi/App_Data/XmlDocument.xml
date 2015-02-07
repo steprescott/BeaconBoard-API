@@ -788,6 +788,17 @@
             <param name="id">The ID of the User that the request is asking for.</param>
             <returns>User DTO that holds the details for the User.</returns>
         </member>
+        <member name="M:BB.WebApi.Controllers.UsersController.GetActiveUser">
+            <summary>
+            In order to limit the amount of data needed to be synced to the device this endpoint
+            gives the entry point that will allow only the data related to the active User to be sent.
+            For example, this removes the need to download all the Courses in the system but only download
+            the Courses related to the active User.
+            
+            This end point gets the UserToken from the headers of the request so there is no need to any other parameters.
+            </summary>
+            <returns>User DTO that holds the details for the active User.</returns>
+        </member>
         <member name="M:BB.WebApi.Controllers.UsersController.GetLecturer(System.Guid)">
             <summary>
             Gets the Lecturer with the given ID.
