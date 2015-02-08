@@ -952,12 +952,19 @@
             </summary>
             <returns>An array of Session DTOs that holds the details for the Sessions that are upcoming.</returns>
         </member>
-        <member name="M:BB.WebApi.Controllers.SessionsController.GetUpcomingSessions(System.Guid)">
+        <member name="M:BB.WebApi.Controllers.SessionsController.GetUpcomingSessionsForCourse(System.Guid)">
             <summary>
             Gets all the sessions that are upcoming for the given Course ID.
             </summary>
             <param name="courseID">The Course ID that should be used to filter the upcoming Sessions.</param>
             <returns>An array of Session DTOs that holds the details for the Sessions that are upcoming for the given Course ID.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.SessionsController.GetUpcomingSessionsForModule(System.Guid)">
+            <summary>
+            Gets all the sessions that are upcoming for the given Module ID.
+            </summary>
+            <param name="moduleID">The Module ID that should be used to filter the upcoming Sessions.</param>
+            <returns>An array of Session DTOs that holds the details for the Sessions that are upcoming for the given Module ID.</returns>
         </member>
         <member name="M:BB.WebApi.Controllers.SessionsController.Get(System.Guid)">
             <summary>
@@ -968,9 +975,9 @@
         </member>
         <member name="M:BB.WebApi.Controllers.SessionsController.GetCurrentSessionByRoomID(System.Guid)">
             <summary>
-            Gets the current Session that is ongoing, if there is one, for the room with the given ID.
+            Gets the current Session that is ongoing, if there is one, for the Room with the given ID.
             </summary>
-            <param name="id">The room ID that is to be checked for a ongoing session.</param>
+            <param name="roomID">The room ID that is to be checked for a ongoing session.</param>
             <returns></returns>
         </member>
         <member name="M:BB.WebApi.Controllers.SessionsController.Delete(System.Guid)">

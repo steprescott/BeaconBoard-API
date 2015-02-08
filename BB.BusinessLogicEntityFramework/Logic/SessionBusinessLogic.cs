@@ -152,6 +152,23 @@ namespace BB.BusinessLogicEntityFramework.Logic
             return Mapper.Map<List<Domain.Session>>(items);
         }
 
+        public List<Domain.Session> GetAllUpcomingSessionsForModuleWithID(Guid id)
+        {
+            //Get the Module from the database with the given ID
+            var module = _unitOfWork.GetById<Module>(id);
+
+            if (module == null)
+            {
+                return null;
+            }
+
+            //Get all the Sessions from the database that have a end date later than now.
+            var items = module.Lessons.SelectMany(i => i.Sessions).Where(i => i.ScheduledEndDate > DateTime.Now);
+
+            //Map all the Entity Framework items to a list of domain objects
+            return Mapper.Map<List<Domain.Session>>(items);
+        }
+
         public Domain.Session GetByID(Guid id)
         {
             //Get all the Entity Framework item with the given ID from the database

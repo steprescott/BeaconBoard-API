@@ -22,6 +22,8 @@ namespace BB.Interfaces
 
         List<Session> GetAllUpcomingSessionsForCourseWithID(Guid id);
 
+        List<Domain.Session> GetAllUpcomingSessionsForModuleWithID(Guid id);
+
         Session GetByID(Guid id);
         Session GetCurrentSessionForRoomWithID(Guid id);
 
