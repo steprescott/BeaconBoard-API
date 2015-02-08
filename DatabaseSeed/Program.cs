@@ -58,12 +58,16 @@ namespace DatabaseSeed
             var resource3 = CreateOrUpdateResource("41502cea-05af-4078-bc97-bb3ed10cdb9b", "Introduction to Programming Through Game Development.", "This book teaches programming in a gaming context.", "http://www.andrews.edu/~greenley/cs2/IntroProgXNAGameStudio_eBook.pdf", resourceTypePDF);
 
             Console.WriteLine("--- Seeding lessons");
-            var lesson1 = CreateOrUpdateLesson("75feec01-6cff-4f86-93fe-2d74f4e4995a", new List<Resource> { resource1, resource2 });
-            var lesson2 = CreateOrUpdateLesson("62344945-d4be-42c2-8e0b-504dda3a642a", new List<Resource> { resource1, resource3 });
+            var lesson1 = CreateOrUpdateLesson("75feec01-6cff-4f86-93fe-2d74f4e4995a", "Binary Tree", new List<Resource> { resource1, resource2 });
+            var lesson2 = CreateOrUpdateLesson("62344945-d4be-42c2-8e0b-504dda3a642a", "Software design patterns", new List<Resource> { resource1, resource3 });
+
+            Console.WriteLine("--- Seeding modules");
+            var module1 = CreateOrUpdateModule("11ca8cc8-4967-4860-ae13-6a3d1f8e4d71", "Advance maths for Software Engineering", "description", 1, new List<Lesson> { lesson1 });
+            var module2 = CreateOrUpdateModule("8bbbb3b8-f676-4225-a520-c7d8e1ee4c1c", "Applications Architecture", "description", 1, new List<Lesson> { lesson1, lesson2 });
 
             Console.WriteLine("--- Seeding courses");
-            var course1 = CreateOrUpdateCourse("cd3b9e14-c648-4501-a0f6-6ff7d878cc04", "MComp Software Engineering", new List<Lesson> { lesson1 }, new List<Lecturer> { lecturer1, lecturer2 }, new List<Student> { student1, student2, student4 });
-            var course2 = CreateOrUpdateCourse("2965c284-d6a9-4d7d-8217-8a91a14e5e0b", "BSC Games Development", new List<Lesson> { lesson2 }, new List<Lecturer> { lecturer1, lecturer2 }, new List<Student> { student3 });
+            var course1 = CreateOrUpdateCourse("cd3b9e14-c648-4501-a0f6-6ff7d878cc04", "MComp Software Engineering", new List<Module> { module1, module2 }, new List<Lecturer> { lecturer1, lecturer2 }, new List<Student> { student1, student2, student4 });
+            var course2 = CreateOrUpdateCourse("2965c284-d6a9-4d7d-8217-8a91a14e5e0b", "BSC Games Development", new List<Module> { module1 }, new List<Lecturer> { lecturer1, lecturer2 }, new List<Student> { student3 });
 
             Console.WriteLine("--- Seeding sessions");
             var session1 = CreateOrUpdateSession("00fbf224-159b-4921-8d87-c2f3d3832afb", DateTime.Now.AddDays(-1), DateTime.Now.AddDays(-1).AddHours(1), lesson1, room1, new List<Lecturer> { lecturer1 });
@@ -381,7 +385,7 @@ namespace DatabaseSeed
             return null;
         }
 
-        static Lesson CreateOrUpdateLesson(String id, List<Resource> resources)
+        static Lesson CreateOrUpdateLesson(String id, String name, List<Resource> resources)
         {
             var businessLogic = BeaconBoardContainer.GetInstance<ILessonBusinessLogic>();
             var obj = businessLogic.GetByID(Guid.Parse(id));
@@ -391,6 +395,7 @@ namespace DatabaseSeed
                 obj = new Lesson
                 {
                     LessonID = Guid.Parse(id),
+                    Name = name,
                     ResourceIDs = resources.Select(i => i.ResourceID).ToList()
                 };
 
@@ -404,6 +409,7 @@ namespace DatabaseSeed
             else
             {
                 obj.LessonID = Guid.Parse(id);
+                obj.Name = name;
                 obj.ResourceIDs = resources.Select(i => i.ResourceID).ToList();
 
                 var result = businessLogic.Update(obj);
@@ -418,7 +424,50 @@ namespace DatabaseSeed
             return null;
         }
 
-        static Course CreateOrUpdateCourse(String id, String name, List<Lesson> lessons, List<Lecturer> lecturers, List<Student> students)
+        static Module CreateOrUpdateModule(String id, String name, String description, int termNumber, List<Lesson> lessons)
+        {
+            var businessLogic = BeaconBoardContainer.GetInstance<IModuleBusinessLogic>();
+            var obj = businessLogic.GetByID(Guid.Parse(id));
+
+            if (obj == null)
+            {
+                obj = new Module
+                {
+                    ModuleID = Guid.Parse(id),
+                    Name = name,
+                    Description = description,
+                    TermNumber = termNumber,
+                    LessonIDs = lessons.Select(i => i.LessonID).ToList()
+                };
+
+                var result = businessLogic.Create(obj);
+
+                if (result == CRUDResult.Created)
+                {
+                    return obj;
+                }
+            }
+            else
+            {
+                obj.ModuleID = Guid.Parse(id);
+                obj.Name = name;
+                obj.Description = description;
+                obj.TermNumber = termNumber;
+                obj.LessonIDs = lessons.Select(i => i.LessonID).ToList();
+
+                var result = businessLogic.Update(obj);
+
+                if (result == CRUDResult.Updated)
+                {
+                    return obj;
+                }
+            }
+
+            Console.WriteLine("    Error occurred");
+            return null;
+        }
+
+        static Course CreateOrUpdateCourse(String id, String name, List<Module> modules, List<Lecturer> lecturers, List<Student> students)
         {
             var businessLogic = BeaconBoardContainer.GetInstance<ICourseBusinessLogic>();
             var obj = businessLogic.GetByID(Guid.Parse(id));
@@ -429,7 +478,7 @@ namespace DatabaseSeed
                 {
                     CourseID = Guid.Parse(id),
                     Name = name,
-                    LessonIDs = lessons.Select(i => i.LessonID).ToList(),
+                    ModuleIDs = modules.Select(i => i.ModuleID).ToList(),
                     LecturerIDs = lecturers.Select(i => i.UserID).ToList(),
                     StudentIDs = students.Select(i => i.UserID).ToList(),
                 };
@@ -445,7 +494,7 @@ namespace DatabaseSeed
             {
                 obj.CourseID = Guid.Parse(id);
                 obj.Name = name;
-                obj.LessonIDs = lessons.Select(i => i.LessonID).ToList();
+                obj.ModuleIDs = modules.Select(i => i.ModuleID).ToList();
                 obj.LecturerIDs = lecturers.Select(i => i.UserID).ToList();
                 obj.StudentIDs = students.Select(i => i.UserID).ToList();
 

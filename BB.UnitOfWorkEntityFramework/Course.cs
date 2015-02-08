@@ -16,16 +16,16 @@ namespace BB.UnitOfWorkEntityFramework
     {
         public Course()
         {
-            this.Lessons = new HashSet<Lesson>();
             this.Students = new HashSet<Student>();
             this.Lecturers = new HashSet<Lecturer>();
+            this.Modules = new HashSet<Module>();
         }
     
         public System.Guid CourseID { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<Lesson> Lessons { get; set; }
         public virtual ICollection<Student> Students { get; set; }
         public virtual ICollection<Lecturer> Lecturers { get; set; }
+        public virtual ICollection<Module> Modules { get; set; }
     }
 }

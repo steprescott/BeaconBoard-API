@@ -18,7 +18,7 @@ namespace BB.BusinessLogicEntityFramework.Utilities
             Mapper.CreateMap<Beacon, Domain.Beacon>();
             Mapper.CreateMap<Domain.Beacon, Beacon>();
 
-            Mapper.CreateMap<Course, Domain.Course>().ForMember(dest => dest.LessonIDs, opt => opt.MapFrom(c => c.Lessons.Select(i => i.LessonID).ToList()))
+            Mapper.CreateMap<Course, Domain.Course>().ForMember(dest => dest.ModuleIDs, opt => opt.MapFrom(c => c.Modules.Select(i => i.ModuleID).ToList()))
                                                                 .ForMember(dest => dest.StudentIDs, opt => opt.MapFrom(c => c.Students.Select(i => i.UserID).ToList()))
                                                                 .ForMember(dest => dest.LecturerIDs, opt => opt.MapFrom(c => c.Lecturers.Select(i => i.UserID).ToList()));
             Mapper.CreateMap<Domain.Course, Course>();
@@ -29,8 +29,12 @@ namespace BB.BusinessLogicEntityFramework.Utilities
 
             Mapper.CreateMap<Lesson, Domain.Lesson>().ForMember(dest => dest.SessionIDs, opt => opt.MapFrom(so => so.Sessions.Select(i => i.SessionID).ToList()))
                 .ForMember(dest => dest.ResourceIDs, opt => opt.MapFrom(so => so.Resources.Select(i => i.ResourceID).ToList()))
-                .ForMember(dest => dest.CourseIDs, opt => opt.MapFrom(so => so.Courses.Select(i => i.CourseID).ToList()));
+                .ForMember(dest => dest.ModuleIDs, opt => opt.MapFrom(so => so.Modules.Select(i => i.ModuleID).ToList()));
             Mapper.CreateMap<Domain.Lesson, Lesson>();
+
+            Mapper.CreateMap<Module, Domain.Module>().ForMember(dest => dest.CourseIDs, opt => opt.MapFrom(c => c.Courses.Select(i => i.CourseID).ToList()))
+                .ForMember(dest => dest.LessonIDs, opt => opt.MapFrom(c => c.Lessons.Select(i => i.LessonID).ToList()));
+            Mapper.CreateMap<Domain.Module, Module>();
 
             Mapper.CreateMap<Resource, Domain.Resource>().ForMember(dest => dest.LessonIDs, opt => opt.MapFrom(c => c.Lessons.Select(i => i.LessonID).ToList()));
             Mapper.CreateMap<Domain.Resource, Resource>();

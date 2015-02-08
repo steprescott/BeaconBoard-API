@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/29/2015 21:43:02
+-- Date Created: 02/08/2015 13:00:10
 -- Generated from EDMX file: C:\Users\steprescott\Documents\Visual Studio 2013\Projects\BeaconBoard\BB.UnitOfWorkEntityFramework\BeaconBoardDatabase.edmx
 -- --------------------------------------------------
 
@@ -19,12 +19,6 @@ GO
 
 IF OBJECT_ID(N'[dbo].[FK_RoomBeacon]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Beacons] DROP CONSTRAINT [FK_RoomBeacon];
-GO
-IF OBJECT_ID(N'[dbo].[FK_CourseLesson_Course]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CourseLesson] DROP CONSTRAINT [FK_CourseLesson_Course];
-GO
-IF OBJECT_ID(N'[dbo].[FK_CourseLesson_Lesson]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CourseLesson] DROP CONSTRAINT [FK_CourseLesson_Lesson];
 GO
 IF OBJECT_ID(N'[dbo].[FK_StudentCourse_Student]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[StudentCourse] DROP CONSTRAINT [FK_StudentCourse_Student];
@@ -61,6 +55,24 @@ IF OBJECT_ID(N'[dbo].[FK_SessionLecturer_Lecturer]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_UserRole]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Users] DROP CONSTRAINT [FK_UserRole];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AttendanceSession]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Attendances] DROP CONSTRAINT [FK_AttendanceSession];
+GO
+IF OBJECT_ID(N'[dbo].[FK_StudentAttendance]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Attendances] DROP CONSTRAINT [FK_StudentAttendance];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CourseModule_Course]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CourseModule] DROP CONSTRAINT [FK_CourseModule_Course];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CourseModule_Module]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CourseModule] DROP CONSTRAINT [FK_CourseModule_Module];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ModuleLesson_Module]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ModuleLesson] DROP CONSTRAINT [FK_ModuleLesson_Module];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ModuleLesson_Lesson]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ModuleLesson] DROP CONSTRAINT [FK_ModuleLesson_Lesson];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Student_inherits_User]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Users_Student] DROP CONSTRAINT [FK_Student_inherits_User];
@@ -100,14 +112,17 @@ GO
 IF OBJECT_ID(N'[dbo].[Roles]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Roles];
 GO
+IF OBJECT_ID(N'[dbo].[Attendances]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Attendances];
+GO
+IF OBJECT_ID(N'[dbo].[Modules]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Modules];
+GO
 IF OBJECT_ID(N'[dbo].[Users_Student]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Users_Student];
 GO
 IF OBJECT_ID(N'[dbo].[Users_Lecturer]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Users_Lecturer];
-GO
-IF OBJECT_ID(N'[dbo].[CourseLesson]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CourseLesson];
 GO
 IF OBJECT_ID(N'[dbo].[StudentCourse]', 'U') IS NOT NULL
     DROP TABLE [dbo].[StudentCourse];
@@ -120,6 +135,12 @@ IF OBJECT_ID(N'[dbo].[LessonResource]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[SessionLecturer]', 'U') IS NOT NULL
     DROP TABLE [dbo].[SessionLecturer];
+GO
+IF OBJECT_ID(N'[dbo].[CourseModule]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CourseModule];
+GO
+IF OBJECT_ID(N'[dbo].[ModuleLesson]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ModuleLesson];
 GO
 
 -- --------------------------------------------------
@@ -151,7 +172,8 @@ GO
 
 -- Creating table 'Lessons'
 CREATE TABLE [dbo].[Lessons] (
-    [LessonID] uniqueidentifier  NOT NULL
+    [LessonID] uniqueidentifier  NOT NULL,
+    [Name] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -212,6 +234,15 @@ CREATE TABLE [dbo].[Attendances] (
 );
 GO
 
+-- Creating table 'Modules'
+CREATE TABLE [dbo].[Modules] (
+    [ModuleID] uniqueidentifier  NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [Description] nvarchar(max)  NULL,
+    [TermNumber] int  NOT NULL
+);
+GO
+
 -- Creating table 'Users_Student'
 CREATE TABLE [dbo].[Users_Student] (
     [UserID] uniqueidentifier  NOT NULL
@@ -221,13 +252,6 @@ GO
 -- Creating table 'Users_Lecturer'
 CREATE TABLE [dbo].[Users_Lecturer] (
     [UserID] uniqueidentifier  NOT NULL
-);
-GO
-
--- Creating table 'CourseLesson'
-CREATE TABLE [dbo].[CourseLesson] (
-    [Courses_CourseID] uniqueidentifier  NOT NULL,
-    [Lessons_LessonID] uniqueidentifier  NOT NULL
 );
 GO
 
@@ -256,6 +280,20 @@ GO
 CREATE TABLE [dbo].[SessionLecturer] (
     [Sessions_SessionID] uniqueidentifier  NOT NULL,
     [Lecturers_UserID] uniqueidentifier  NOT NULL
+);
+GO
+
+-- Creating table 'CourseModule'
+CREATE TABLE [dbo].[CourseModule] (
+    [Courses_CourseID] uniqueidentifier  NOT NULL,
+    [Modules_ModuleID] uniqueidentifier  NOT NULL
+);
+GO
+
+-- Creating table 'ModuleLesson'
+CREATE TABLE [dbo].[ModuleLesson] (
+    [Modules_ModuleID] uniqueidentifier  NOT NULL,
+    [Lessons_LessonID] uniqueidentifier  NOT NULL
 );
 GO
 
@@ -323,6 +361,12 @@ ADD CONSTRAINT [PK_Attendances]
     PRIMARY KEY CLUSTERED ([AttendanceID] ASC);
 GO
 
+-- Creating primary key on [ModuleID] in table 'Modules'
+ALTER TABLE [dbo].[Modules]
+ADD CONSTRAINT [PK_Modules]
+    PRIMARY KEY CLUSTERED ([ModuleID] ASC);
+GO
+
 -- Creating primary key on [UserID] in table 'Users_Student'
 ALTER TABLE [dbo].[Users_Student]
 ADD CONSTRAINT [PK_Users_Student]
@@ -333,12 +377,6 @@ GO
 ALTER TABLE [dbo].[Users_Lecturer]
 ADD CONSTRAINT [PK_Users_Lecturer]
     PRIMARY KEY CLUSTERED ([UserID] ASC);
-GO
-
--- Creating primary key on [Courses_CourseID], [Lessons_LessonID] in table 'CourseLesson'
-ALTER TABLE [dbo].[CourseLesson]
-ADD CONSTRAINT [PK_CourseLesson]
-    PRIMARY KEY CLUSTERED ([Courses_CourseID], [Lessons_LessonID] ASC);
 GO
 
 -- Creating primary key on [Students_UserID], [Courses_CourseID] in table 'StudentCourse'
@@ -365,6 +403,18 @@ ADD CONSTRAINT [PK_SessionLecturer]
     PRIMARY KEY CLUSTERED ([Sessions_SessionID], [Lecturers_UserID] ASC);
 GO
 
+-- Creating primary key on [Courses_CourseID], [Modules_ModuleID] in table 'CourseModule'
+ALTER TABLE [dbo].[CourseModule]
+ADD CONSTRAINT [PK_CourseModule]
+    PRIMARY KEY CLUSTERED ([Courses_CourseID], [Modules_ModuleID] ASC);
+GO
+
+-- Creating primary key on [Modules_ModuleID], [Lessons_LessonID] in table 'ModuleLesson'
+ALTER TABLE [dbo].[ModuleLesson]
+ADD CONSTRAINT [PK_ModuleLesson]
+    PRIMARY KEY CLUSTERED ([Modules_ModuleID], [Lessons_LessonID] ASC);
+GO
+
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
@@ -382,30 +432,6 @@ GO
 CREATE INDEX [IX_FK_RoomBeacon]
 ON [dbo].[Beacons]
     ([RoomID]);
-GO
-
--- Creating foreign key on [Courses_CourseID] in table 'CourseLesson'
-ALTER TABLE [dbo].[CourseLesson]
-ADD CONSTRAINT [FK_CourseLesson_Course]
-    FOREIGN KEY ([Courses_CourseID])
-    REFERENCES [dbo].[Courses]
-        ([CourseID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [Lessons_LessonID] in table 'CourseLesson'
-ALTER TABLE [dbo].[CourseLesson]
-ADD CONSTRAINT [FK_CourseLesson_Lesson]
-    FOREIGN KEY ([Lessons_LessonID])
-    REFERENCES [dbo].[Lessons]
-        ([LessonID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_CourseLesson_Lesson'
-CREATE INDEX [IX_FK_CourseLesson_Lesson]
-ON [dbo].[CourseLesson]
-    ([Lessons_LessonID]);
 GO
 
 -- Creating foreign key on [Students_UserID] in table 'StudentCourse'
@@ -592,6 +618,54 @@ GO
 CREATE INDEX [IX_FK_StudentAttendance]
 ON [dbo].[Attendances]
     ([StudentID]);
+GO
+
+-- Creating foreign key on [Courses_CourseID] in table 'CourseModule'
+ALTER TABLE [dbo].[CourseModule]
+ADD CONSTRAINT [FK_CourseModule_Course]
+    FOREIGN KEY ([Courses_CourseID])
+    REFERENCES [dbo].[Courses]
+        ([CourseID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Modules_ModuleID] in table 'CourseModule'
+ALTER TABLE [dbo].[CourseModule]
+ADD CONSTRAINT [FK_CourseModule_Module]
+    FOREIGN KEY ([Modules_ModuleID])
+    REFERENCES [dbo].[Modules]
+        ([ModuleID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CourseModule_Module'
+CREATE INDEX [IX_FK_CourseModule_Module]
+ON [dbo].[CourseModule]
+    ([Modules_ModuleID]);
+GO
+
+-- Creating foreign key on [Modules_ModuleID] in table 'ModuleLesson'
+ALTER TABLE [dbo].[ModuleLesson]
+ADD CONSTRAINT [FK_ModuleLesson_Module]
+    FOREIGN KEY ([Modules_ModuleID])
+    REFERENCES [dbo].[Modules]
+        ([ModuleID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Lessons_LessonID] in table 'ModuleLesson'
+ALTER TABLE [dbo].[ModuleLesson]
+ADD CONSTRAINT [FK_ModuleLesson_Lesson]
+    FOREIGN KEY ([Lessons_LessonID])
+    REFERENCES [dbo].[Lessons]
+        ([LessonID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ModuleLesson_Lesson'
+CREATE INDEX [IX_FK_ModuleLesson_Lesson]
+ON [dbo].[ModuleLesson]
+    ([Lessons_LessonID]);
 GO
 
 -- Creating foreign key on [UserID] in table 'Users_Student'

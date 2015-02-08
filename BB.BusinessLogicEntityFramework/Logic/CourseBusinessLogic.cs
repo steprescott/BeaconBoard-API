@@ -51,16 +51,16 @@ namespace BB.BusinessLogicEntityFramework.Logic
                     }
                 }
 
-                //If there are any Lessons to map
-                if(domainObject.LessonIDs != null)
+                //If there are any Modules to map
+                if(domainObject.ModuleIDs != null)
                 {
                     //Due to a Many - Many relationship it is too complex for Automapper to do.
-                    var lessons = _unitOfWork.GetAll<Lesson>().Where(i => domainObject.LessonIDs.Contains(i.LessonID)).ToList();
+                    var modules = _unitOfWork.GetAll<Module>().Where(i => domainObject.ModuleIDs.Contains(i.ModuleID)).ToList();
 
-                    //If the Course has Students linked to it
-                    if (lessons != null && lessons.Count > 0)
+                    //If the Course has Modules linked to it
+                    if (modules != null && modules.Count > 0)
                     {
-                        obj.Lessons = lessons;
+                        obj.Modules = modules;
                     }
                 }
 
@@ -120,16 +120,16 @@ namespace BB.BusinessLogicEntityFramework.Logic
                             }
                         }
 
-                        //If there are any Lessons to map
-                        if (domainObject.LessonIDs != null)
+                        //If there are any Modules to map
+                        if (domainObject.ModuleIDs != null)
                         {
                             //Due to a Many - Many relationship it is too complex for Automapper to do.
-                            var lessons = _unitOfWork.GetAll<Lesson>().Where(i => domainObject.LessonIDs.Contains(i.LessonID)).ToList();
+                            var modules = _unitOfWork.GetAll<Module>().Where(i => domainObject.ModuleIDs.Contains(i.ModuleID)).ToList();
 
-                            //If the Course has Students linked to it
-                            if (lessons != null && lessons.Count > 0)
+                            //If the Course has Modules linked to it
+                            if (modules != null && modules.Count > 0)
                             {
-                                obj.Lessons = lessons;
+                                obj.Modules = modules;
                             }
                         }
 
