@@ -18,7 +18,6 @@ namespace BB.UnitOfWorkEntityFramework
         public BeaconBoardDatabaseContainer()
             : base("name=BeaconBoardDatabaseContainer")
         {
-            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
