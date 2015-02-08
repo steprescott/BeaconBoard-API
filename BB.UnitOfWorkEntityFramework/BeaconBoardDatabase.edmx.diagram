@@ -29,10 +29,10 @@
         <AssociationConnector Association="BeaconBoardDatabase.UserRole" />
         <EntityTypeShape EntityType="BeaconBoardDatabase.Attendance" Width="1.5" PointX="2.25" PointY="11.875" />
         <AssociationConnector Association="BeaconBoardDatabase.AttendanceSession" ManuallyRouted="true" >
-          <ConnectorPoint PointX="3.75" PointY="13.171683786801026" />
-          <ConnectorPoint PointX="11.032196910944112" PointY="13.171683786801026" />
-          <ConnectorPoint PointX="11.032196910944112" PointY="9.1032080360083576" />
-          <ConnectorPoint PointX="10.5" PointY="9.1032080360083576" />
+          <ConnectorPoint PointX="3.75" PointY="13.318016793434158" />
+          <ConnectorPoint PointX="10.875" PointY="13.318016793434158" />
+          <ConnectorPoint PointX="10.875" PointY="9.2297033008271967" />
+          <ConnectorPoint PointX="10.5" PointY="9.2297033008271967" />
         </AssociationConnector>
         <AssociationConnector Association="BeaconBoardDatabase.StudentAttendance" />
         <EntityTypeShape EntityType="BeaconBoardDatabase.Module" Width="1.5" PointX="4.25" PointY="9" />
