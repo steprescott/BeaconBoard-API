@@ -63,7 +63,7 @@ namespace DatabaseSeed
             
             Console.WriteLine("--- Seeding modules");
             var module1 = CreateOrUpdateModule("74e2eae7-960c-4d96-8ce7-9f2495cdba33", "Cloud Applications", "Aims are to understand how to use computing power over the web.", 1, new List<Course> { course1 });
-            var module2 = CreateOrUpdateModule("11ca8cc8-4967-4860-ae13-6a3d1f8e4d71", "Advance Software Engineering", "This module is taught across several courses.", 1, new List<Course> { course1, course2 });
+            var module2 = CreateOrUpdateModule("11ca8cc8-4967-4860-ae13-6a3d1f8e4d71", "Advance Software Engineering", "This module is taught across several courses.", 1, new List<Course> { course1 });
             var module3 = CreateOrUpdateModule("8bbbb3b8-f676-4225-a520-c7d8e1ee4c1c", "Games & Software Engineering", "To deepen students' knowledge and understanding of the context and current trends in software engineering.", 1, new List<Course> { course2 });
 
             Console.WriteLine("--- Seeding lessons");
