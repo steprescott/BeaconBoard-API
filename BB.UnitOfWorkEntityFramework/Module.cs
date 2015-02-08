@@ -17,7 +17,7 @@ namespace BB.UnitOfWorkEntityFramework
         public Module()
         {
             this.Courses = new HashSet<Course>();
-            this.Lessons = new HashSet<Lesson>();
+            this.Sessions = new HashSet<Session>();
         }
     
         public System.Guid ModuleID { get; set; }
@@ -26,6 +26,6 @@ namespace BB.UnitOfWorkEntityFramework
         public int TermNumber { get; set; }
     
         public virtual ICollection<Course> Courses { get; set; }
-        public virtual ICollection<Lesson> Lessons { get; set; }
+        public virtual ICollection<Session> Sessions { get; set; }
     }
 }

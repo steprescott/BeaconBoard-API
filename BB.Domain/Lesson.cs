@@ -32,9 +32,5 @@ namespace BB.Domain
         /// An array of resources used in this Lesson.
         /// </summary>
         public List<Guid> ResourceIDs { get; set; }
-        /// <summary>
-        /// An array of Modules that this Lesson is linked with.
-        /// </summary>
-        public List<Guid> ModuleIDs { get; set; }
     }
 }

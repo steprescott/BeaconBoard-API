@@ -38,6 +38,11 @@ namespace BB.Domain
         [Required]
         public Guid LessonID { get; set; }
         /// <summary>
+        /// This is the Module that the Session is taught in.
+        /// </summary>
+        [Required]
+        public Guid ModuleID { get; set; }
+        /// <summary>
         /// The ID of the Room that the Session will be taught in.
         /// This allows the App to know what is the current Session for a given Room.
         /// </summary>

@@ -38,16 +38,29 @@ namespace BB.BusinessLogicEntityFramework.Logic
                 //Map the domain object to an Entity Framework object
                 var obj = Mapper.Map<Module>(domainObject);
 
-                //If there are any Lessons to map
-                if (domainObject.LessonIDs != null)
+                //If there are any Courses to map
+                if (domainObject.CourseIDs != null)
                 {
                     //Due to a Many - Many relationship it is too complex for Automapper to do.
-                    var lessons = _unitOfWork.GetAll<Lesson>().Where(i => domainObject.LessonIDs.Contains(i.LessonID)).ToList();
+                    var courses = _unitOfWork.GetAll<Course>().Where(i => domainObject.CourseIDs.Contains(i.CourseID)).ToList();
 
-                    //If the Module has Lessons linked to it
-                    if (lessons != null && lessons.Count > 0)
+                    //If the Module has Sessions linked to it
+                    if (courses != null && courses.Count > 0)
                     {
-                        obj.Lessons = lessons;
+                        obj.Courses = courses;
+                    }
+                }
+
+                //If there are any Sessions to map
+                if (domainObject.SessionIDs != null)
+                {
+                    //Due to a Many - Many relationship it is too complex for Automapper to do.
+                    var sessions = _unitOfWork.GetAll<Session>().Where(i => domainObject.SessionIDs.Contains(i.SessionID)).ToList();
+
+                    //If the Module has Sessions linked to it
+                    if (sessions != null && sessions.Count > 0)
+                    {
+                        obj.Sessions = sessions;
                     }
                 }
 
@@ -81,16 +94,29 @@ namespace BB.BusinessLogicEntityFramework.Logic
                         //Map the updated values
                         obj = Mapper.Map(domainObject, obj);
 
-                        //If there are any Lessons to map
-                        if (domainObject.LessonIDs != null)
+                        //If there are any Courses to map
+                        if (domainObject.CourseIDs != null)
                         {
                             //Due to a Many - Many relationship it is too complex for Automapper to do.
-                            var lessons = _unitOfWork.GetAll<Lesson>().Where(i => domainObject.LessonIDs.Contains(i.LessonID)).ToList();
+                            var courses = _unitOfWork.GetAll<Course>().Where(i => domainObject.CourseIDs.Contains(i.CourseID)).ToList();
 
-                            //If the Module has Lessons linked to it
-                            if (lessons != null && lessons.Count > 0)
+                            //If the Module has Sessions linked to it
+                            if (courses != null && courses.Count > 0)
                             {
-                                obj.Lessons = lessons;
+                                obj.Courses = courses;
+                            }
+                        }
+
+                        //If there are any Sessions to map
+                        if (domainObject.SessionIDs != null)
+                        {
+                            //Due to a Many - Many relationship it is too complex for Automapper to do.
+                            var sessions = _unitOfWork.GetAll<Session>().Where(i => domainObject.SessionIDs.Contains(i.SessionID)).ToList();
+
+                            //If the Module has Sessions linked to it
+                            if (sessions != null && sessions.Count > 0)
+                            {
+                                obj.Sessions = sessions;
                             }
                         }
 

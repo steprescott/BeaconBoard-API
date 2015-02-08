@@ -25,10 +25,12 @@ namespace BB.UnitOfWorkEntityFramework
         public System.DateTime ScheduledStartDate { get; set; }
         public System.DateTime ScheduledEndDate { get; set; }
         public System.Guid RoomID { get; set; }
+        public System.Guid ModuleID { get; set; }
     
         public virtual Lesson Lesson { get; set; }
         public virtual Room Room { get; set; }
         public virtual ICollection<Lecturer> Lecturers { get; set; }
         public virtual ICollection<Attendance> Attendances { get; set; }
+        public virtual Module Module { get; set; }
     }
 }

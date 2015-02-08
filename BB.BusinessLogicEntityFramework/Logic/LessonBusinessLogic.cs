@@ -38,16 +38,16 @@ namespace BB.BusinessLogicEntityFramework.Logic
                 //Map the domain object to an Entity Framework object
                 var obj = Mapper.Map<Lesson>(domainObject);
 
-                //If there are Modules to map
-                if(domainObject.ModuleIDs != null)
+                //If there are Sessions to map
+                if(domainObject.SessionIDs != null)
                 {
                     //Due to a Many - Many relationship it is too complex for Automapper to do.
-                    var modules = _unitOfWork.GetAll<Module>().Where(i => domainObject.ModuleIDs.Contains(i.ModuleID)).ToList();
+                    var sessions = _unitOfWork.GetAll<Session>().Where(i => domainObject.SessionIDs.Contains(i.SessionID)).ToList();
 
                     //If the Lesson has Modules linked to it
-                    if (modules != null && modules.Count > 0)
+                    if (sessions != null && sessions.Count > 0)
                     {
-                        obj.Modules = modules;
+                        obj.Sessions = sessions;
                     }
                 }
 
@@ -94,16 +94,16 @@ namespace BB.BusinessLogicEntityFramework.Logic
                         //Map the updated values
                         obj = Mapper.Map(domainObject, obj);
 
-                        //If there are Modules to map
-                        if (domainObject.ModuleIDs != null)
+                        //If there are Sessions to map
+                        if (domainObject.SessionIDs != null)
                         {
                             //Due to a Many - Many relationship it is too complex for Automapper to do.
-                            var modules = _unitOfWork.GetAll<Module>().Where(i => domainObject.ModuleIDs.Contains(i.ModuleID)).ToList();
+                            var sessions = _unitOfWork.GetAll<Session>().Where(i => domainObject.SessionIDs.Contains(i.SessionID)).ToList();
 
                             //If the Lesson has Modules linked to it
-                            if (modules != null && modules.Count > 0)
+                            if (sessions != null && sessions.Count > 0)
                             {
-                                obj.Modules = modules;
+                                obj.Sessions = sessions;
                             }
                         }
 

@@ -56,7 +56,7 @@ namespace BB.BusinessLogicEntityFramework.Logic
                 _unitOfWork.SaveChanges();
                 return CRUDResult.Created;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 //An error has occurred.
                 //We don't want to return the over the API as it could
@@ -146,7 +146,7 @@ namespace BB.BusinessLogicEntityFramework.Logic
             }
 
             //Get all the Sessions from the database that have a end date later than now.
-            var items = course.Modules.SelectMany(i => i.Lessons).SelectMany(i => i.Sessions).Where(i => i.ScheduledEndDate > DateTime.Now);
+            var items = course.Modules.SelectMany(i => i.Sessions).Where(i => i.ScheduledEndDate > DateTime.Now);
 
             //Map all the Entity Framework items to a list of domain objects
             return Mapper.Map<List<Domain.Session>>(items);
@@ -163,7 +163,7 @@ namespace BB.BusinessLogicEntityFramework.Logic
             }
 
             //Get all the Sessions from the database that have a end date later than now.
-            var items = module.Lessons.SelectMany(i => i.Sessions).Where(i => i.ScheduledEndDate > DateTime.Now);
+            var items = module.Sessions.Where(i => i.ScheduledEndDate > DateTime.Now);
 
             //Map all the Entity Framework items to a list of domain objects
             return Mapper.Map<List<Domain.Session>>(items);

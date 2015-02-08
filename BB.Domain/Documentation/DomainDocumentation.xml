@@ -219,11 +219,6 @@
             An array of resources used in this Lesson.
             </summary>
         </member>
-        <member name="P:BB.Domain.Lesson.ModuleIDs">
-            <summary>
-            An array of Modules that this Lesson is linked with.
-            </summary>
-        </member>
         <member name="T:BB.Domain.Resource">
             <summary>
             DTO to allow the Entity to be passed over the API.
@@ -363,9 +358,9 @@
             An array of Course IDs that incorporate this Module.
             </summary>
         </member>
-        <member name="P:BB.Domain.Module.LessonIDs">
+        <member name="P:BB.Domain.Module.SessionIDs">
             <summary>
-            An array of Lesson IDs that are ran in this Module.
+            An array of Sessions IDs that are ran in this Module.
             </summary>
         </member>
         <member name="T:BB.Domain.Student">
@@ -437,6 +432,11 @@
             <summary>
             The ID of the Lesson that is being taught for this Session.
             This links the Session to the Resources via the Lesson.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Session.ModuleID">
+            <summary>
+            This is the Module that the Session is taught in.
             </summary>
         </member>
         <member name="P:BB.Domain.Session.RoomID">

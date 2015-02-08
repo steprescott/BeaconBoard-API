@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/08/2015 13:00:10
+-- Date Created: 02/08/2015 21:07:22
 -- Generated from EDMX file: C:\Users\steprescott\Documents\Visual Studio 2013\Projects\BeaconBoard\BB.UnitOfWorkEntityFramework\BeaconBoardDatabase.edmx
 -- --------------------------------------------------
 
@@ -68,11 +68,8 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_CourseModule_Module]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CourseModule] DROP CONSTRAINT [FK_CourseModule_Module];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ModuleLesson_Module]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ModuleLesson] DROP CONSTRAINT [FK_ModuleLesson_Module];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ModuleLesson_Lesson]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ModuleLesson] DROP CONSTRAINT [FK_ModuleLesson_Lesson];
+IF OBJECT_ID(N'[dbo].[FK_ModuleSession]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Sessions] DROP CONSTRAINT [FK_ModuleSession];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Student_inherits_User]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Users_Student] DROP CONSTRAINT [FK_Student_inherits_User];
@@ -139,9 +136,6 @@ GO
 IF OBJECT_ID(N'[dbo].[CourseModule]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CourseModule];
 GO
-IF OBJECT_ID(N'[dbo].[ModuleLesson]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ModuleLesson];
-GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -183,7 +177,8 @@ CREATE TABLE [dbo].[Sessions] (
     [LessonID] uniqueidentifier  NOT NULL,
     [ScheduledStartDate] datetime  NOT NULL,
     [ScheduledEndDate] datetime  NOT NULL,
-    [RoomID] uniqueidentifier  NOT NULL
+    [RoomID] uniqueidentifier  NOT NULL,
+    [ModuleID] uniqueidentifier  NOT NULL
 );
 GO
 
@@ -287,13 +282,6 @@ GO
 CREATE TABLE [dbo].[CourseModule] (
     [Courses_CourseID] uniqueidentifier  NOT NULL,
     [Modules_ModuleID] uniqueidentifier  NOT NULL
-);
-GO
-
--- Creating table 'ModuleLesson'
-CREATE TABLE [dbo].[ModuleLesson] (
-    [Modules_ModuleID] uniqueidentifier  NOT NULL,
-    [Lessons_LessonID] uniqueidentifier  NOT NULL
 );
 GO
 
@@ -407,12 +395,6 @@ GO
 ALTER TABLE [dbo].[CourseModule]
 ADD CONSTRAINT [PK_CourseModule]
     PRIMARY KEY CLUSTERED ([Courses_CourseID], [Modules_ModuleID] ASC);
-GO
-
--- Creating primary key on [Modules_ModuleID], [Lessons_LessonID] in table 'ModuleLesson'
-ALTER TABLE [dbo].[ModuleLesson]
-ADD CONSTRAINT [PK_ModuleLesson]
-    PRIMARY KEY CLUSTERED ([Modules_ModuleID], [Lessons_LessonID] ASC);
 GO
 
 -- --------------------------------------------------
@@ -644,28 +626,19 @@ ON [dbo].[CourseModule]
     ([Modules_ModuleID]);
 GO
 
--- Creating foreign key on [Modules_ModuleID] in table 'ModuleLesson'
-ALTER TABLE [dbo].[ModuleLesson]
-ADD CONSTRAINT [FK_ModuleLesson_Module]
-    FOREIGN KEY ([Modules_ModuleID])
+-- Creating foreign key on [ModuleID] in table 'Sessions'
+ALTER TABLE [dbo].[Sessions]
+ADD CONSTRAINT [FK_ModuleSession]
+    FOREIGN KEY ([ModuleID])
     REFERENCES [dbo].[Modules]
         ([ModuleID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [Lessons_LessonID] in table 'ModuleLesson'
-ALTER TABLE [dbo].[ModuleLesson]
-ADD CONSTRAINT [FK_ModuleLesson_Lesson]
-    FOREIGN KEY ([Lessons_LessonID])
-    REFERENCES [dbo].[Lessons]
-        ([LessonID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_ModuleLesson_Lesson'
-CREATE INDEX [IX_FK_ModuleLesson_Lesson]
-ON [dbo].[ModuleLesson]
-    ([Lessons_LessonID]);
+-- Creating non-clustered index for FOREIGN KEY 'FK_ModuleSession'
+CREATE INDEX [IX_FK_ModuleSession]
+ON [dbo].[Sessions]
+    ([ModuleID]);
 GO
 
 -- Creating foreign key on [UserID] in table 'Users_Student'

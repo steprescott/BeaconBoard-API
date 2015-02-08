@@ -18,7 +18,6 @@ namespace BB.UnitOfWorkEntityFramework
         {
             this.Sessions = new HashSet<Session>();
             this.Resources = new HashSet<Resource>();
-            this.Modules = new HashSet<Module>();
         }
     
         public System.Guid LessonID { get; set; }
@@ -26,6 +25,5 @@ namespace BB.UnitOfWorkEntityFramework
     
         public virtual ICollection<Session> Sessions { get; set; }
         public virtual ICollection<Resource> Resources { get; set; }
-        public virtual ICollection<Module> Modules { get; set; }
     }
 }

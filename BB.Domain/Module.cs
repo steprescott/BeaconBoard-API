@@ -40,8 +40,8 @@ namespace BB.Domain
         public List<Guid> CourseIDs { get; set; }
 
         /// <summary>
-        /// An array of Lesson IDs that are ran in this Module.
+        /// An array of Sessions IDs that are ran in this Module.
         /// </summary>
-        public List<Guid> LessonIDs { get; set; }
+        public List<Guid> SessionIDs { get; set; }
     }
 }
