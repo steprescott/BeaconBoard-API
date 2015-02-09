@@ -30,10 +30,10 @@ namespace DatabaseSeed
             var studentRole = CreateOrUpdateRole("730237a9-8620-4d29-b005-ba7b6a02b769", "Student");
 
             Console.WriteLine("--- Seeding students");
-            var student1 = CreateOrUpdateStudent("2715f8a0-4d09-410e-bc02-37982d0e4632", "student1", "password", "Jonny", null, "Booker", "ste@beaconboard.co.uk", "4e279f6a-b28a-4815-8555-51c667952abe", studentRole);
+            var student1 = CreateOrUpdateStudent("2715f8a0-4d09-410e-bc02-37982d0e4632", "student1", "password", "Jonny", null, "Booker", "jonny@email.com", "4e279f6a-b28a-4815-8555-51c667952abe", studentRole);
             var student2 = CreateOrUpdateStudent("5ac1333c-9eeb-48dc-a6dd-a6ceaa1ad821", "student2", "password", "Tom", "Markus", "Windowson", "tom@email.com", "752e098f-27b4-4d38-92d9-42afdc73f08f", studentRole);
             var student3 = CreateOrUpdateStudent("3cc3c708-2b37-44c7-8bc3-a29d79d97102", "student3", "password", "Joe", "Christopher Andrew", "Fletcher", "joe@email.com", "c88432ec-0f70-450b-999b-cfd7a968c205", studentRole);
-            var student4 = CreateOrUpdateStudent("731a27a9-840b-49b6-bcfb-6303536c6b79", "steprescott", "password", "Ste", "Christopher", "Prescott", "jonny@email.com", "c0be1a6d-3d4f-4b23-b3ca-54162aeb2022", studentRole);
+            var student4 = CreateOrUpdateStudent("731a27a9-840b-49b6-bcfb-6303536c6b79", "steprescott", "password", "Ste", "Christopher", "Prescott", "ste@beaconboard.co.uk", "c0be1a6d-3d4f-4b23-b3ca-54162aeb2022", studentRole);
             
             Console.WriteLine("--- Seeding lecturer");
             var lecturer1 = CreateOrUpdateLecturer("39c05e8f-2c65-44c9-bfb7-bb92f480dbdf", "lecturer1", "password", "Bob", null, "Smith", "bob@email.com", "568472a2-8d0c-4c32-bb87-0ca8608de3a8", lectureRole);
@@ -75,11 +75,10 @@ namespace DatabaseSeed
 
             Console.WriteLine("--- Seeding sessions");
             var session1 = CreateOrUpdateSession("00fbf224-159b-4921-8d87-c2f3d3832afb", DateTime.Now.AddDays(-1), DateTime.Now.AddDays(-1).AddHours(1), lesson1, room1, module2, new List<Lecturer> { lecturer1 });
-            var session2 = CreateOrUpdateSession("8d79f5cb-814e-41e8-b0eb-f6396d4f75c2", DateTime.Now.AddDays(1), DateTime.Now.AddDays(1).AddHours(1), lesson1, room1, module2, new List<Lecturer> { lecturer1, lecturer2 });
-            var session3 = CreateOrUpdateSession("9e7532b4-bcd8-4ea9-9412-e7a14d268498", DateTime.Now.AddDays(2), DateTime.Now.AddDays(2).AddHours(1), lesson2, room2, module2, new List<Lecturer> { lecturer1 });
-            var session4 = CreateOrUpdateSession("28d96a39-ae13-4aba-aaa4-4b7c10deadd8", DateTime.Now.AddDays(9), DateTime.Now.AddDays(9).AddHours(1), lesson3, room1, module2, new List<Lecturer> { lecturer1 });
-            var session5 = CreateOrUpdateSession("9d25ec6a-da69-4e01-a21a-1922af43e5fd", DateTime.Now.AddDays(16), DateTime.Now.AddDays(16).AddHours(1), lesson4, room1, module1, new List<Lecturer> { lecturer1 });
-            var session6 = CreateOrUpdateSession("38194dc4-ef60-4655-bd78-bb6805306601", DateTime.Now.AddDays(23), DateTime.Now.AddDays(23).AddHours(1), lesson5, room1, module3, new List<Lecturer> { lecturer1 });
+            var session2 = CreateOrUpdateSession("8d79f5cb-814e-41e8-b0eb-f6396d4f75c2", DateTime.Now.AddDays(1), DateTime.Now.AddDays(1).AddHours(1), lesson2, room1, module2, new List<Lecturer> { lecturer1, lecturer2 });
+            var session3 = CreateOrUpdateSession("9e7532b4-bcd8-4ea9-9412-e7a14d268498", DateTime.Now.AddDays(2), DateTime.Now.AddDays(2).AddHours(1), lesson3, room2, module2, new List<Lecturer> { lecturer1 });
+            var session4 = CreateOrUpdateSession("28d96a39-ae13-4aba-aaa4-4b7c10deadd8", DateTime.Now.AddDays(9), DateTime.Now.AddDays(9).AddHours(1), lesson4, room1, module1, new List<Lecturer> { lecturer1 });
+            var session5 = CreateOrUpdateSession("9d25ec6a-da69-4e01-a21a-1922af43e5fd", DateTime.Now.AddDays(16), DateTime.Now.AddDays(16).AddHours(1), lesson5, room1, module3, new List<Lecturer> { lecturer1 });
             
             Console.WriteLine("--- Seeding attendances");
             var attendance1 = CreateAttendance("1440006f-e593-4207-ba46-5fd7d6dabce6", student1, session1);
