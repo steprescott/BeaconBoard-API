@@ -46,7 +46,7 @@ namespace DatabaseSeed
             Console.WriteLine("--- Seeding beacons");
             var beacon1 = CreateOrUpdateBeacon("8add217a-faa6-4fc4-9e8f-48e0c2c5702a", 1, 1, room1);
             var beacon2 = CreateOrUpdateBeacon("e9f09f7d-0622-4c1d-91dd-adef628b43f5", 1, 2, room1);
-            var beacon3 = CreateOrUpdateBeacon("e8b738b4-5d9d-4e1e-8046-1350f16c48d9", 2, 1, room2);
+            var beacon3 = CreateOrUpdateBeacon("e8b738b4-5d9d-4e1e-8046-1350f16c48d9", 4, 5, room2);
 
             Console.WriteLine("--- Seeding resource types");
             var resourceTypePDF = CreateOrUpdateResourceType("6211158c-8c5a-4862-a1b6-bd2a0b686fa5", "PDF", "This is an open format that can be normally opened via a web browser.");
@@ -74,11 +74,11 @@ namespace DatabaseSeed
             var lesson5 = CreateOrUpdateLesson("62344945-d4be-42c2-8e0b-504dda3a642a", "Programming for Games", new List<Resource> { resource1, resource3 });
 
             Console.WriteLine("--- Seeding sessions");
-            var session1 = CreateOrUpdateSession("00fbf224-159b-4921-8d87-c2f3d3832afb", DateTime.Now.AddDays(-1), DateTime.Now.AddDays(-1).AddHours(1), lesson1, room1, module2, new List<Lecturer> { lecturer1 });
-            var session2 = CreateOrUpdateSession("8d79f5cb-814e-41e8-b0eb-f6396d4f75c2", DateTime.Now.AddDays(1), DateTime.Now.AddDays(1).AddHours(1), lesson2, room1, module2, new List<Lecturer> { lecturer1, lecturer2 });
-            var session3 = CreateOrUpdateSession("9e7532b4-bcd8-4ea9-9412-e7a14d268498", DateTime.Now.AddDays(2), DateTime.Now.AddDays(2).AddHours(1), lesson3, room2, module2, new List<Lecturer> { lecturer1 });
-            var session4 = CreateOrUpdateSession("28d96a39-ae13-4aba-aaa4-4b7c10deadd8", DateTime.Now.AddDays(9), DateTime.Now.AddDays(9).AddHours(1), lesson4, room1, module1, new List<Lecturer> { lecturer1 });
-            var session5 = CreateOrUpdateSession("9d25ec6a-da69-4e01-a21a-1922af43e5fd", DateTime.Now.AddDays(16), DateTime.Now.AddDays(16).AddHours(1), lesson5, room1, module3, new List<Lecturer> { lecturer1 });
+            var session1 = CreateOrUpdateSession("00fbf224-159b-4921-8d87-c2f3d3832afb", DateTime.Now.AddDays(-1), DateTime.Now.AddDays(-1).AddHours(1), lesson1, room2, module2, new List<Lecturer> { lecturer1 });
+            var session2 = CreateOrUpdateSession("8d79f5cb-814e-41e8-b0eb-f6396d4f75c2", DateTime.Now, DateTime.Now.AddHours(1), lesson2, room2, module2, new List<Lecturer> { lecturer1, lecturer2 });
+            var session3 = CreateOrUpdateSession("9e7532b4-bcd8-4ea9-9412-e7a14d268498", DateTime.Now.AddDays(2), DateTime.Now.AddDays(2).AddHours(1), lesson3, room1, module2, new List<Lecturer> { lecturer2 });
+            var session4 = CreateOrUpdateSession("28d96a39-ae13-4aba-aaa4-4b7c10deadd8", DateTime.Now.AddDays(9), DateTime.Now.AddDays(9).AddHours(1), lesson4, room2, module1, new List<Lecturer> { lecturer1, lecturer2 });
+            var session5 = CreateOrUpdateSession("9d25ec6a-da69-4e01-a21a-1922af43e5fd", DateTime.Now.AddDays(16), DateTime.Now.AddDays(16).AddHours(1), lesson5, room2, module3, new List<Lecturer> { lecturer1 });
             
             Console.WriteLine("--- Seeding attendances");
             var attendance1 = CreateAttendance("1440006f-e593-4207-ba46-5fd7d6dabce6", student1, session1);
