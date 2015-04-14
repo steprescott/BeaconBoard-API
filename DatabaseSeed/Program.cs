@@ -76,7 +76,7 @@ namespace DatabaseSeed
 
             Console.WriteLine("--- Seeding sessions");
             var session1 = CreateOrUpdateSession("00fbf224-159b-4921-8d87-c2f3d3832afb", DateTime.Now.AddDays(-1), DateTime.Now.AddDays(-1).AddHours(1), lesson1, room2, module2, new List<Lecturer> { lecturer1 });
-            var session2 = CreateOrUpdateSession("8d79f5cb-814e-41e8-b0eb-f6396d4f75c2", DateTime.Now, DateTime.Now.AddHours(1), lesson2, room2, module2, new List<Lecturer> { lecturer1, lecturer2 });
+            var session2 = CreateOrUpdateSession("8d79f5cb-814e-41e8-b0eb-f6396d4f75c2", DateTime.Now, DateTime.Now.AddHours(1), lesson2, room1, module2, new List<Lecturer> { lecturer1, lecturer2 });
             var session3 = CreateOrUpdateSession("9e7532b4-bcd8-4ea9-9412-e7a14d268498", DateTime.Now.AddDays(2), DateTime.Now.AddDays(2).AddHours(1), lesson3, room1, module2, new List<Lecturer> { lecturer2 });
             var session4 = CreateOrUpdateSession("28d96a39-ae13-4aba-aaa4-4b7c10deadd8", DateTime.Now.AddDays(9), DateTime.Now.AddDays(9).AddHours(1), lesson4, room2, module1, new List<Lecturer> { lecturer1, lecturer2 });
             var session5 = CreateOrUpdateSession("9d25ec6a-da69-4e01-a21a-1922af43e5fd", DateTime.Now.AddDays(16), DateTime.Now.AddDays(16).AddHours(1), lesson5, room2, module3, new List<Lecturer> { lecturer1 });
