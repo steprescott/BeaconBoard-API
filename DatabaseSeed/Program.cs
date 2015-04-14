@@ -40,13 +40,14 @@ namespace DatabaseSeed
             var lecturer2 = CreateOrUpdateLecturer("1e80abc5-d3e7-40c1-be6e-e907d0943918", "lecturer2", "password", "Jane", null, "Doe", "jane@email.com", "b96dab00-d711-4926-a87f-4a1a7ea7838a", lectureRole);
 
             Console.WriteLine("--- Seeding rooms");
-            var room1 = CreateOrUpdateRoom("2eae5485-512d-43e3-9050-7c7b85445e81", "9101");
+            var room1 = CreateOrUpdateRoom("2eae5485-512d-43e3-9050-7c7b85445e81", "9129");
             var room2 = CreateOrUpdateRoom("67daf5e0-326e-4ef9-8e6e-a93a3f5bd764", "9130");
+            var room3 = CreateOrUpdateRoom("0b965c3a-9a7a-45ee-b7d8-6c5f93584ba3", "9132");
 
             Console.WriteLine("--- Seeding beacons");
             var beacon1 = CreateOrUpdateBeacon("8add217a-faa6-4fc4-9e8f-48e0c2c5702a", 1, 1, room1);
-            var beacon2 = CreateOrUpdateBeacon("e9f09f7d-0622-4c1d-91dd-adef628b43f5", 1, 2, room1);
-            var beacon3 = CreateOrUpdateBeacon("e8b738b4-5d9d-4e1e-8046-1350f16c48d9", 1, 3, room2);
+            var beacon2 = CreateOrUpdateBeacon("e9f09f7d-0622-4c1d-91dd-adef628b43f5", 1, 2, room2);
+            var beacon3 = CreateOrUpdateBeacon("e8b738b4-5d9d-4e1e-8046-1350f16c48d9", 1, 3, room3);
 
             Console.WriteLine("--- Seeding resource types");
             var resourceTypePDF = CreateOrUpdateResourceType("6211158c-8c5a-4862-a1b6-bd2a0b686fa5", "PDF", "This is an open format that can be normally opened via a web browser.");
