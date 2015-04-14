@@ -46,7 +46,7 @@ namespace DatabaseSeed
             Console.WriteLine("--- Seeding beacons");
             var beacon1 = CreateOrUpdateBeacon("8add217a-faa6-4fc4-9e8f-48e0c2c5702a", 1, 1, room1);
             var beacon2 = CreateOrUpdateBeacon("e9f09f7d-0622-4c1d-91dd-adef628b43f5", 1, 2, room1);
-            var beacon3 = CreateOrUpdateBeacon("e8b738b4-5d9d-4e1e-8046-1350f16c48d9", 4, 5, room2);
+            var beacon3 = CreateOrUpdateBeacon("e8b738b4-5d9d-4e1e-8046-1350f16c48d9", 1, 3, room2);
 
             Console.WriteLine("--- Seeding resource types");
             var resourceTypePDF = CreateOrUpdateResourceType("6211158c-8c5a-4862-a1b6-bd2a0b686fa5", "PDF", "This is an open format that can be normally opened via a web browser.");
