@@ -12,18 +12,20 @@ namespace BB.UnitOfWorkEntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class Lesson
+    public partial class Module
     {
-        public Lesson()
+        public Module()
         {
+            this.Courses = new HashSet<Course>();
             this.Sessions = new HashSet<Session>();
-            this.Resources = new HashSet<Resource>();
         }
     
-        public System.Guid LessonID { get; set; }
+        public System.Guid ModuleID { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
+        public int TermNumber { get; set; }
     
+        public virtual ICollection<Course> Courses { get; set; }
         public virtual ICollection<Session> Sessions { get; set; }
-        public virtual ICollection<Resource> Resources { get; set; }
     }
 }

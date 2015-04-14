@@ -19,6 +19,12 @@ namespace BB.Domain
         public Guid LessonID { get; set; }
 
         /// <summary>
+        /// The name of the Module that can be shown to the User.
+        /// </summary>
+        [Required]
+        public string Name { get; set; }
+
+        /// <summary>
         /// An array of Session IDs that will teach / use this lesson.
         /// </summary>
         public List<Guid> SessionIDs { get; set; }
@@ -26,9 +32,5 @@ namespace BB.Domain
         /// An array of resources used in this Lesson.
         /// </summary>
         public List<Guid> ResourceIDs { get; set; }
-        /// <summary>
-        /// An array of Courses that teach this Lesson.
-        /// </summary>
-        public List<Guid> CourseIDs { get; set; }
     }
 }

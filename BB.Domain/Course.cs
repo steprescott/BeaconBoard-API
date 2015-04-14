@@ -24,9 +24,9 @@ namespace BB.Domain
         public string Name { get; set; }
 
         /// <summary>
-        /// An array of Lesson IDs that is in the course. 
+        /// An array of Module IDs that is in the course. 
         /// </summary>
-        public List<Guid> LessonIDs { get; set; }
+        public List<Guid> ModuleIDs { get; set; }
         /// <summary>
         /// An array of Student IDs that are enrolled on the course.
         /// </summary>

@@ -10,60 +10,60 @@ using System.Threading.Tasks;
 
 namespace BB.BusinessLogicEntityFramework.Logic
 {
-    public class LessonBusinessLogic : ILessonBusinessLogic
+    public class ModuleBusinessLogic : IModuleBusinessLogic
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public LessonBusinessLogic(IUnitOfWork unitOfWork)
+        public ModuleBusinessLogic(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public bool LessonExists(Guid id)
+        public bool ModuleExists(Guid id)
         {
-            return _unitOfWork.GetAll<Lesson>().Any(i => i.LessonID == id);
+            return _unitOfWork.GetAll<Module>().Any(i => i.ModuleID == id);
         }
 
-        public CRUDResult Create(Domain.Lesson domainObject)
+        public CRUDResult Create(Domain.Module domainObject)
         {
             try
             {
                 //Check to see if the ID has been set on the domain object already
-                if (domainObject.LessonID == Guid.Empty)
+                if (domainObject.ModuleID == Guid.Empty)
                 {
                     //If it hasn't been set generate a new GUID
-                    domainObject.LessonID = Guid.NewGuid();
+                    domainObject.ModuleID = Guid.NewGuid();
                 }
 
                 //Map the domain object to an Entity Framework object
-                var obj = Mapper.Map<Lesson>(domainObject);
+                var obj = Mapper.Map<Module>(domainObject);
 
-                //If there are Sessions to map
-                if(domainObject.SessionIDs != null)
+                //If there are any Courses to map
+                if (domainObject.CourseIDs != null)
+                {
+                    //Due to a Many - Many relationship it is too complex for Automapper to do.
+                    var courses = _unitOfWork.GetAll<Course>().Where(i => domainObject.CourseIDs.Contains(i.CourseID)).ToList();
+
+                    //If the Module has Sessions linked to it
+                    if (courses != null && courses.Count > 0)
+                    {
+                        obj.Courses = courses;
+                    }
+                }
+
+                //If there are any Sessions to map
+                if (domainObject.SessionIDs != null)
                 {
                     //Due to a Many - Many relationship it is too complex for Automapper to do.
                     var sessions = _unitOfWork.GetAll<Session>().Where(i => domainObject.SessionIDs.Contains(i.SessionID)).ToList();
 
-                    //If the Lesson has Modules linked to it
+                    //If the Module has Sessions linked to it
                     if (sessions != null && sessions.Count > 0)
                     {
                         obj.Sessions = sessions;
                     }
                 }
 
-                //If there are Resources to map
-                if(domainObject.ResourceIDs != null)
-                {
-                    //Due to a Many - Many relationship it is too complex for Automapper to do.
-                    var resources = _unitOfWork.GetAll<Resource>().Where(i => domainObject.ResourceIDs.Contains(i.ResourceID)).ToList();
-
-                    //If the Lesson has Resources linked to it
-                    if (resources != null && resources.Count > 0)
-                    {
-                        obj.Resources = resources;
-                    }
-                }
-                
                 //Insert it in the database
                 _unitOfWork.Insert(obj);
                 _unitOfWork.SaveChanges();
@@ -78,13 +78,13 @@ namespace BB.BusinessLogicEntityFramework.Logic
             }
         }
 
-        public CRUDResult Update(Domain.Lesson domainObject)
+        public CRUDResult Update(Domain.Module domainObject)
         {
             //Check first that an ID has been passed
-            if (domainObject.LessonID != Guid.Empty)
+            if (domainObject.ModuleID != Guid.Empty)
             {
                 //Query the database to see if we already have an object with the same ID
-                var obj = _unitOfWork.GetById<Lesson>(domainObject.LessonID);
+                var obj = _unitOfWork.GetById<Module>(domainObject.ModuleID);
 
                 try
                 {
@@ -94,29 +94,29 @@ namespace BB.BusinessLogicEntityFramework.Logic
                         //Map the updated values
                         obj = Mapper.Map(domainObject, obj);
 
-                        //If there are Sessions to map
+                        //If there are any Courses to map
+                        if (domainObject.CourseIDs != null)
+                        {
+                            //Due to a Many - Many relationship it is too complex for Automapper to do.
+                            var courses = _unitOfWork.GetAll<Course>().Where(i => domainObject.CourseIDs.Contains(i.CourseID)).ToList();
+
+                            //If the Module has Sessions linked to it
+                            if (courses != null && courses.Count > 0)
+                            {
+                                obj.Courses = courses;
+                            }
+                        }
+
+                        //If there are any Sessions to map
                         if (domainObject.SessionIDs != null)
                         {
                             //Due to a Many - Many relationship it is too complex for Automapper to do.
                             var sessions = _unitOfWork.GetAll<Session>().Where(i => domainObject.SessionIDs.Contains(i.SessionID)).ToList();
 
-                            //If the Lesson has Modules linked to it
+                            //If the Module has Sessions linked to it
                             if (sessions != null && sessions.Count > 0)
                             {
                                 obj.Sessions = sessions;
-                            }
-                        }
-
-                        //If there are Resources to map
-                        if (domainObject.ResourceIDs != null)
-                        {
-                            //Due to a Many - Many relationship it is too complex for Automapper to do.
-                            var resources = _unitOfWork.GetAll<Resource>().Where(i => domainObject.ResourceIDs.Contains(i.ResourceID)).ToList();
-
-                            //If the Resource has Lessons linked to it
-                            if (resources != null && resources.Count > 0)
-                            {
-                                obj.Resources = resources;
                             }
                         }
 
@@ -143,28 +143,28 @@ namespace BB.BusinessLogicEntityFramework.Logic
             return CRUDResult.Error;
         }
 
-        public List<Domain.Lesson> GetAll()
+        public List<Domain.Module> GetAll()
         {
             //Get all the Entity Framework items from the database
-            var items = _unitOfWork.GetAll<Lesson>().ToList();
+            var items = _unitOfWork.GetAll<Module>().ToList();
 
             //Map all the Entity Framework items to a list of domain objects
-            return Mapper.Map<List<Domain.Lesson>>(items);
+            return Mapper.Map<List<Domain.Module>>(items);
         }
 
-        public Domain.Lesson GetByID(Guid id)
+        public Domain.Module GetByID(Guid id)
         {
             //Get all the Entity Framework item with the given ID from the database
-            var obj = _unitOfWork.GetById<Lesson>(id);
+            var obj = _unitOfWork.GetById<Module>(id);
 
             //Map the Entity Framework item to a domain object
-            return Mapper.Map<Domain.Lesson>(obj);
+            return Mapper.Map<Domain.Module>(obj);
         }
 
-        public CRUDResult Delete(Domain.Lesson domainObject)
+        public CRUDResult Delete(Domain.Module domainObject)
         {
             //Use the ID of the domain object to call the DeleteByID function
-            return DeleteByID(domainObject.LessonID);
+            return DeleteByID(domainObject.ModuleID);
         }
 
         public CRUDResult DeleteByID(Guid id)
@@ -172,7 +172,7 @@ namespace BB.BusinessLogicEntityFramework.Logic
             try
             {
                 //Get back the Entity Framework object from the database with the given ID
-                var obj = _unitOfWork.GetById<Lesson>(id);
+                var obj = _unitOfWork.GetById<Module>(id);
 
                 //If the object is in the database
                 if (obj != null)

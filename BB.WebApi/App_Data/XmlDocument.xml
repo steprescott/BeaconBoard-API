@@ -523,12 +523,12 @@
             <param name="id">The ID of the Resource to delete.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         </member>
-        <member name="T:BB.WebApi.Controllers.ResourceTypeTypesController">
+        <member name="T:BB.WebApi.Controllers.ResourceTypesController">
             <summary>
             Any requests made to the API for ResourceType entities will be handled by the ResourceTypesController
             </summary>
         </member>
-        <member name="M:BB.WebApi.Controllers.ResourceTypeTypesController.Post(BB.Domain.ResourceType)">
+        <member name="M:BB.WebApi.Controllers.ResourceTypesController.Post(BB.Domain.ResourceType)">
             <summary>
             Creates a new Resource Type with the given details.
             Only Lecturers can call this action.
@@ -536,7 +536,7 @@
             <param name="ResourceType">The details of the new Resource Type.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         </member>
-        <member name="M:BB.WebApi.Controllers.ResourceTypeTypesController.Put(BB.Domain.ResourceType)">
+        <member name="M:BB.WebApi.Controllers.ResourceTypesController.Put(BB.Domain.ResourceType)">
             <summary>
             Updates the Resource Type with the given details.
             Only Lecturers can call this action.
@@ -544,20 +544,20 @@
             <param name="ResourceType">These are the details that the Resource Type should be update with.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         </member>
-        <member name="M:BB.WebApi.Controllers.ResourceTypeTypesController.Get">
+        <member name="M:BB.WebApi.Controllers.ResourceTypesController.Get">
             <summary>
             Gets all Resource Types that are in the system.
             </summary>
             <returns>An array of Resource Type DTOs that holds the details for the Resource Types.</returns>
         </member>
-        <member name="M:BB.WebApi.Controllers.ResourceTypeTypesController.Get(System.Guid)">
+        <member name="M:BB.WebApi.Controllers.ResourceTypesController.Get(System.Guid)">
             <summary>
             Gets the ResourceType with the given ID.
             </summary>
             <param name="id">The ID of the Resource Type that the request is asking for.</param>
             <returns>Resource Type DTO that holds the details for the Resource Type.</returns>
         </member>
-        <member name="M:BB.WebApi.Controllers.ResourceTypeTypesController.Delete(System.Guid)">
+        <member name="M:BB.WebApi.Controllers.ResourceTypesController.Delete(System.Guid)">
             <summary>
             Deletes the Resource Type from the database with the given ID.
             Only Lecturers can call this action.
@@ -758,6 +758,48 @@
             <param name="id">The ID of the Role to delete.</param>
             <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
         </member>
+        <member name="T:BB.WebApi.Controllers.ModulesController">
+            <summary>
+            Any requests made to the API for Module entities will be handled by the ModulesController
+            </summary>
+        </member>
+        <member name="M:BB.WebApi.Controllers.ModulesController.Post(BB.Domain.Module)">
+            <summary>
+            Creates a new Module with the given details.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="Module">The details of the new Module.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.ModulesController.Put(BB.Domain.Module)">
+            <summary>
+            Updates the Module with the given details.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="Module">These are the details that the Module should be update with.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.ModulesController.Get">
+            <summary>
+            Gets all Modules that are in the system.
+            </summary>
+            <returns>An array of Module DTOs that holds the details for the Modules.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.ModulesController.Get(System.Guid)">
+            <summary>
+            Gets the Module with the given ID.
+            </summary>
+            <param name="id">The ID of the Module that the request is asking for.</param>
+            <returns>Module DTO that holds the details for the Module.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.ModulesController.Delete(System.Guid)">
+            <summary>
+            Deletes the Module from the database with the given ID.
+            Only Lecturers can call this action.
+            </summary>
+            <param name="id">The ID of the Module to delete.</param>
+            <returns>HttpResponseMessage with correct status code and content for the result of the call.</returns>
+        </member>
         <member name="T:BB.WebApi.Controllers.UsersController">
             <summary>
             Any requests made to the API for User entities will be handled by the UsersController
@@ -787,6 +829,17 @@
             </summary>
             <param name="id">The ID of the User that the request is asking for.</param>
             <returns>User DTO that holds the details for the User.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.UsersController.GetActiveUser">
+            <summary>
+            In order to limit the amount of data needed to be synced to the device this endpoint
+            gives the entry point that will allow only the data related to the active User to be sent.
+            For example, this removes the need to download all the Courses in the system but only download
+            the Courses related to the active User.
+            
+            This end point gets the UserToken from the headers of the request so there is no need to any other parameters.
+            </summary>
+            <returns>User DTO that holds the details for the active User.</returns>
         </member>
         <member name="M:BB.WebApi.Controllers.UsersController.GetLecturer(System.Guid)">
             <summary>
@@ -899,12 +952,19 @@
             </summary>
             <returns>An array of Session DTOs that holds the details for the Sessions that are upcoming.</returns>
         </member>
-        <member name="M:BB.WebApi.Controllers.SessionsController.GetUpcomingSessions(System.Guid)">
+        <member name="M:BB.WebApi.Controllers.SessionsController.GetUpcomingSessionsForCourse(System.Guid)">
             <summary>
             Gets all the sessions that are upcoming for the given Course ID.
             </summary>
             <param name="courseID">The Course ID that should be used to filter the upcoming Sessions.</param>
             <returns>An array of Session DTOs that holds the details for the Sessions that are upcoming for the given Course ID.</returns>
+        </member>
+        <member name="M:BB.WebApi.Controllers.SessionsController.GetUpcomingSessionsForModule(System.Guid)">
+            <summary>
+            Gets all the sessions that are upcoming for the given Module ID.
+            </summary>
+            <param name="moduleID">The Module ID that should be used to filter the upcoming Sessions.</param>
+            <returns>An array of Session DTOs that holds the details for the Sessions that are upcoming for the given Module ID.</returns>
         </member>
         <member name="M:BB.WebApi.Controllers.SessionsController.Get(System.Guid)">
             <summary>
@@ -915,9 +975,9 @@
         </member>
         <member name="M:BB.WebApi.Controllers.SessionsController.GetCurrentSessionByRoomID(System.Guid)">
             <summary>
-            Gets the current Session that is ongoing, if there is one, for the room with the given ID.
+            Gets the current Session that is ongoing, if there is one, for the Room with the given ID.
             </summary>
-            <param name="id">The room ID that is to be checked for a ongoing session.</param>
+            <param name="roomID">The room ID that is to be checked for a ongoing session.</param>
             <returns></returns>
         </member>
         <member name="M:BB.WebApi.Controllers.SessionsController.Delete(System.Guid)">

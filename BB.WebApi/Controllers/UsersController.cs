@@ -3,6 +3,7 @@ using BB.Domain.Enums;
 using BB.WebApi.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -28,11 +29,11 @@ namespace BB.WebApi.Controllers
             //Get back all the items
             var items = BeaconBoardService.UserBusinessLogic.GetAll();
 
-            var Users = new List<UserDTOModel>();
+            var users = new List<UserDTOModel>();
 
             foreach (User user in items)
             {
-                Users.Add(new UserDTOModel
+                users.Add(new UserDTOModel
                 {
                     UserID = user.UserID,
                     Username = user.Username,
@@ -45,7 +46,7 @@ namespace BB.WebApi.Controllers
             }
 
             //Return them via a HttpResponseMessage with OK
-            return Request.CreateResponse(HttpStatusCode.OK, Users);
+            return Request.CreateResponse(HttpStatusCode.OK, users);
         }
 
         /// <summary>
@@ -60,11 +61,11 @@ namespace BB.WebApi.Controllers
             //Get back all the items
             var items = BeaconBoardService.LecturerBusinessLogic.GetAll();
 
-            var Users = new List<LecturerDTOModel>();
+            var users = new List<LecturerDTOModel>();
 
             foreach (Lecturer lecturer in items)
             {
-                Users.Add(new LecturerDTOModel
+                users.Add(new LecturerDTOModel
                 {
                     UserID = lecturer.UserID,
                     Username = lecturer.Username,
@@ -79,7 +80,7 @@ namespace BB.WebApi.Controllers
             }
 
             //Return them via a HttpResponseMessage with OK
-            return Request.CreateResponse(HttpStatusCode.OK, Users);
+            return Request.CreateResponse(HttpStatusCode.OK, users);
         }
 
         /// <summary>
@@ -94,11 +95,11 @@ namespace BB.WebApi.Controllers
             //Get back all the items
             var items = BeaconBoardService.StudentBusinessLogic.GetAll();
 
-            var Users = new List<StudentDTOModel>();
+            var users = new List<StudentDTOModel>();
 
             foreach (Student student in items)
             {
-                Users.Add(new StudentDTOModel
+                users.Add(new StudentDTOModel
                 {
                     UserID = student.UserID,
                     Username = student.Username,
@@ -112,7 +113,7 @@ namespace BB.WebApi.Controllers
             }
 
             //Return them via a HttpResponseMessage with OK
-            return Request.CreateResponse(HttpStatusCode.OK, Users);
+            return Request.CreateResponse(HttpStatusCode.OK, users);
         }
 
         /// <summary>
@@ -134,7 +135,7 @@ namespace BB.WebApi.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No User found");
             }
 
-            var User = new UserDTOModel
+            var user = new UserDTOModel
             {
                 UserID = obj.UserID,
                 Username = obj.Username,
@@ -146,7 +147,58 @@ namespace BB.WebApi.Controllers
             };
 
             //Otherwise return the object with a status of OK
-            return Request.CreateResponse(HttpStatusCode.OK, User);
+            return Request.CreateResponse(HttpStatusCode.OK, user);
+        }
+
+        /// <summary>
+        /// In order to limit the amount of data needed to be synced to the device this endpoint
+        /// gives the entry point that will allow only the data related to the active User to be sent.
+        /// For example, this removes the need to download all the Courses in the system but only download
+        /// the Courses related to the active User.
+        /// 
+        /// This end point gets the UserToken from the headers of the request so there is no need to any other parameters.
+        /// </summary>
+        /// <returns>User DTO that holds the details for the active User.</returns>
+        [HttpGet]
+        [Route("users/activeUser")]
+        [ResponseType(typeof(UserDTOModel))]
+        public HttpResponseMessage GetActiveUser()
+        {
+            //Get back the headers we are checking for
+            var userTokenHeader = Request.Headers.SingleOrDefault(h => h.Key == ConfigurationManager.AppSettings["UserTokenHeader"]);
+
+            if (userTokenHeader.Value != null)
+            {
+                //Get the User Token value from the header
+                var userToken = Guid.Parse(userTokenHeader.Value.First());
+
+                //Get back the item details for the token ID
+                var obj = BeaconBoardService.UserBusinessLogic.GetUserForToken(userToken);
+
+                //If there wasn't an object with the given token ID
+                if (obj == null)
+                {
+                    //Return HttpResponseMessage with NotFound status code
+                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No User found with token.");
+                }
+
+                var user = new UserDTOModel
+                {
+                    UserID = obj.UserID,
+                    Username = obj.Username,
+                    FirstName = obj.FirstName,
+                    OtherNames = obj.OtherNames,
+                    LastName = obj.LastName,
+                    EmailAddress = obj.EmailAddress,
+                    RoleID = obj.RoleID
+                };
+
+                //Otherwise return the object with a status of OK
+                return Request.CreateResponse(HttpStatusCode.OK, user);
+            }
+
+            //Return HttpResponseMessage with BadRequest status code
+            return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "No User token sent.");
         }
 
         /// <summary>
@@ -169,7 +221,7 @@ namespace BB.WebApi.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No Lecturer found");
             }
 
-            var User = new LecturerDTOModel
+            var user = new LecturerDTOModel
             {
                 UserID = obj.UserID,
                 Username = obj.Username,
@@ -183,7 +235,7 @@ namespace BB.WebApi.Controllers
             };
 
             //Otherwise return the object with a status of OK
-            return Request.CreateResponse(HttpStatusCode.OK, User);
+            return Request.CreateResponse(HttpStatusCode.OK, user);
         }
 
         /// <summary>
@@ -206,7 +258,7 @@ namespace BB.WebApi.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No Student found");
             }
 
-            var User = new StudentDTOModel
+            var user = new StudentDTOModel
             {
                 UserID = obj.UserID,
                 Username = obj.Username,
@@ -219,7 +271,7 @@ namespace BB.WebApi.Controllers
             };
 
             //Otherwise return the object with a status of OK
-            return Request.CreateResponse(HttpStatusCode.OK, User);
+            return Request.CreateResponse(HttpStatusCode.OK, user);
         }
 
         /// <summary>

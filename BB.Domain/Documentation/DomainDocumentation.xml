@@ -47,9 +47,9 @@
             The name of the course.
             </summary>
         </member>
-        <member name="P:BB.Domain.Course.LessonIDs">
+        <member name="P:BB.Domain.Course.ModuleIDs">
             <summary>
-            An array of Lesson IDs that is in the course. 
+            An array of Module IDs that is in the course. 
             </summary>
         </member>
         <member name="P:BB.Domain.Course.StudentIDs">
@@ -204,6 +204,11 @@
             Primary key that is unique for the object.
             </summary>
         </member>
+        <member name="P:BB.Domain.Lesson.Name">
+            <summary>
+            The name of the Module that can be shown to the User.
+            </summary>
+        </member>
         <member name="P:BB.Domain.Lesson.SessionIDs">
             <summary>
             An array of Session IDs that will teach / use this lesson.
@@ -212,11 +217,6 @@
         <member name="P:BB.Domain.Lesson.ResourceIDs">
             <summary>
             An array of resources used in this Lesson.
-            </summary>
-        </member>
-        <member name="P:BB.Domain.Lesson.CourseIDs">
-            <summary>
-            An array of Courses that teach this Lesson.
             </summary>
         </member>
         <member name="T:BB.Domain.Resource">
@@ -327,6 +327,42 @@
             An array of Users that have this Role.
             </summary>
         </member>
+        <member name="T:BB.Domain.Module">
+            <summary>
+            DTO to allow the Entity to be passed over the API.
+            
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Module.ModuleID">
+            <summary>
+            Primary key that is unique for the object.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Module.Name">
+            <summary>
+            The name of the Module that can be displayed to the User.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Module.Description">
+            <summary>
+            Description of the Module. This may be shown to the User.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Module.TermNumber">
+            <summary>
+            This is the Term number that the Module is ran during.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Module.CourseIDs">
+            <summary>
+            An array of Course IDs that incorporate this Module.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Module.SessionIDs">
+            <summary>
+            An array of Sessions IDs that are ran in this Module.
+            </summary>
+        </member>
         <member name="T:BB.Domain.Student">
             <summary>
             DTO to allow the Entity to be passed over the API.
@@ -396,6 +432,11 @@
             <summary>
             The ID of the Lesson that is being taught for this Session.
             This links the Session to the Resources via the Lesson.
+            </summary>
+        </member>
+        <member name="P:BB.Domain.Session.ModuleID">
+            <summary>
+            This is the Module that the Session is taught in.
             </summary>
         </member>
         <member name="P:BB.Domain.Session.RoomID">

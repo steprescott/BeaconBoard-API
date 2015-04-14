@@ -28,23 +28,24 @@ namespace BB.Container
         {
             _unityContainer = new UnityContainer();
 
-            _unityContainer.RegisterType<IUnitOfWork, UnitOfWorkEntityFrameworkImplementation>(new ContainerControlledLifetimeManager());
+            _unityContainer.RegisterType<IUnitOfWork, UnitOfWorkEntityFrameworkImplementation>(new HierarchicalLifetimeManager());
 
-            _unityContainer.RegisterType<IAttendanceBusinessLogic, AttendanceBusinessLogic>(new ContainerControlledLifetimeManager());
-            _unityContainer.RegisterType<IBeaconBusinessLogic, BeaconBusinessLogic>(new ContainerControlledLifetimeManager());
-            _unityContainer.RegisterType<ICourseBusinessLogic, CourseBusinessLogic>(new ContainerControlledLifetimeManager());
-            _unityContainer.RegisterType<ILessonBusinessLogic, LessonBusinessLogic>(new ContainerControlledLifetimeManager());
-            _unityContainer.RegisterType<IResourceBusinessLogic, ResourceBusinessLogic>(new ContainerControlledLifetimeManager());
-            _unityContainer.RegisterType<IResourceTypeBusinessLogic, ResourceTypeBusinessLogic>(new ContainerControlledLifetimeManager());
-            _unityContainer.RegisterType<IRoleBusinessLogic, RoleBusinessLogic>(new ContainerControlledLifetimeManager());
-            _unityContainer.RegisterType<IRoomBusinessLogic, RoomBusinessLogic>(new ContainerControlledLifetimeManager());
-            _unityContainer.RegisterType<ISessionBusinessLogic, SessionBusinessLogic>(new ContainerControlledLifetimeManager());
+            _unityContainer.RegisterType<IAttendanceBusinessLogic, AttendanceBusinessLogic>();
+            _unityContainer.RegisterType<IBeaconBusinessLogic, BeaconBusinessLogic>();
+            _unityContainer.RegisterType<ICourseBusinessLogic, CourseBusinessLogic>();
+            _unityContainer.RegisterType<ILessonBusinessLogic, LessonBusinessLogic>();
+            _unityContainer.RegisterType<IModuleBusinessLogic, ModuleBusinessLogic>();
+            _unityContainer.RegisterType<IResourceBusinessLogic, ResourceBusinessLogic>();
+            _unityContainer.RegisterType<IResourceTypeBusinessLogic, ResourceTypeBusinessLogic>();
+            _unityContainer.RegisterType<IRoleBusinessLogic, RoleBusinessLogic>();
+            _unityContainer.RegisterType<IRoomBusinessLogic, RoomBusinessLogic>();
+            _unityContainer.RegisterType<ISessionBusinessLogic, SessionBusinessLogic>();
 
-            _unityContainer.RegisterType<ITokenBusinessLogic, TokenBusinessLogic>(new ContainerControlledLifetimeManager());
+            _unityContainer.RegisterType<ITokenBusinessLogic, TokenBusinessLogic>();
 
-            _unityContainer.RegisterType<IUserBusinessLogic, UserBusinessLogic>(new ContainerControlledLifetimeManager());
-            _unityContainer.RegisterType<ILecturerBusinessLogic, LecturerBusinessLogic>(new ContainerControlledLifetimeManager());
-            _unityContainer.RegisterType<IStudentBusinessLogic, StudentBusinessLogic>(new ContainerControlledLifetimeManager());
+            _unityContainer.RegisterType<IUserBusinessLogic, UserBusinessLogic>();
+            _unityContainer.RegisterType<ILecturerBusinessLogic, LecturerBusinessLogic>();
+            _unityContainer.RegisterType<IStudentBusinessLogic, StudentBusinessLogic>();
         }
     }
 }

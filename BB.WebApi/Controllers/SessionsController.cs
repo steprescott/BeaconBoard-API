@@ -75,6 +75,7 @@ namespace BB.WebApi.Controllers
         /// </summary>
         /// <returns>An array of Session DTOs that holds the details for the Sessions.</returns>
         [HttpGet]
+        [Route("sessions")]
         [ResponseType(typeof(List<Session>))]
         public HttpResponseMessage Get()
         {
@@ -110,7 +111,7 @@ namespace BB.WebApi.Controllers
         [HttpGet]
         [Route("sessions/upcoming")]
         [ResponseType(typeof(List<Session>))]
-        public HttpResponseMessage GetUpcomingSessions(Guid courseID)
+        public HttpResponseMessage GetUpcomingSessionsForCourse(Guid courseID)
         {
             //Get all the sessions that are upcoming for the Course with the given ID. That is Sessions that are to be ran for the Course.
             var obj = BeaconBoardService.CourseBusinessLogic.GetByID(courseID);
@@ -128,11 +129,37 @@ namespace BB.WebApi.Controllers
         }
 
         /// <summary>
+        /// Gets all the sessions that are upcoming for the given Module ID.
+        /// </summary>
+        /// <param name="moduleID">The Module ID that should be used to filter the upcoming Sessions.</param>
+        /// <returns>An array of Session DTOs that holds the details for the Sessions that are upcoming for the given Module ID.</returns>
+        [HttpGet]
+        [Route("sessions/upcoming")]
+        [ResponseType(typeof(List<Session>))]
+        public HttpResponseMessage GetUpcomingSessionsForModule(Guid moduleID)
+        {
+            //Get all the sessions that are upcoming for the Module with the given ID. That is Sessions that are to be ran for the Module.
+            var obj = BeaconBoardService.ModuleBusinessLogic.GetByID(moduleID);
+
+            //If there isn't a Module with the given ID
+            if (obj == null)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Module with the ID of '" + moduleID + "' was not found.");
+            }
+
+            var items = BeaconBoardService.SessionBusinessLogic.GetAllUpcomingSessionsForModuleWithID(moduleID);
+
+            //Otherwise return the object with a status of OK
+            return Request.CreateResponse(HttpStatusCode.OK, items);
+        }
+
+        /// <summary>
         /// Gets the Session with the given ID.
         /// </summary>
         /// <param name="id">The ID of the Session that the request is asking for.</param>
         /// <returns>Session DTO that holds the details for the Session.</returns>
         [HttpGet]
+        [Route("sessions/{id}")]
         [ResponseType(typeof(Session))]
         public HttpResponseMessage Get(Guid id)
         {
@@ -151,26 +178,20 @@ namespace BB.WebApi.Controllers
         }
 
         /// <summary>
-        /// Gets the current Session that is ongoing, if there is one, for the room with the given ID.
+        /// Gets the current Session that is ongoing, if there is one, for the Room with the given ID.
         /// </summary>
-        /// <param name="id">The room ID that is to be checked for a ongoing session.</param>
+        /// <param name="roomID">The room ID that is to be checked for a ongoing session.</param>
         /// <returns></returns>
         [HttpGet]
-        [Route("sessions/GetCurrentSessionByRoomID")]
+        [Route("sessions/current")]
         [ResponseType(typeof(Session))]
-        public HttpResponseMessage GetCurrentSessionByRoomID(Guid id)
+        public HttpResponseMessage GetCurrentSessionByRoomID(Guid roomID)
         {
             //Get back the current Session that is happening in the Room with the given ID
-            var obj = BeaconBoardService.SessionBusinessLogic.GetCurrentSessionForRoomWithID(id);
+            var obj = BeaconBoardService.SessionBusinessLogic.GetCurrentSessionForRoomWithID(roomID);
 
-            //If there is no current Session for the Room
-            if (obj == null)
-            {
-                //Return HttpResponseMessage with NotFound status code
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No current Session for the room.");
-            }
-
-            //Otherwise return the object with a status of OK
+            //Return the object with a status of OK
+            //If there is no current Session for the Room then it will return an empty array
             return Request.CreateResponse(HttpStatusCode.OK, obj);
         }
 

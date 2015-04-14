@@ -16,24 +16,17 @@
     <EntitySet Name="Users" EntityType="BeaconBoardDatabase.Store.Users" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Roles" EntityType="BeaconBoardDatabase.Store.Roles" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Attendances" EntityType="BeaconBoardDatabase.Store.Attendances" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Modules" EntityType="BeaconBoardDatabase.Store.Modules" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Users_Student" EntityType="BeaconBoardDatabase.Store.Users_Student" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Users_Lecturer" EntityType="BeaconBoardDatabase.Store.Users_Lecturer" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="CourseLesson" EntityType="BeaconBoardDatabase.Store.CourseLesson" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="StudentCourse" EntityType="BeaconBoardDatabase.Store.StudentCourse" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="LecturerCourse" EntityType="BeaconBoardDatabase.Store.LecturerCourse" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="LessonResource" EntityType="BeaconBoardDatabase.Store.LessonResource" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="SessionLecturer" EntityType="BeaconBoardDatabase.Store.SessionLecturer" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CourseModule" EntityType="BeaconBoardDatabase.Store.CourseModule" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="RoomBeacon" Association="BeaconBoardDatabase.Store.RoomBeacon">
       <End Role="Room" EntitySet="Rooms" />
       <End Role="Beacon" EntitySet="Beacons" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CourseLesson_Course" Association="BeaconBoardDatabase.Store.FK_CourseLesson_Course">
-      <End Role="Course" EntitySet="Courses" />
-      <End Role="CourseLesson" EntitySet="CourseLesson" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CourseLesson_Lesson" Association="BeaconBoardDatabase.Store.FK_CourseLesson_Lesson">
-      <End Role="Lesson" EntitySet="Lessons" />
-      <End Role="CourseLesson" EntitySet="CourseLesson" />
     </AssociationSet>
     <AssociationSet Name="FK_StudentCourse_Student" Association="BeaconBoardDatabase.Store.FK_StudentCourse_Student">
       <End Role="Student" EntitySet="Users_Student" />
@@ -91,6 +84,18 @@
       <End Role="Student" EntitySet="Users_Student" />
       <End Role="Attendance" EntitySet="Attendances" />
     </AssociationSet>
+    <AssociationSet Name="FK_CourseModule_Course" Association="BeaconBoardDatabase.Store.FK_CourseModule_Course">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="CourseModule" EntitySet="CourseModule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseModule_Module" Association="BeaconBoardDatabase.Store.FK_CourseModule_Module">
+      <End Role="Module" EntitySet="Modules" />
+      <End Role="CourseModule" EntitySet="CourseModule" />
+    </AssociationSet>
+    <AssociationSet Name="ModuleSession" Association="BeaconBoardDatabase.Store.ModuleSession">
+      <End Role="Module" EntitySet="Modules" />
+      <End Role="Session" EntitySet="Sessions" />
+    </AssociationSet>
     <AssociationSet Name="FK_Student_inherits_User" Association="BeaconBoardDatabase.Store.FK_Student_inherits_User">
       <End Role="User" EntitySet="Users" />
       <End Role="Student" EntitySet="Users_Student" />
@@ -128,6 +133,7 @@
       <PropertyRef Name="LessonID" />
     </Key>
     <Property Name="LessonID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Sessions">
     <Key>
@@ -138,6 +144,7 @@
     <Property Name="ScheduledStartDate" Type="datetime" Nullable="false" />
     <Property Name="ScheduledEndDate" Type="datetime" Nullable="false" />
     <Property Name="RoomID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ModuleID" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
   <EntityType Name="Resources">
     <Key>
@@ -186,6 +193,15 @@
     <Property Name="SessionID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="StudentID" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
+  <EntityType Name="Modules">
+    <Key>
+      <PropertyRef Name="ModuleID" />
+    </Key>
+    <Property Name="ModuleID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="TermNumber" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Users_Student">
     <Key>
       <PropertyRef Name="UserID" />
@@ -197,14 +213,6 @@
       <PropertyRef Name="UserID" />
     </Key>
     <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
-  </EntityType>
-  <EntityType Name="CourseLesson">
-    <Key>
-      <PropertyRef Name="Courses_CourseID" />
-      <PropertyRef Name="Lessons_LessonID" />
-    </Key>
-    <Property Name="Courses_CourseID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Lessons_LessonID" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
   <EntityType Name="StudentCourse">
     <Key>
@@ -237,6 +245,14 @@
     </Key>
     <Property Name="Sessions_SessionID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Lecturers_UserID" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CourseModule">
+    <Key>
+      <PropertyRef Name="Courses_CourseID" />
+      <PropertyRef Name="Modules_ModuleID" />
+    </Key>
+    <Property Name="Courses_CourseID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Modules_ModuleID" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
   <Association Name="RoomBeacon">
     <End Role="Room" Type="BeaconBoardDatabase.Store.Rooms" Multiplicity="0..1" />
@@ -322,27 +338,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_CourseLesson_Course">
-    <End Role="Course" Type="BeaconBoardDatabase.Store.Courses" Multiplicity="1" />
-    <End Role="CourseLesson" Type="BeaconBoardDatabase.Store.CourseLesson" Multiplicity="*" />
+  <Association Name="ModuleSession">
+    <End Role="Module" Type="BeaconBoardDatabase.Store.Modules" Multiplicity="1" />
+    <End Role="Session" Type="BeaconBoardDatabase.Store.Sessions" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Course">
-        <PropertyRef Name="CourseID" />
+      <Principal Role="Module">
+        <PropertyRef Name="ModuleID" />
       </Principal>
-      <Dependent Role="CourseLesson">
-        <PropertyRef Name="Courses_CourseID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CourseLesson_Lesson">
-    <End Role="CourseLesson" Type="BeaconBoardDatabase.Store.CourseLesson" Multiplicity="*" />
-    <End Role="Lesson" Type="BeaconBoardDatabase.Store.Lessons" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Lesson">
-        <PropertyRef Name="LessonID" />
-      </Principal>
-      <Dependent Role="CourseLesson">
-        <PropertyRef Name="Lessons_LessonID" />
+      <Dependent Role="Session">
+        <PropertyRef Name="ModuleID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -442,6 +446,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_CourseModule_Course">
+    <End Role="Course" Type="BeaconBoardDatabase.Store.Courses" Multiplicity="1" />
+    <End Role="CourseModule" Type="BeaconBoardDatabase.Store.CourseModule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseID" />
+      </Principal>
+      <Dependent Role="CourseModule">
+        <PropertyRef Name="Courses_CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseModule_Module">
+    <End Role="CourseModule" Type="BeaconBoardDatabase.Store.CourseModule" Multiplicity="*" />
+    <End Role="Module" Type="BeaconBoardDatabase.Store.Modules" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Module">
+        <PropertyRef Name="ModuleID" />
+      </Principal>
+      <Dependent Role="CourseModule">
+        <PropertyRef Name="Modules_ModuleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Student_inherits_User">
     <End Role="User" Type="BeaconBoardDatabase.Store.Users" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -487,10 +515,6 @@
             <End Role="Room" EntitySet="Rooms" />
             <End Role="Beacon" EntitySet="Beacons" />
           </AssociationSet>
-          <AssociationSet Name="CourseLesson" Association="BeaconBoardDatabase.CourseLesson">
-            <End Role="Course" EntitySet="Courses" />
-            <End Role="Lesson" EntitySet="Lessons" />
-          </AssociationSet>
           <AssociationSet Name="StudentCourse" Association="BeaconBoardDatabase.StudentCourse">
             <End Role="Student" EntitySet="Users" />
             <End Role="Course" EntitySet="Courses" />
@@ -533,6 +557,15 @@
             <End Role="Student" EntitySet="Users" />
             <End Role="Attendance" EntitySet="Attendances" />
           </AssociationSet>
+          <EntitySet Name="Modules" EntityType="BeaconBoardDatabase.Module" />
+          <AssociationSet Name="CourseModule" Association="BeaconBoardDatabase.CourseModule">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Module" EntitySet="Modules" />
+          </AssociationSet>
+          <AssociationSet Name="ModuleSession" Association="BeaconBoardDatabase.ModuleSession">
+            <End Role="Module" EntitySet="Modules" />
+            <End Role="Session" EntitySet="Sessions" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Beacon">
           <Key>
@@ -559,16 +592,16 @@
           </Key>
           <Property Name="CourseID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="Name" Type="String" Nullable="false" />
-          <NavigationProperty Name="Lessons" Relationship="BeaconBoardDatabase.CourseLesson" FromRole="Course" ToRole="Lesson" />
           <NavigationProperty Name="Students" Relationship="BeaconBoardDatabase.StudentCourse" FromRole="Course" ToRole="Student" />
           <NavigationProperty Name="Lecturers" Relationship="BeaconBoardDatabase.LecturerCourse" FromRole="Course" ToRole="Lecturer" />
+          <NavigationProperty Name="Modules" Relationship="BeaconBoardDatabase.CourseModule" FromRole="Course" ToRole="Module" />
         </EntityType>
         <EntityType Name="Lesson">
           <Key>
             <PropertyRef Name="LessonID" />
           </Key>
           <Property Name="LessonID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <NavigationProperty Name="Courses" Relationship="BeaconBoardDatabase.CourseLesson" FromRole="Lesson" ToRole="Course" />
+          <Property Name="Name" Type="String" Nullable="false" />
           <NavigationProperty Name="Sessions" Relationship="BeaconBoardDatabase.LessonSession" FromRole="Lesson" ToRole="Session" />
           <NavigationProperty Name="Resources" Relationship="BeaconBoardDatabase.LessonResource" FromRole="Lesson" ToRole="Resource" />
         </EntityType>
@@ -585,6 +618,8 @@
           <Property Name="RoomID" Type="Guid" Nullable="false" />
           <NavigationProperty Name="Lecturers" Relationship="BeaconBoardDatabase.SessionLecturer" FromRole="Session" ToRole="Lecturer" />
           <NavigationProperty Name="Attendances" Relationship="BeaconBoardDatabase.AttendanceSession" FromRole="Session" ToRole="Attendance" />
+          <NavigationProperty Name="Module" Relationship="BeaconBoardDatabase.ModuleSession" FromRole="Session" ToRole="Module" />
+          <Property Name="ModuleID" Type="Guid" Nullable="false" />
         </EntityType>
         <EntityType Name="Resource">
           <Key>
@@ -641,10 +676,6 @@
               <PropertyRef Name="RoomID" />
             </Dependent>
           </ReferentialConstraint>
-        </Association>
-        <Association Name="CourseLesson">
-          <End Type="BeaconBoardDatabase.Course" Role="Course" Multiplicity="*" />
-          <End Type="BeaconBoardDatabase.Lesson" Role="Lesson" Multiplicity="*" />
         </Association>
         <Association Name="StudentCourse">
           <End Type="BeaconBoardDatabase.Student" Role="Student" Multiplicity="*" />
@@ -752,6 +783,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="ModuleID" />
+          </Key>
+          <Property Name="ModuleID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <NavigationProperty Name="Courses" Relationship="BeaconBoardDatabase.CourseModule" FromRole="Module" ToRole="Course" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          <Property Name="TermNumber" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sessions" Relationship="BeaconBoardDatabase.ModuleSession" FromRole="Module" ToRole="Session" />
+        </EntityType>
+        <Association Name="CourseModule">
+          <End Type="BeaconBoardDatabase.Course" Role="Course" Multiplicity="*" />
+          <End Type="BeaconBoardDatabase.Module" Role="Module" Multiplicity="*" />
+        </Association>
+        <Association Name="ModuleSession">
+          <End Type="BeaconBoardDatabase.Module" Role="Module" Multiplicity="1" />
+          <End Type="BeaconBoardDatabase.Session" Role="Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="ModuleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -788,6 +846,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(BeaconBoardDatabase.Lesson)">
         <MappingFragment StoreEntitySet="Lessons">
           <ScalarProperty Name="LessonID" ColumnName="LessonID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -799,6 +858,7 @@
           <ScalarProperty Name="ScheduledStartDate" ColumnName="ScheduledStartDate" />
           <ScalarProperty Name="ScheduledEndDate" ColumnName="ScheduledEndDate" />
           <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+          <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -864,14 +924,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="CourseLesson" TypeName="BeaconBoardDatabase.CourseLesson" StoreEntitySet="CourseLesson">
-      <EndProperty Name="Course">
-        <ScalarProperty Name="CourseID" ColumnName="Courses_CourseID" />
-      </EndProperty>
-      <EndProperty Name="Lesson">
-        <ScalarProperty Name="LessonID" ColumnName="Lessons_LessonID" />
-      </EndProperty>
-    </AssociationSetMapping>
+    <EntitySetMapping Name="Modules">
+      <EntityTypeMapping TypeName="IsTypeOf(BeaconBoardDatabase.Module)">
+        <MappingFragment StoreEntitySet="Modules">
+          <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="TermNumber" ColumnName="TermNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="StudentCourse" TypeName="BeaconBoardDatabase.StudentCourse" StoreEntitySet="StudentCourse">
       <EndProperty Name="Student">
         <ScalarProperty Name="UserID" ColumnName="Students_UserID" />
@@ -902,6 +964,14 @@
       </EndProperty>
       <EndProperty Name="Lecturer">
         <ScalarProperty Name="UserID" ColumnName="Lecturers_UserID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CourseModule" TypeName="BeaconBoardDatabase.CourseModule" StoreEntitySet="CourseModule">
+      <EndProperty Name="Course">
+        <ScalarProperty Name="CourseID" ColumnName="Courses_CourseID" />
+      </EndProperty>
+      <EndProperty Name="Module">
+        <ScalarProperty Name="ModuleID" ColumnName="Modules_ModuleID" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

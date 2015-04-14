@@ -46,6 +46,7 @@
     <Compile Include="ILecturerBusinessLogic.cs" />
     <Compile Include="IAttendanceBusinessLogic.cs" />
     <Compile Include="IRoleBusinessLogic.cs" />
+    <Compile Include="IModuleBusinessLogic.cs" />
     <Compile Include="ITokenBusinessLogic.cs" />
     <Compile Include="IStudentBusinessLogic.cs" />
     <Compile Include="IUserBusinessLogic.cs" />
